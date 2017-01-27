@@ -32,10 +32,7 @@ namespace LoginScreen
                 throw;
             }
         }
-        ChiltonDB dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-        List<string> query = from user in dbase.Users
-                                    where user.Username == "Chris"
-                                    select user;
+        
          
     }
 }
