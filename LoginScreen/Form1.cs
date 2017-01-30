@@ -115,13 +115,14 @@ namespace LoginScreen
                     Suspend();
                 }
 
-                LoginAttempt la = new LoginAttempt();
-
-                la.UserID = Convert.ToInt32(inID);
-                la.Username = inUser;
-                la.TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss");
-                la.Success = validAcct.ToString();
-                la.AttemptNum = _attempts;
+                LoginAttempt la = new LoginAttempt
+                {
+                    UserID = Convert.ToInt32(inID),
+                    Username = inUser,
+                    TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
+                    Success = validAcct.ToString(),
+                    AttemptNum = _attempts,
+                };
 
                 dbase.LoginAttempts.InsertOnSubmit(la);
                 dbase.SubmitChanges();
