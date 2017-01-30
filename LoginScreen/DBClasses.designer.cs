@@ -55,17 +55,17 @@ namespace LoginScreen
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Users> Users
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<Users>();
+				return this.GetTable<User>();
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
-	public partial class Users
+	public partial class User
 	{
 		
 		private string _UserID;
@@ -74,7 +74,7 @@ namespace LoginScreen
 		
 		private string _Password;
 		
-		public Users()
+		public User()
 		{
 		}
 		

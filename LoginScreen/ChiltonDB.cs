@@ -9,7 +9,7 @@ namespace LoginScreen
 {
     public partial class ChiltonDB : DataContext
     {
-        public Table<Users> Users;
+        public Table<User> Users;
         public ChiltonDB(string connection) : base(connection) { }
     }
 }

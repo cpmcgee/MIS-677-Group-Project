@@ -133,12 +133,20 @@ namespace LoginScreen
             }
         }
 
-        private void asdf()
+        private void QueryData()
         {
             ChiltonDB dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-            IEnumerable<Users> query = from u in dbase.Users
+            IEnumerable<User> query = from u in dbase.Users
                                  where u.Username == "d"
                                  select u;
+
+            User bob = new User();
+            bob.UserID = "";
+            bob.Password = "";
+            bob.Username = "";
+
+            dbase.Users.InsertOnSubmit(bob);
+            dbase.SubmitChanges();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
