@@ -33,5 +33,16 @@ namespace LoginScreen.Properties {
                 return ((string)(this["Group2ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\ProjectsV13;Initial Catalog=master;Integrated Security=True" +
+            ";Connect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
+        public string masterConnectionString {
+            get {
+                return ((string)(this["masterConnectionString"]));
+            }
+        }
     }
 }

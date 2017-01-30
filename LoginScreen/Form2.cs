@@ -16,7 +16,7 @@ namespace LoginScreen
     {
         Form1 opener;
         ChiltonDB dbase;
-        //Form1 form1 = new Form1();
+
         public Form2(Form parentForm)
         {
             InitializeComponent();
@@ -37,9 +37,15 @@ namespace LoginScreen
         private void button1_Click(object sender, EventArgs e)
         {
             StringBuilder results = new StringBuilder();
-            foreach (_LoginAttempt la in dbase.LoginAttempts)
+            foreach (LoginAttempt la in dbase.LoginAttempts)
             {
-                results.Append(la.AttemptNum.ToString() + " " + la.Username.ToString() + " " + la.Success.ToString() + " " + la.TimeStamp.ToString() + "\n");
+                bool success = la.Success == "True";
+                string entry = "";
+                if (success)
+                    entry = String.Format("{0} - User: {1} with ID: {2} successfully logged in at {3}", la.AttemptNum, la.Username.ToString(), la.UserID.ToString(), la.TimeStamp.ToString() + "\n");
+                else
+                    entry = String.Format("{0} - User: {1} with ID: {2} failed to log in at {3}", la.AttemptNum, la.Username.ToString(), la.UserID.ToString(), la.TimeStamp.ToString() + "\n");
+                results.Append(entry);
             }
             MessageBox.Show(results.ToString());
         }

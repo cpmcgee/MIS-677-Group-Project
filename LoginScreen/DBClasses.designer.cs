@@ -22,7 +22,7 @@ namespace LoginScreen
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Group2")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="master")]
 	public partial class DBClassesDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,16 +30,16 @@ namespace LoginScreen
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insert_User(_User instance);
-    partial void Update_User(_User instance);
-    partial void Delete_User(_User instance);
-    partial void Insert_LoginAttempt(_LoginAttempt instance);
-    partial void Update_LoginAttempt(_LoginAttempt instance);
-    partial void Delete_LoginAttempt(_LoginAttempt instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
+    partial void InsertLoginAttempt(LoginAttempt instance);
+    partial void UpdateLoginAttempt(LoginAttempt instance);
+    partial void DeleteLoginAttempt(LoginAttempt instance);
     #endregion
 		
 		public DBClassesDataContext() : 
-				base(global::LoginScreen.Properties.Settings.Default.Group2ConnectionString, mappingSource)
+				base(global::LoginScreen.Properties.Settings.Default.masterConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -68,68 +68,72 @@ namespace LoginScreen
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<_User> _Users
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<_User>();
+				return this.GetTable<User>();
 			}
 		}
 		
-		public System.Data.Linq.Table<_LoginAttempt> _LoginAttempts
+		public System.Data.Linq.Table<LoginAttempt> LoginAttempts
 		{
 			get
 			{
-				return this.GetTable<_LoginAttempt>();
+				return this.GetTable<LoginAttempt>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[_User]")]
-	public partial class _User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _UserNum;
+		private System.Nullable<int> _UserID;
 		
 		private string _Username;
 		
 		private string _Password;
 		
+		private string _Name;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserNumChanging(System.Nullable<int> value);
-    partial void OnUserNumChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     #endregion
 		
-		public _User()
+		public User()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserNum", DbType="Int", IsPrimaryKey=true)]
-		public System.Nullable<int> UserNum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int", IsPrimaryKey=true)]
+		public System.Nullable<int> UserID
 		{
 			get
 			{
-				return this._UserNum;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._UserNum != value))
+				if ((this._UserID != value))
 				{
-					this.OnUserNumChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserNum = value;
-					this.SendPropertyChanged("UserNum");
-					this.OnUserNumChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
@@ -174,6 +178,26 @@ namespace LoginScreen
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -195,13 +219,13 @@ namespace LoginScreen
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[_LoginAttempts]")]
-	public partial class _LoginAttempt : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoginAttempts")]
+	public partial class LoginAttempt : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _UserNum;
+		private System.Nullable<int> _UserID;
 		
 		private string _Username;
 		
@@ -209,45 +233,45 @@ namespace LoginScreen
 		
 		private string _Success;
 		
-		private string _AttemptNum;
+		private System.Nullable<int> _AttemptNum;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserNumChanging(System.Nullable<int> value);
-    partial void OnUserNumChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
     partial void OnTimeStampChanging(string value);
     partial void OnTimeStampChanged();
     partial void OnSuccessChanging(string value);
     partial void OnSuccessChanged();
-    partial void OnAttemptNumChanging(string value);
+    partial void OnAttemptNumChanging(System.Nullable<int> value);
     partial void OnAttemptNumChanged();
     #endregion
 		
-		public _LoginAttempt()
+		public LoginAttempt()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserNum", DbType="Int")]
-		public System.Nullable<int> UserNum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
 		{
 			get
 			{
-				return this._UserNum;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._UserNum != value))
+				if ((this._UserID != value))
 				{
-					this.OnUserNumChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserNum = value;
-					this.SendPropertyChanged("UserNum");
-					this.OnUserNumChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
@@ -292,7 +316,7 @@ namespace LoginScreen
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Success", DbType="VarChar(5)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Success", DbType="VarChar(10)")]
 		public string Success
 		{
 			get
@@ -312,8 +336,8 @@ namespace LoginScreen
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttemptNum", CanBeNull=false, IsPrimaryKey=true)]
-		public string AttemptNum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttemptNum", DbType="Int", IsPrimaryKey=true)]
+		public System.Nullable<int> AttemptNum
 		{
 			get
 			{

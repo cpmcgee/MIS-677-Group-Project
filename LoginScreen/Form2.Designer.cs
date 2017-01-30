@@ -37,10 +37,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(165, 209);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExit.Location = new System.Drawing.Point(124, 170);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(56, 19);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -49,54 +49,55 @@
             // lblSuccess
             // 
             this.lblSuccess.AutoSize = true;
-            this.lblSuccess.Location = new System.Drawing.Point(149, 11);
+            this.lblSuccess.Location = new System.Drawing.Point(112, 9);
+            this.lblSuccess.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSuccess.Name = "lblSuccess";
-            this.lblSuccess.Size = new System.Drawing.Size(111, 17);
+            this.lblSuccess.Size = new System.Drawing.Size(86, 13);
             this.lblSuccess.TabIndex = 1;
             this.lblSuccess.Text = "Login Succesful!";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(139, 60);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(104, 46);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 23);
+            this.button1.Size = new System.Drawing.Size(100, 44);
             this.button1.TabIndex = 2;
-            this.button1.Text = "First Option";
+            this.button1.Text = "Show Login History";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(139, 101);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Location = new System.Drawing.Point(104, 94);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 23);
+            this.button2.Size = new System.Drawing.Size(100, 19);
             this.button2.TabIndex = 3;
             this.button2.Text = "Second Option";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(139, 144);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Location = new System.Drawing.Point(104, 117);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(133, 23);
+            this.button3.Size = new System.Drawing.Size(100, 19);
             this.button3.TabIndex = 4;
             this.button3.Text = "Third Option";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 305);
+            this.ClientSize = new System.Drawing.Size(318, 248);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.btnExit);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form2";
             this.Text = "Main Window";
             this.Load += new System.EventHandler(this.Form2_Load);
