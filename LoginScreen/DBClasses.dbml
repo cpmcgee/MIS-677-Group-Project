@@ -1,9 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Class="DBClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Table Name="" Member="Users">
-    <Type Name="User">
-      <Column Name="UserID" Type="System.String" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" CanBeNull="false" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Group2" Class="DBClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.135.85.168;Initial Catalog=Group2;Persist Security Info=True;User ID=Group2" SettingsObjectName="LoginScreen.Properties.Settings" SettingsPropertyName="Group2ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[_User]" Member="_Users">
+    <Type Name="_User">
+      <Column Name="UserNum" Type="System.Int32" DbType="Int" IsPrimaryKey="true" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[_LoginAttempts]" Member="_LoginAttempts">
+    <Type Name="_LoginAttempt">
+      <Column Name="UserNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Success" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Member="AttemptNum" Type="System.String" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

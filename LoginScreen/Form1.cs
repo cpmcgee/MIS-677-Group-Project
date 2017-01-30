@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,20 +13,15 @@ namespace LoginScreen
 {
     public partial class Form1 : Form
     {
-        List<User> users;
-        static DBServer database = new DBServer();
+        public ChiltonDB dbase;
         Form2 form2;
         bool validUser = false;
         bool validPass = false;
         bool validAcct = false;
         string inUser;
         string inPass;
-        User user1;
-        User user2;
-        User user3;
-        User user4;
-        User user5;
         int ct = 0;
+        int _attempts = 0;
 
         public Form1()
         {
@@ -34,39 +30,66 @@ namespace LoginScreen
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //connect to database
+            try
+            {
+                dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
+            }
+            catch
+            {
+                throw;
+            }
+
             //instantiate dummy data
-            user1 = new User("Bob32", "Password");
-            user2 = new User("JohnSmith", "1234");
-            user3 = new User("bill12", "77uhde");
-            user4 = new User("janedoe9", "trees");
-            user5 = new User("Jack", "82y83ihf");
+            _User user1 = new _User();
+            user1.UserNum = 1;
+            user1.Username = "johndoe";
+            user1.Password = "password1";
+            _User user2 = new _User();
+            user2.UserNum = 2;
+            user2.Username = "janesmith";
+            user2.Password = "password2";
 
-            users = new List<User>();
-            users.Add(user1);
-            users.Add(user2);
-            users.Add(user3);
-            users.Add(user4);
-            users.Add(user5);
+            try
+            {
+                dbase.ExecuteCommand("DROP TABLE _User");
+                
+            }
+            catch { };
+            try
+            {
+                dbase.ExecuteCommand("DROP TABLE _LoginAttempts");
+            }
+            catch { };
+            dbase.ExecuteCommand("CREATE TABLE _User (UserNum int, Username varchar(20), Password varchar(20));");
+            dbase.ExecuteCommand("CREATE TABLE _LoginAttempts (UserNum int, Username varchar(20), TimeStamp varchar(20), Success varchar(5), AttemptNum int);");
 
-            form2 = new Form2(this);
-            
-            
+            dbase.Users.InsertOnSubmit(user1);
+            dbase.Users.InsertOnSubmit(user2);
+
+            dbase.SubmitChanges();
+
+            form2 = new Form2(this); 
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             inUser = txtUsername.Text;
             inPass = txtPassword.Text;
+            string inID = null;
             string pass = null; //stores password typed in by user
 
-            foreach (User u in users)
+            foreach (_User u in dbase.Users)
             {
-                if (u.Username == inUser)
+                string user = u.Username;
+                inID = u.UserNum.ToString();
+                if (user == inUser)
                 {
                     validUser = true;
                     pass = u.Password;
                 }
             }
+
             if (pass == inPass)
             {
                 validPass = true;
@@ -84,9 +107,22 @@ namespace LoginScreen
             {
                 Suspend();
             }
+
+            _LoginAttempt la = new _LoginAttempt();
+
+            la.UserNum = Convert.ToInt32(inID);
+            la.Username = inUser;
+            la.TimeStamp = DateTime.Now.ToString();
+            la.Success = validAcct.ToString();
+            la.AttemptNum = _attempts.ToString();
+
+            dbase.LoginAttempts.InsertOnSubmit(la);
+            dbase.SubmitChanges();
+
             validPass = false;
             validUser = false;
             validAcct = false;
+            _attempts++;
         }
 
         public void Authenticate()
@@ -133,21 +169,6 @@ namespace LoginScreen
             }
         }
 
-        private void QueryData()
-        {
-            ChiltonDB dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-            IEnumerable<User> query = from u in dbase.Users
-                                 where u.Username == "d"
-                                 select u;
-
-            User bob = new User();
-            bob.UserID = "";
-            bob.Password = "";
-            bob.Username = "";
-
-            dbase.Users.InsertOnSubmit(bob);
-            dbase.SubmitChanges();
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

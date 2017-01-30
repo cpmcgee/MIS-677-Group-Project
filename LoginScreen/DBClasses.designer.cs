@@ -22,6 +22,7 @@ namespace LoginScreen
 	using System;
 	
 	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Group2")]
 	public partial class DBClassesDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -29,7 +30,19 @@ namespace LoginScreen
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insert_User(_User instance);
+    partial void Update_User(_User instance);
+    partial void Delete_User(_User instance);
+    partial void Insert_LoginAttempt(_LoginAttempt instance);
+    partial void Update_LoginAttempt(_LoginAttempt instance);
+    partial void Delete_LoginAttempt(_LoginAttempt instance);
     #endregion
+		
+		public DBClassesDataContext() : 
+				base(global::LoginScreen.Properties.Settings.Default.Group2ConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public DBClassesDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -55,46 +68,73 @@ namespace LoginScreen
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<_User> _Users
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<_User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<_LoginAttempt> _LoginAttempts
+		{
+			get
+			{
+				return this.GetTable<_LoginAttempt>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
-	public partial class User
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[_User]")]
+	public partial class _User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _UserID;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Nullable<int> _UserNum;
 		
 		private string _Username;
 		
 		private string _Password;
 		
-		public User()
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserNumChanging(System.Nullable<int> value);
+    partial void OnUserNumChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    #endregion
+		
+		public _User()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", CanBeNull=false)]
-		public string UserID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserNum", DbType="Int", IsPrimaryKey=true)]
+		public System.Nullable<int> UserNum
 		{
 			get
 			{
-				return this._UserID;
+				return this._UserNum;
 			}
 			set
 			{
-				if ((this._UserID != value))
+				if ((this._UserNum != value))
 				{
-					this._UserID = value;
+					this.OnUserNumChanging(value);
+					this.SendPropertyChanging();
+					this._UserNum = value;
+					this.SendPropertyChanged("UserNum");
+					this.OnUserNumChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20)")]
 		public string Username
 		{
 			get
@@ -105,12 +145,16 @@ namespace LoginScreen
 			{
 				if ((this._Username != value))
 				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
 					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(20)")]
 		public string Password
 		{
 			get
@@ -121,8 +165,190 @@ namespace LoginScreen
 			{
 				if ((this._Password != value))
 				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
 					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[_LoginAttempts]")]
+	public partial class _LoginAttempt : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Nullable<int> _UserNum;
+		
+		private string _Username;
+		
+		private string _TimeStamp;
+		
+		private string _Success;
+		
+		private string _AttemptNum;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserNumChanging(System.Nullable<int> value);
+    partial void OnUserNumChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnTimeStampChanging(string value);
+    partial void OnTimeStampChanged();
+    partial void OnSuccessChanging(string value);
+    partial void OnSuccessChanged();
+    partial void OnAttemptNumChanging(string value);
+    partial void OnAttemptNumChanged();
+    #endregion
+		
+		public _LoginAttempt()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserNum", DbType="Int")]
+		public System.Nullable<int> UserNum
+		{
+			get
+			{
+				return this._UserNum;
+			}
+			set
+			{
+				if ((this._UserNum != value))
+				{
+					this.OnUserNumChanging(value);
+					this.SendPropertyChanging();
+					this._UserNum = value;
+					this.SendPropertyChanged("UserNum");
+					this.OnUserNumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStamp", DbType="VarChar(20)")]
+		public string TimeStamp
+		{
+			get
+			{
+				return this._TimeStamp;
+			}
+			set
+			{
+				if ((this._TimeStamp != value))
+				{
+					this.OnTimeStampChanging(value);
+					this.SendPropertyChanging();
+					this._TimeStamp = value;
+					this.SendPropertyChanged("TimeStamp");
+					this.OnTimeStampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Success", DbType="VarChar(5)")]
+		public string Success
+		{
+			get
+			{
+				return this._Success;
+			}
+			set
+			{
+				if ((this._Success != value))
+				{
+					this.OnSuccessChanging(value);
+					this.SendPropertyChanging();
+					this._Success = value;
+					this.SendPropertyChanged("Success");
+					this.OnSuccessChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttemptNum", CanBeNull=false, IsPrimaryKey=true)]
+		public string AttemptNum
+		{
+			get
+			{
+				return this._AttemptNum;
+			}
+			set
+			{
+				if ((this._AttemptNum != value))
+				{
+					this.OnAttemptNumChanging(value);
+					this.SendPropertyChanging();
+					this._AttemptNum = value;
+					this.SendPropertyChanged("AttemptNum");
+					this.OnAttemptNumChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
