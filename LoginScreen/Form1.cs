@@ -46,26 +46,26 @@ namespace LoginScreen
             {
                 //ChiltonDB : DBClassesDataContext : DataContext is a class used to initiate a connection to a database with use for Linq to SQL statements implementing IQueryable<T>()
 
-                //dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-                dbase = new ChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+                dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
+                //dbase = new ChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
 
 
                 //dbase.ExecuteCommand("DROP TABLE Users;");
                 //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
-                //dbase.ExecuteCommand("DROP TABLE _Users;");
+                //dbase.ExecuteCommand("DROP TABLE _User;");
                 //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
+
 
                 //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
                 //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
 
-
                 //dbase.ExecuteCommand("DELETE FROM Users;");
                 //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
-                dbase.Users.InsertOnSubmit(user1);
-                dbase.Users.InsertOnSubmit(user2);
+                //dbase.Users.InsertOnSubmit(user1);
+                //dbase.Users.InsertOnSubmit(user2);
 
-                dbase.SubmitChanges();
+                //dbase.SubmitChanges();
                 
                 form2 = new Form2(this);
             }
@@ -123,6 +123,7 @@ namespace LoginScreen
                     UserID = Convert.ToInt32(inID),
                     Username = inUser,
                     TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
+                    //TimeStamp = dbase.GetSystemDate().ToString(),
                     Success = validAcct.ToString(),
                     AttemptNum = _attempts,
                 };

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace LoginScreen
 {
@@ -21,6 +22,11 @@ namespace LoginScreen
                 return (from u in Users
                         select u) as List<User>;
             }
+        }
+
+        public string GetSystemDate()
+        {
+            return this.ExecuteQuery<string>(@"SELECT GETDATE() AS CurrentDateTime;", new object[] { }).Take(1).ToString(); 
         }
     }
 }
