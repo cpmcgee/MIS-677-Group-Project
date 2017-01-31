@@ -30,7 +30,7 @@ namespace LoginScreen
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //For portability and testing purposes, this load method contains logic for erasing and setting up the database on each run
+            //For portability and debugging purposes, this load method contains (un)commented logic for erasing and setting up the database on each run
 
             //instantiate dummy data
             User user1 = new User();
@@ -44,18 +44,21 @@ namespace LoginScreen
             //connect to database
             try
             {
+                //ChiltonDB : DBClassesDataContext : DataContext is a class used to initiate a connection to a database with use for Linq to SQL statements implementing IQueryable<T>()
+
                 //dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
                 dbase = new ChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
 
 
                 //dbase.ExecuteCommand("DROP TABLE Users;");
                 //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
-                //
-                //
+                //dbase.ExecuteCommand("DROP TABLE _Users;");
+                //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
+
                 //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
                 //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
-                
+
 
                 //dbase.ExecuteCommand("DELETE FROM Users;");
                 //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
@@ -86,18 +89,18 @@ namespace LoginScreen
             }
             else
             {
-                foreach (User u in dbase.Users)
+                foreach (User u in dbase.Users) //loop through database table to check for user
                 {
                     string user = u.Username;
                     inID = u.UserID.ToString();
                     if (user == inUser)
                     {
                         validUser = true;
-                        pass = u.Password;
+                        pass = u.Password; //save users actual password
                     }
                 }
 
-                if (pass == inPass)
+                if (pass == inPass) //check if valid password matches password from textbox
                 {
                     validPass = true;
                 }
@@ -108,14 +111,14 @@ namespace LoginScreen
 
                 if (validAcct)
                 {
-                    Authenticate();
+                    Authenticate(); //let user in
                 }
                 else
                 {
-                    Suspend();
+                    Suspend(); //reset form, lock user out if 3 failed attempts
                 }
 
-                LoginAttempt la = new LoginAttempt
+                LoginAttempt la = new LoginAttempt //create new login attempt object (based on current state) to add to database
                 {
                     UserID = Convert.ToInt32(inID),
                     Username = inUser,
@@ -125,7 +128,7 @@ namespace LoginScreen
                 };
 
                 dbase.LoginAttempts.InsertOnSubmit(la);
-                dbase.SubmitChanges();
+                dbase.SubmitChanges(); //insert new login attempt record to database
 
                 validPass = false;
                 validUser = false;
@@ -134,6 +137,7 @@ namespace LoginScreen
             }
         }
 
+        //accept user, load form2
         public void Authenticate()
         {
             lblMsg.Text = "Success!";
@@ -146,12 +150,12 @@ namespace LoginScreen
         public void Suspend()
         {
             _ct++;
-            if (!validUser)
+            if (!validUser) //user was not found
             {
                 lblMsg.Text = "No user named " + inUser;
                 lblMsg.Enabled = true;
             }
-            else if (!validPass)
+            else if (!validPass) //user was found but password was wrong
             {
                 lblMsg.Text = "Invalid Password.";
                 lblMsg.Enabled = true;
@@ -161,7 +165,7 @@ namespace LoginScreen
 
             txtPassword.Text = "";
             txtUsername.Text = "";
-            if (_ct >= 3)
+            if (_ct >= 3) //if 3 login attempts already, freeze form for desired amount of time
             {
                 MessageBox.Show("No more attempts remaining");
                 DateTime now = DateTime.Now;
@@ -174,7 +178,7 @@ namespace LoginScreen
 
                 lblMsg.Text = "";
                 this.Enabled = true;
-                _ct = 0;
+                _ct = 0; //reset count
             }
         }
 

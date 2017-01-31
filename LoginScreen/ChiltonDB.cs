@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LoginScreen
 {
 
-    public partial class ChiltonDB : DBClassesDataContext
+    public partial class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
     {
         //public Table<User> Users;
         //public Table<LoginAttempt> LoginAttempts;

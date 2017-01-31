@@ -36,8 +36,8 @@ namespace LoginScreen
 
         private void button1_Click(object sender, EventArgs e)
         {
-            StringBuilder results = new StringBuilder();
-            foreach (LoginAttempt la in dbase.LoginAttempts)
+            StringBuilder results = new StringBuilder(); //create stringbuilder 
+            foreach (LoginAttempt la in dbase.LoginAttempts) //loop through database of login attempts and add each line to the stringbuilder
             {
                 bool success = la.Success == "True";
                 string entry = "";
@@ -47,7 +47,7 @@ namespace LoginScreen
                     entry = String.Format("{0} - User: {1} with ID: {2} failed to log in at {3}", la.AttemptNum, la.Username.ToString(), la.UserID.ToString(), la.TimeStamp.ToString() + "\n");
                 results.Append(entry);
             }
-            MessageBox.Show(results.ToString());
+            MessageBox.Show(results.ToString()); //show stringbuilder full of log lines in a messagebox
         }
     }
 }
