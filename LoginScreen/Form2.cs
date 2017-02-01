@@ -15,7 +15,7 @@ namespace LoginScreen
     public partial class Form2 : Form
     {
         Form1 opener;
-        ChiltonDB dbase;
+        IChiltonDB dbase;
 
         public Form2(Form parentForm)
         {

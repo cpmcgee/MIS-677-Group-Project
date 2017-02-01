@@ -13,7 +13,7 @@ namespace LoginScreen
 {
     public partial class Form1 : Form
     {
-        public ChiltonDB dbase;
+        public IChiltonDB dbase;
         Form2 form2;
         bool validUser = false;
         bool validPass = false;
@@ -44,10 +44,10 @@ namespace LoginScreen
             //connect to database
             try
             {
-                //ChiltonDB : DBClassesDataContext : DataContext is a class used to initiate a connection to a database with use for Linq to SQL statements implementing IQueryable<T>()
+                //IChiltonDB : DBClassesDataContext : DataContext is a class used to initiate a connection to a database with use for Linq to SQL statements implementing IQueryable<T>()
 
-                //dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-                dbase = new ChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+                //dbase = new IChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
+                dbase = new IChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
 
 
                 //dbase.ExecuteCommand("DROP TABLE Users;");

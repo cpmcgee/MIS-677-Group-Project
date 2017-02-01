@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace LoginScreen
 {
 
-    public partial class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
+    public partial class IChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
     {
         //public Table<User> Users;
         //public Table<LoginAttempt> LoginAttempts;
-        public ChiltonDB(string connection) : base(connection) { }
+        public IChiltonDB(string connection) : base(connection) { }
 
         public List<User> UserList
         {
