@@ -26,7 +26,8 @@ namespace LoginScreen
 
         public string GetSystemDate()
         {
-            return this.ExecuteQuery<string>(@"SELECT GETDATE() AS CurrentDateTime;", new object[] { }).Take(1).ToString(); 
+            string s = this.ExecuteQuery<string>(@"SELECT GETDATE() AS CurrentDateTime;", new object[] { }).Take(1).ToString();
+            return s;
         }
     }
 }
