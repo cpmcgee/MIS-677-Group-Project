@@ -23,19 +23,15 @@ namespace LoginScreen
             opener = parentForm as Form1;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
-            opener.Shutdown();
+            opener.Show();
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+            ChiltonDB dbase = ChiltonDB.GetInstance();
             StringBuilder results = new StringBuilder(); //create stringbuilder 
             foreach (LoginAttempt la in dbase.LoginAttempts) //loop through database of login attempts and add each line to the stringbuilder
             {
@@ -59,7 +55,7 @@ namespace LoginScreen
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+            ChiltonDB dbase = ChiltonDB.GetInstance();
             StringBuilder results = new StringBuilder(); //create stringbuilder 
             foreach (User u in dbase.Users) //loop through database of login attempts and add each line to the stringbuilder
             {

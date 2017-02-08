@@ -13,23 +13,34 @@ namespace LoginScreen
     {
         //public Table<User> Users;
         //public Table<LoginAttempt> LoginAttempts;
-        public ChiltonDB(string connection) : base(connection) { }
 
-        public List<User> UserList
+        public static ChiltonDB instance = null;
+
+        public ChiltonDB(string connection) : base(connection)
         {
-            get
+            if (instance != null)
             {
-                return (from u in Users
-                        select u) as List<User>;
+                throw new Exception("a db connection already exists");
             }
+            else
+                instance = this;
         }
 
-        
+        public static ChiltonDB GetInstance()
+        {
+            return instance;
+        }
 
         public string GetSystemDate()
         {
             string s = this.ExecuteQuery<string>(@"SELECT GETDATE() AS CurrentDateTime;", new object[] { }).Take(1).ToString();
             return s;
         }
-    }
+
+        public static void Close()
+        {
+            instance.Connection.Close();
+            instance.Dispose();
+        }
+    } 
 }

@@ -26,7 +26,7 @@ namespace LoginScreen
 
         public void AddUser(string username, string password)
         {
-            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+            ChiltonDB dbase = ChiltonDB.GetInstance();
             User newUser = new User
             {
                 Password = password,

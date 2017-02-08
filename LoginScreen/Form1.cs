@@ -41,7 +41,6 @@ namespace LoginScreen
             defaultUser.UserID = 0;
             defaultUser.Username = "admin";
             defaultUser.Password = "admin";
-            //connect to database
             try
             {
                 //dbase.ExecuteCommand("DROP TABLE Users;");
@@ -51,12 +50,12 @@ namespace LoginScreen
                 //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
                 //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
-                ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
-                dbase.ExecuteCommand("DELETE FROM Users;");
-                dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
-                dbase.Connection.Close();
-                dbase.Users.InsertOnSubmit(defaultUser);
-                dbase.SubmitChanges();
+                //ChiltonDB dbase = ChiltonDB.GetInstance();
+                //dbase.ExecuteCommand("DELETE FROM Users;");
+                //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
+                //dbase.Connection.Close();
+                //dbase.Users.InsertOnSubmit(defaultUser);
+                //dbase.SubmitChanges();
                 
                 form2 = new Form2(this);
             }
@@ -68,7 +67,7 @@ namespace LoginScreen
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+            ChiltonDB dbase = ChiltonDB.GetInstance();
             inUser = txtUsername.Text;
             inPass = txtPassword.Text;
             string inID = null;
@@ -133,7 +132,6 @@ namespace LoginScreen
         //accept user, load form2
         public void Authenticate()
         {
-            lblMsg.Text = "Success!";
             txtPassword.Text = "";
             txtUsername.Text = "";
             form2.Show();
@@ -154,17 +152,16 @@ namespace LoginScreen
                 lblMsg.Enabled = true;
             }
 
-            
-
             txtPassword.Text = "";
             txtUsername.Text = "";
             if (_ct >= 3) //if 3 login attempts already, freeze form for desired amount of time
             {
                 MessageBox.Show("No more attempts remaining");
+                lblMsg.Text = "SUSPENDED";
                 DateTime now = DateTime.Now;
                 DateTime then = now.AddSeconds(5);
                 this.Enabled = false;
-                while (now < then) //this can be changed to 2 hours for full implementation
+                while (now < then) 
                 {
                     now = DateTime.Now;
                 }
@@ -192,6 +189,7 @@ namespace LoginScreen
         {
             //form2.Close();
             //form2.Dispose();
+            ChiltonDB.Close();
             Close();
             Dispose(); 
         }
