@@ -13,7 +13,12 @@ namespace LoginScreen
 {
     public partial class Form1 : Form
     {
-        public IChiltonDB dbase;
+        //TODO:
+        //- implement singleton for database connection
+        //- implement data sync and duplicate removal
+        //- database design patterns
+
+
         Form2 form2;
         bool validUser = false;
         bool validPass = false;
@@ -31,41 +36,27 @@ namespace LoginScreen
         private void Form1_Load(object sender, EventArgs e)
         {
             //For portability and debugging purposes, this load method contains (un)commented logic for erasing and setting up the database on each run
-
             //instantiate dummy data
-            User user1 = new User();
-            user1.UserID = 1;
-            user1.Username = "johndoe";
-            user1.Password = "password1";
-            User user2 = new User();
-            user2.UserID = 2;
-            user2.Username = "janesmith";
-            user2.Password = "password2";
+            User defaultUser = new User();
+            defaultUser.UserID = 0;
+            defaultUser.Username = "admin";
+            defaultUser.Password = "admin";
             //connect to database
             try
             {
-                //IChiltonDB : DBClassesDataContext : DataContext is a class used to initiate a connection to a database with use for Linq to SQL statements implementing IQueryable<T>()
-
-                //dbase = new ChiltonDB("Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;");
-                dbase = new ChiltonDB("Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
-
-
                 //dbase.ExecuteCommand("DROP TABLE Users;");
                 //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
                 //dbase.ExecuteCommand("DROP TABLE _User;");
                 //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
-
-
                 //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
                 //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
-
-                //dbase.ExecuteCommand("DELETE FROM Users;");
-                //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
-                //dbase.Users.InsertOnSubmit(user1);
-                //dbase.Users.InsertOnSubmit(user2);
-
-                //dbase.SubmitChanges();
+                ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+                dbase.ExecuteCommand("DELETE FROM Users;");
+                dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
+                dbase.Connection.Close();
+                dbase.Users.InsertOnSubmit(defaultUser);
+                dbase.SubmitChanges();
                 
                 form2 = new Form2(this);
             }
@@ -77,6 +68,7 @@ namespace LoginScreen
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
             inUser = txtUsername.Text;
             inPass = txtPassword.Text;
             string inID = null;
@@ -117,25 +109,25 @@ namespace LoginScreen
                 {
                     Suspend(); //reset form, lock user out if 3 failed attempts
                 }
-
-                LoginAttempt la = new LoginAttempt //create new login attempt object (based on current state) to add to database
-                {
-                    UserID = Convert.ToInt32(inID),
-                    Username = inUser,
-                    TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
-                    //TimeStamp = dbase.GetSystemDate().ToString(),
-                    Success = validAcct.ToString(),
-                    AttemptNum = _attempts,
-                };
-
-                dbase.LoginAttempts.InsertOnSubmit(la);
-                dbase.SubmitChanges(); //insert new login attempt record to database
-
-                validPass = false;
-                validUser = false;
-                validAcct = false;
-                _attempts++;
             }
+
+            LoginAttempt la = new LoginAttempt //create new login attempt object (based on current state) to add to database
+            {
+                //UserID = Convert.ToInt32(inID),
+                Username = inUser,
+                TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
+                //TimeStamp = dbase.GetSystemDate().ToString(),
+                Success = validAcct.ToString(),
+                AttemptNum = _attempts,
+            };
+
+            dbase.LoginAttempts.InsertOnSubmit(la);
+            dbase.SubmitChanges(); //insert new login attempt record to database
+            dbase.Connection.Close();
+            validPass = false;
+            validUser = false;
+            validAcct = false;
+            _attempts++;
         }
 
         //accept user, load form2

@@ -37,8 +37,8 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(124, 170);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExit.Location = new System.Drawing.Point(127, 218);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(56, 19);
             this.btnExit.TabIndex = 0;
@@ -59,7 +59,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(104, 46);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 44);
             this.button1.TabIndex = 2;
@@ -70,22 +70,24 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(104, 94);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 19);
+            this.button2.Size = new System.Drawing.Size(100, 44);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Second Option";
+            this.button2.Text = "Add Users";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(104, 117);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Location = new System.Drawing.Point(104, 142);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 19);
+            this.button3.Size = new System.Drawing.Size(100, 44);
             this.button3.TabIndex = 4;
-            this.button3.Text = "Third Option";
+            this.button3.Text = "Show Users";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form2
             // 
@@ -97,7 +99,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.btnExit);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.Text = "Main Window";
             this.Load += new System.EventHandler(this.Form2_Load);

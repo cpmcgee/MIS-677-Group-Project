@@ -15,13 +15,12 @@ namespace LoginScreen
     public partial class Form2 : Form
     {
         Form1 opener;
-        IChiltonDB dbase;
+        Form3 form3;
 
         public Form2(Form parentForm)
         {
             InitializeComponent();
             opener = parentForm as Form1;
-            dbase = opener.dbase;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -36,6 +35,7 @@ namespace LoginScreen
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
             StringBuilder results = new StringBuilder(); //create stringbuilder 
             foreach (LoginAttempt la in dbase.LoginAttempts) //loop through database of login attempts and add each line to the stringbuilder
             {
@@ -48,6 +48,26 @@ namespace LoginScreen
                 results.Append(entry);
             }
             MessageBox.Show(results.ToString()); //show stringbuilder full of log lines in a messagebox
+            dbase.Connection.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            form3 = new Form3(this);
+            form3.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ChiltonDB dbase = new ChiltonDB(Program.ConnectionString);
+            StringBuilder results = new StringBuilder(); //create stringbuilder 
+            foreach (User u in dbase.Users) //loop through database of login attempts and add each line to the stringbuilder
+            {
+                string entry = u.Username + "\n";
+                results.Append(entry);
+            }
+            MessageBox.Show(results.ToString()); //show stringbuilder full of log lines in a messagebox
+            dbase.Connection.Close();
         }
     }
 }

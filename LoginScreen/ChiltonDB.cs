@@ -9,11 +9,11 @@ using System.Reflection;
 namespace LoginScreen
 {
 
-    public partial class IChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
+    public class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
     {
         //public Table<User> Users;
         //public Table<LoginAttempt> LoginAttempts;
-        public IChiltonDB(string connection) : base(connection) { }
+        public ChiltonDB(string connection) : base(connection) { }
 
         public List<User> UserList
         {
@@ -23,6 +23,8 @@ namespace LoginScreen
                         select u) as List<User>;
             }
         }
+
+        
 
         public string GetSystemDate()
         {
