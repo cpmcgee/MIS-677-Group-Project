@@ -41,8 +41,8 @@ namespace LoginScreen
             defaultUser.UserID = 0;
             defaultUser.Username = "admin";
             defaultUser.Password = "admin";
-            try
-            {
+            form2 = new Form2(this);
+
                 //dbase.ExecuteCommand("DROP TABLE Users;");
                 //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
                 //dbase.ExecuteCommand("DROP TABLE _User;");
@@ -56,13 +56,6 @@ namespace LoginScreen
                 //dbase.Connection.Close();
                 //dbase.Users.InsertOnSubmit(defaultUser);
                 //dbase.SubmitChanges();
-                
-                form2 = new Form2(this);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
