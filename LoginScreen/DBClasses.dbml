@@ -5,7 +5,7 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int" IsPrimaryKey="true" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Member="Name" Type="System.String" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.LoginAttempts" Member="LoginAttempts">

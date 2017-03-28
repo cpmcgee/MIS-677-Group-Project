@@ -8,10 +8,10 @@
         <elementListCompartment Id="d2658b2b-fcfa-45c9-8c00-c76639d5f156" absoluteBounds="1.6400000000000001, 2.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ddf1e31f-d3b5-48f9-bcde-293dafb586e3" absoluteBounds="6.375, 2.375, 2, 1.7708968098958331">
+    <classShape Id="ddf1e31f-d3b5-48f9-bcde-293dafb586e3" absoluteBounds="6, 2.125, 2, 1.7708968098958331">
       <DataClassMoniker Name="/DBClassesDataContext/LoginAttempt" />
       <nestedChildShapes>
-        <elementListCompartment Id="70f03499-69ff-48fb-a3f9-b0386f5aa9ef" absoluteBounds="6.39, 2.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="70f03499-69ff-48fb-a3f9-b0386f5aa9ef" absoluteBounds="6.015, 2.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
