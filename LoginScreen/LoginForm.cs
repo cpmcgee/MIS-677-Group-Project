@@ -7,14 +7,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using System.Web.Script.Serialization;
 
 namespace LoginScreen
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
         //TODO:
-        //- implement singleton for database connection
         //- implement data sync and duplicate removal
         //- database design patterns
 
@@ -28,7 +29,7 @@ namespace LoginScreen
         int _ct = 0;
         int _attempts = 0;
 
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -43,19 +44,26 @@ namespace LoginScreen
             defaultUser.Password = "admin";
             form2 = new Form2(this);
 
-                //dbase.ExecuteCommand("DROP TABLE Users;");
-                //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
-                //dbase.ExecuteCommand("DROP TABLE _User;");
-                //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
-                //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
-                //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
+            //dbase.ExecuteCommand("DROP TABLE Users;");
+            //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
+            //dbase.ExecuteCommand("DROP TABLE _User;");
+            //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
+            //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
+            //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
-                //ChiltonDB dbase = ChiltonDB.GetInstance();
-                //dbase.ExecuteCommand("DELETE FROM Users;");
-                //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
-                //dbase.Connection.Close();
-                //dbase.Users.InsertOnSubmit(defaultUser);
-                //dbase.SubmitChanges();
+            //ChiltonDB dbase = ChiltonDB.GetInstance();
+            //dbase.ExecuteCommand("DELETE FROM Users;");
+            //dbase.ExecuteCommand("DELETE FROM LoginAttempts;");
+            //dbase.Connection.Close();
+            //dbase.Users.InsertOnSubmit(defaultUser);
+            //dbase.SubmitChanges();
+
+            var ser = new JavaScriptSerializer();
+            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
+            foreach (JsonDataObject j in jsonData)
+            {
+                MessageBox.Show(j.firstName + "\n" + j.lastName + "\n" + j.dateOfBirth + "\n" + j.sex + "\n" + j.backgroundStatus);
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

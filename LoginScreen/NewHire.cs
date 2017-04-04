@@ -11,13 +11,9 @@ namespace LoginScreen
         public bool BackgroundCheckPass { get; set; }
         public EquipmentRequest EquipmentReq { get; set; }
         
-        public NewHire(string firstName, string lastName, string gender, DateTime dob, Employee supervisor)
+        public NewHire(string firstName, string lastName, string gender, DateTime dob, Employee supervisor) : base(firstName, lastName, gender, dob, supervisor)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Gender = gender;
-            DateOfBirth = dob;
-            Supervisor = supervisor;
+
         }
 
         public void CreateRequest(bool[] software, bool[] hardware)

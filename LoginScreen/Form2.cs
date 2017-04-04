@@ -14,13 +14,13 @@ namespace LoginScreen
     
     public partial class Form2 : Form
     {
-        Form1 opener;
+        LoginForm opener;
         Form3 form3;
 
         public Form2(Form parentForm)
         {
             InitializeComponent();
-            opener = parentForm as Form1;
+            opener = parentForm as LoginForm;
         }
 
         private void btnExit_Click(object sender, EventArgs e)

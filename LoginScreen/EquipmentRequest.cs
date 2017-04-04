@@ -67,5 +67,11 @@ namespace LoginScreen
             CompletedOn = DateTime.Now;
             IsBuilt = true;
         }
+
+        public void UpdateRequest(bool[] hardware, bool[] software)
+        {
+            HardwareOptions = hardware;
+            SoftwareOptions = software;
+        }
     }
 }
