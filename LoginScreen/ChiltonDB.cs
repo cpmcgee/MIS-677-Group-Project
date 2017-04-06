@@ -11,12 +11,11 @@ namespace LoginScreen
 
     public class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
     {
-        //public Table<User> Users;
-        //public Table<LoginAttempt> LoginAttempts;
-
         public static ChiltonDB instance = null;
+        //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+        private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
 
-        public ChiltonDB(string connection) : base(connection)
+        public ChiltonDB(string connection = CONNECTIONSTRING) : base(connection)
         {
             if (instance != null)
             {

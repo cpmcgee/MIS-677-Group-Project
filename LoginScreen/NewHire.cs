@@ -10,6 +10,7 @@ namespace LoginScreen
     {
         public bool BackgroundCheckPass { get; set; }
         public EquipmentRequest EquipmentReq { get; set; }
+        public bool IsHired { get; set; }
         
         public NewHire(string firstName, string lastName, string gender, DateTime dob, Employee supervisor) : base(firstName, lastName, gender, dob, supervisor)
         {

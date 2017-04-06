@@ -44,11 +44,13 @@ namespace LoginScreen
             defaultUser.Password = "admin";
             form2 = new Form2(this);
 
+            ChiltonDB dbase = ChiltonDB.GetInstance();
+
             //dbase.ExecuteCommand("DROP TABLE Users;");
             //dbase.ExecuteCommand("DROP TABLE LoginAttempts;");
             //dbase.ExecuteCommand("DROP TABLE _User;");
             //dbase.ExecuteCommand("DROP TABLE _LoginAttempts;");
-            //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));");
+            //dbase.ExecuteCommand("CREATE TABLE Users (UserID int, Username varchar(20), Password varchar(20), Name varchar(30));//");
             //dbase.ExecuteCommand("CREATE TABLE LoginAttempts (UserID int, Username varchar(20), TimeStamp varchar(20), Success varchar(10), AttemptNum int);");
 
             //ChiltonDB dbase = ChiltonDB.GetInstance();

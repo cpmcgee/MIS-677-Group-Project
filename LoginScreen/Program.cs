@@ -16,7 +16,7 @@ namespace LoginScreen
         {
             try
             {
-                ChiltonDB dbase = new ChiltonDB(ConnectionString); //singleton
+                ChiltonDB dbase = new ChiltonDB(); //singleton
             }
             catch (Exception ex)
             {
@@ -28,15 +28,7 @@ namespace LoginScreen
             Application.Run(new LoginForm());
         }
 
-        public static string ConnectionString
-        {   
-            get 
-            {
-                //string s = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
-                string s = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-                return s;
-            }
-        }
+        
 
         public static ChiltonDB GetDatabaseConnection
         {
