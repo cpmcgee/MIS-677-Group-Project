@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LoginScreen
+namespace GroupProject
 {
     
     public partial class Form2 : Form

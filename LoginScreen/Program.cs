@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LoginScreen
+namespace GroupProject
 {
     static class Program
     {
@@ -20,22 +20,12 @@ namespace LoginScreen
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to connect to database");
+                MessageBox.Show("Failed to connect to database\n" + ex.Message);
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
-        }
-
-        
-
-        public static ChiltonDB GetDatabaseConnection
-        {
-            get
-            {
-                return ChiltonDB.GetInstance();
-            }
         }
     }
 }

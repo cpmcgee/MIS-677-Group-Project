@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginScreen
+namespace GroupProject
 {
     public class HRRep : Employee
     {

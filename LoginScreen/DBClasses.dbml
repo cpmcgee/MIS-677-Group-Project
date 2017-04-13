@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="master" Class="DBClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\ProjectsV13;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="LoginScreen.Properties.Settings" SettingsPropertyName="masterConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\ProjectsV13;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True" SettingsObjectName="GroupProject.Properties.Settings" SettingsPropertyName="masterConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Users" Member="Users">
     <Type Name="User">
       <Column Name="UserID" Type="System.Int32" DbType="Int" IsPrimaryKey="true" CanBeNull="true" />

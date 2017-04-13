@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoginScreen
+namespace GroupProject
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -39,7 +39,7 @@ namespace LoginScreen
     #endregion
 		
 		public DBClassesDataContext() : 
-				base(global::LoginScreen.Properties.Settings.Default.masterConnectionString, mappingSource)
+				base(global::GroupProject.Properties.Settings.Default.masterConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

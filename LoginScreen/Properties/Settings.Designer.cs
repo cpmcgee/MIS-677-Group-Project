@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoginScreen.Properties {
+namespace GroupProject.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

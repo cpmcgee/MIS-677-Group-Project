@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace LoginScreen
+namespace GroupProject
 {
 
     public class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
@@ -22,7 +22,9 @@ namespace LoginScreen
                 throw new Exception("a db connection already exists");
             }
             else
+            {
                 instance = this;
+            }
         }
 
         public static ChiltonDB GetInstance()
@@ -34,6 +36,15 @@ namespace LoginScreen
         {
             string s = this.ExecuteQuery<string>(@"SELECT GETDATE() AS CurrentDateTime;", new object[] { }).Take(1).ToString();
             return s;
+        }
+
+        public List<NewHire> GetNewHireData()
+        {
+            //call database stored procedure
+            //instantiate list of new hires
+            //add appropriate equipment request to each new hire
+            //return list to loginform
+            throw new NotImplementedException();
         }
 
         public static void Close()

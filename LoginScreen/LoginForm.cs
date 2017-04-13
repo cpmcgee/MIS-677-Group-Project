@@ -11,7 +11,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Web.Script.Serialization;
 
-namespace LoginScreen
+namespace GroupProject
 {
     public partial class LoginForm : Form
     {
@@ -78,7 +78,7 @@ namespace LoginScreen
 
             if (inUser.Contains("\"") || inPass.Contains("\""))
             {
-                MessageBox.Show("Username and Password field cannot contain SQL statements.");
+                MessageBox.Show("Username and Password field cannot contain quotation marks.");
                 _ct++;
             }
             else
