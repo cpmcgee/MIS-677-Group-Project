@@ -22,7 +22,7 @@ namespace GroupProject
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="master")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Group2")]
 	public partial class DBClassesDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,16 +30,31 @@ namespace GroupProject
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertLoginAttempt(LoginAttempt instance);
-    partial void UpdateLoginAttempt(LoginAttempt instance);
-    partial void DeleteLoginAttempt(LoginAttempt instance);
+    partial void InsertEMPLOYEE(EMPLOYEE instance);
+    partial void UpdateEMPLOYEE(EMPLOYEE instance);
+    partial void DeleteEMPLOYEE(EMPLOYEE instance);
+    partial void InsertUSER(USER instance);
+    partial void UpdateUSER(USER instance);
+    partial void DeleteUSER(USER instance);
+    partial void InsertEQUIPMENTREQUEST(EQUIPMENTREQUEST instance);
+    partial void UpdateEQUIPMENTREQUEST(EQUIPMENTREQUEST instance);
+    partial void DeleteEQUIPMENTREQUEST(EQUIPMENTREQUEST instance);
+    partial void InsertHARDWARE(HARDWARE instance);
+    partial void UpdateHARDWARE(HARDWARE instance);
+    partial void DeleteHARDWARE(HARDWARE instance);
+    partial void InsertNEWHIRE(NEWHIRE instance);
+    partial void UpdateNEWHIRE(NEWHIRE instance);
+    partial void DeleteNEWHIRE(NEWHIRE instance);
+    partial void InsertSOFTWARE(SOFTWARE instance);
+    partial void UpdateSOFTWARE(SOFTWARE instance);
+    partial void DeleteSOFTWARE(SOFTWARE instance);
+    partial void InsertSUPERVISOR(SUPERVISOR instance);
+    partial void UpdateSUPERVISOR(SUPERVISOR instance);
+    partial void DeleteSUPERVISOR(SUPERVISOR instance);
     #endregion
 		
 		public DBClassesDataContext() : 
-				base(global::GroupProject.Properties.Settings.Default.masterConnectionString, mappingSource)
+				base(global::GroupProject.Properties.Settings.Default.Group2ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -68,132 +83,503 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<EMPLOYEE> EMPLOYEEs
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<EMPLOYEE>();
 			}
 		}
 		
-		public System.Data.Linq.Table<LoginAttempt> LoginAttempts
+		public System.Data.Linq.Table<USER> USERs
 		{
 			get
 			{
-				return this.GetTable<LoginAttempt>();
+				return this.GetTable<USER>();
+			}
+		}
+		
+		public System.Data.Linq.Table<EQUIPMENTREQUEST> EQUIPMENTREQUESTs
+		{
+			get
+			{
+				return this.GetTable<EQUIPMENTREQUEST>();
+			}
+		}
+		
+		public System.Data.Linq.Table<HARDWARE> HARDWAREs
+		{
+			get
+			{
+				return this.GetTable<HARDWARE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<NEWHIRE> NEWHIREs
+		{
+			get
+			{
+				return this.GetTable<NEWHIRE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SOFTWARE> SOFTWAREs
+		{
+			get
+			{
+				return this.GetTable<SOFTWARE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SUPERVISOR> SUPERVISORs
+		{
+			get
+			{
+				return this.GetTable<SUPERVISOR>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EMPLOYEE")]
+	public partial class EMPLOYEE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _UserID;
+		private string _EMPLOYEE_NUM;
 		
-		private string _Username;
+		private string _FIRST_NAME;
 		
-		private string _Password;
+		private string _LAST_NAME;
 		
-		private string _Name;
+		private string _GENDER;
+		
+		private System.Nullable<System.DateTime> _DATE_OF_BIRTH;
+		
+		private string _TITLE;
+		
+		private EntitySet<USER> _USERs;
+		
+		private EntitySet<NEWHIRE> _NEWHIREs;
+		
+		private EntitySet<SUPERVISOR> _SUPERVISORs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanged();
+    partial void OnFIRST_NAMEChanging(string value);
+    partial void OnFIRST_NAMEChanged();
+    partial void OnLAST_NAMEChanging(string value);
+    partial void OnLAST_NAMEChanged();
+    partial void OnGENDERChanging(string value);
+    partial void OnGENDERChanged();
+    partial void OnDATE_OF_BIRTHChanging(System.Nullable<System.DateTime> value);
+    partial void OnDATE_OF_BIRTHChanged();
+    partial void OnTITLEChanging(string value);
+    partial void OnTITLEChanged();
     #endregion
 		
-		public User()
+		public EMPLOYEE()
 		{
+			this._USERs = new EntitySet<USER>(new Action<USER>(this.attach_USERs), new Action<USER>(this.detach_USERs));
+			this._NEWHIREs = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs), new Action<NEWHIRE>(this.detach_NEWHIREs));
+			this._SUPERVISORs = new EntitySet<SUPERVISOR>(new Action<SUPERVISOR>(this.attach_SUPERVISORs), new Action<SUPERVISOR>(this.detach_SUPERVISORs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int", IsPrimaryKey=true)]
-		public System.Nullable<int> UserID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string EMPLOYEE_NUM
 		{
 			get
 			{
-				return this._UserID;
+				return this._EMPLOYEE_NUM;
 			}
 			set
 			{
-				if ((this._UserID != value))
+				if ((this._EMPLOYEE_NUM != value))
 				{
-					this.OnUserIDChanging(value);
+					this.OnEMPLOYEE_NUMChanging(value);
 					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
+					this._EMPLOYEE_NUM = value;
+					this.SendPropertyChanged("EMPLOYEE_NUM");
+					this.OnEMPLOYEE_NUMChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20)")]
-		public string Username
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FIRST_NAME", DbType="VarChar(25)")]
+		public string FIRST_NAME
 		{
 			get
 			{
-				return this._Username;
+				return this._FIRST_NAME;
 			}
 			set
 			{
-				if ((this._Username != value))
+				if ((this._FIRST_NAME != value))
 				{
-					this.OnUsernameChanging(value);
+					this.OnFIRST_NAMEChanging(value);
 					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
+					this._FIRST_NAME = value;
+					this.SendPropertyChanged("FIRST_NAME");
+					this.OnFIRST_NAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(20)")]
-		public string Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LAST_NAME", DbType="VarChar(25)")]
+		public string LAST_NAME
 		{
 			get
 			{
-				return this._Password;
+				return this._LAST_NAME;
 			}
 			set
 			{
-				if ((this._Password != value))
+				if ((this._LAST_NAME != value))
 				{
-					this.OnPasswordChanging(value);
+					this.OnLAST_NAMEChanging(value);
 					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
+					this._LAST_NAME = value;
+					this.SendPropertyChanged("LAST_NAME");
+					this.OnLAST_NAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", CanBeNull=false)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GENDER", DbType="VarChar(15)")]
+		public string GENDER
 		{
 			get
 			{
-				return this._Name;
+				return this._GENDER;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._GENDER != value))
 				{
-					this.OnNameChanging(value);
+					this.OnGENDERChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._GENDER = value;
+					this.SendPropertyChanged("GENDER");
+					this.OnGENDERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE_OF_BIRTH", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE_OF_BIRTH
+		{
+			get
+			{
+				return this._DATE_OF_BIRTH;
+			}
+			set
+			{
+				if ((this._DATE_OF_BIRTH != value))
+				{
+					this.OnDATE_OF_BIRTHChanging(value);
+					this.SendPropertyChanging();
+					this._DATE_OF_BIRTH = value;
+					this.SendPropertyChanged("DATE_OF_BIRTH");
+					this.OnDATE_OF_BIRTHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TITLE", DbType="VarChar(30)")]
+		public string TITLE
+		{
+			get
+			{
+				return this._TITLE;
+			}
+			set
+			{
+				if ((this._TITLE != value))
+				{
+					this.OnTITLEChanging(value);
+					this.SendPropertyChanging();
+					this._TITLE = value;
+					this.SendPropertyChanged("TITLE");
+					this.OnTITLEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_USER", Storage="_USERs", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM")]
+		public EntitySet<USER> USERs
+		{
+			get
+			{
+				return this._USERs;
+			}
+			set
+			{
+				this._USERs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE", Storage="_NEWHIREs", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM")]
+		public EntitySet<NEWHIRE> NEWHIREs
+		{
+			get
+			{
+				return this._NEWHIREs;
+			}
+			set
+			{
+				this._NEWHIREs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_SUPERVISOR", Storage="_SUPERVISORs", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM")]
+		public EntitySet<SUPERVISOR> SUPERVISORs
+		{
+			get
+			{
+				return this._SUPERVISORs;
+			}
+			set
+			{
+				this._SUPERVISORs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_USERs(USER entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = this;
+		}
+		
+		private void detach_USERs(USER entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = null;
+		}
+		
+		private void attach_NEWHIREs(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = this;
+		}
+		
+		private void detach_NEWHIREs(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = null;
+		}
+		
+		private void attach_SUPERVISORs(SUPERVISOR entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = this;
+		}
+		
+		private void detach_SUPERVISORs(SUPERVISOR entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.USERS")]
+	public partial class USER : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _USER_NUM;
+		
+		private string _EMPLOYEE_NUM;
+		
+		private string _USER_ID;
+		
+		private string _PASSWORD;
+		
+		private System.Nullable<bool> _ACCESS_LEVEL;
+		
+		private EntityRef<EMPLOYEE> _EMPLOYEE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUSER_NUMChanging(string value);
+    partial void OnUSER_NUMChanged();
+    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanged();
+    partial void OnUSER_IDChanging(string value);
+    partial void OnUSER_IDChanged();
+    partial void OnPASSWORDChanging(string value);
+    partial void OnPASSWORDChanged();
+    partial void OnACCESS_LEVELChanging(System.Nullable<bool> value);
+    partial void OnACCESS_LEVELChanged();
+    #endregion
+		
+		public USER()
+		{
+			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string USER_NUM
+		{
+			get
+			{
+				return this._USER_NUM;
+			}
+			set
+			{
+				if ((this._USER_NUM != value))
+				{
+					this.OnUSER_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._USER_NUM = value;
+					this.SendPropertyChanged("USER_NUM");
+					this.OnUSER_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string EMPLOYEE_NUM
+		{
+			get
+			{
+				return this._EMPLOYEE_NUM;
+			}
+			set
+			{
+				if ((this._EMPLOYEE_NUM != value))
+				{
+					if (this._EMPLOYEE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEMPLOYEE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYEE_NUM = value;
+					this.SendPropertyChanged("EMPLOYEE_NUM");
+					this.OnEMPLOYEE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_ID", DbType="VarChar(25)")]
+		public string USER_ID
+		{
+			get
+			{
+				return this._USER_ID;
+			}
+			set
+			{
+				if ((this._USER_ID != value))
+				{
+					this.OnUSER_IDChanging(value);
+					this.SendPropertyChanging();
+					this._USER_ID = value;
+					this.SendPropertyChanged("USER_ID");
+					this.OnUSER_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(30)")]
+		public string PASSWORD
+		{
+			get
+			{
+				return this._PASSWORD;
+			}
+			set
+			{
+				if ((this._PASSWORD != value))
+				{
+					this.OnPASSWORDChanging(value);
+					this.SendPropertyChanging();
+					this._PASSWORD = value;
+					this.SendPropertyChanged("PASSWORD");
+					this.OnPASSWORDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCESS_LEVEL", DbType="Bit")]
+		public System.Nullable<bool> ACCESS_LEVEL
+		{
+			get
+			{
+				return this._ACCESS_LEVEL;
+			}
+			set
+			{
+				if ((this._ACCESS_LEVEL != value))
+				{
+					this.OnACCESS_LEVELChanging(value);
+					this.SendPropertyChanging();
+					this._ACCESS_LEVEL = value;
+					this.SendPropertyChanged("ACCESS_LEVEL");
+					this.OnACCESS_LEVELChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_USER", Storage="_EMPLOYEE", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
+		public EMPLOYEE EMPLOYEE
+		{
+			get
+			{
+				return this._EMPLOYEE.Entity;
+			}
+			set
+			{
+				EMPLOYEE previousValue = this._EMPLOYEE.Entity;
+				if (((previousValue != value) 
+							|| (this._EMPLOYEE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EMPLOYEE.Entity = null;
+						previousValue.USERs.Remove(this);
+					}
+					this._EMPLOYEE.Entity = value;
+					if ((value != null))
+					{
+						value.USERs.Add(this);
+						this._EMPLOYEE_NUM = value.EMPLOYEE_NUM;
+					}
+					else
+					{
+						this._EMPLOYEE_NUM = default(string);
+					}
+					this.SendPropertyChanged("EMPLOYEE");
 				}
 			}
 		}
@@ -219,139 +605,1060 @@ namespace GroupProject
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoginAttempts")]
-	public partial class LoginAttempt : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EQUIPMENTREQUEST")]
+	public partial class EQUIPMENTREQUEST : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _UserID;
+		private string _EQUIPMENT_REQUEST_NUM;
 		
-		private string _Username;
+		private string _NEWHIRE_NUM;
 		
-		private string _TimeStamp;
+		private string _FIRSTNAME;
 		
-		private string _Success;
+		private string _LASTNAME;
 		
-		private System.Nullable<int> _AttemptNum;
+		private System.Nullable<bool> _IS_APPROVED;
+		
+		private System.Nullable<bool> _IS_BUILT;
+		
+		private EntitySet<HARDWARE> _HARDWAREs;
+		
+		private EntitySet<SOFTWARE> _SOFTWAREs;
+		
+		private EntityRef<NEWHIRE> _NEWHIRE;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnTimeStampChanging(string value);
-    partial void OnTimeStampChanged();
-    partial void OnSuccessChanging(string value);
-    partial void OnSuccessChanged();
-    partial void OnAttemptNumChanging(System.Nullable<int> value);
-    partial void OnAttemptNumChanged();
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanged();
+    partial void OnNEWHIRE_NUMChanging(string value);
+    partial void OnNEWHIRE_NUMChanged();
+    partial void OnFIRSTNAMEChanging(string value);
+    partial void OnFIRSTNAMEChanged();
+    partial void OnLASTNAMEChanging(string value);
+    partial void OnLASTNAMEChanged();
+    partial void OnIS_APPROVEDChanging(System.Nullable<bool> value);
+    partial void OnIS_APPROVEDChanged();
+    partial void OnIS_BUILTChanging(System.Nullable<bool> value);
+    partial void OnIS_BUILTChanged();
     #endregion
 		
-		public LoginAttempt()
+		public EQUIPMENTREQUEST()
 		{
+			this._HARDWAREs = new EntitySet<HARDWARE>(new Action<HARDWARE>(this.attach_HARDWAREs), new Action<HARDWARE>(this.detach_HARDWAREs));
+			this._SOFTWAREs = new EntitySet<SOFTWARE>(new Action<SOFTWARE>(this.attach_SOFTWAREs), new Action<SOFTWARE>(this.detach_SOFTWAREs));
+			this._NEWHIRE = default(EntityRef<NEWHIRE>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string EQUIPMENT_REQUEST_NUM
 		{
 			get
 			{
-				return this._UserID;
+				return this._EQUIPMENT_REQUEST_NUM;
 			}
 			set
 			{
-				if ((this._UserID != value))
+				if ((this._EQUIPMENT_REQUEST_NUM != value))
 				{
-					this.OnUserIDChanging(value);
+					this.OnEQUIPMENT_REQUEST_NUMChanging(value);
 					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
+					this._EQUIPMENT_REQUEST_NUM = value;
+					this.SendPropertyChanged("EQUIPMENT_REQUEST_NUM");
+					this.OnEQUIPMENT_REQUEST_NUMChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(20)")]
-		public string Username
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string NEWHIRE_NUM
 		{
 			get
 			{
-				return this._Username;
+				return this._NEWHIRE_NUM;
 			}
 			set
 			{
-				if ((this._Username != value))
+				if ((this._NEWHIRE_NUM != value))
 				{
-					this.OnUsernameChanging(value);
+					if (this._NEWHIRE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNEWHIRE_NUMChanging(value);
 					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
+					this._NEWHIRE_NUM = value;
+					this.SendPropertyChanged("NEWHIRE_NUM");
+					this.OnNEWHIRE_NUMChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStamp", DbType="VarChar(20)")]
-		public string TimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FIRSTNAME", DbType="VarChar(25)")]
+		public string FIRSTNAME
 		{
 			get
 			{
-				return this._TimeStamp;
+				return this._FIRSTNAME;
 			}
 			set
 			{
-				if ((this._TimeStamp != value))
+				if ((this._FIRSTNAME != value))
 				{
-					this.OnTimeStampChanging(value);
+					this.OnFIRSTNAMEChanging(value);
 					this.SendPropertyChanging();
-					this._TimeStamp = value;
-					this.SendPropertyChanged("TimeStamp");
-					this.OnTimeStampChanged();
+					this._FIRSTNAME = value;
+					this.SendPropertyChanged("FIRSTNAME");
+					this.OnFIRSTNAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Success", DbType="VarChar(10)")]
-		public string Success
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LASTNAME", DbType="VarChar(25)")]
+		public string LASTNAME
 		{
 			get
 			{
-				return this._Success;
+				return this._LASTNAME;
 			}
 			set
 			{
-				if ((this._Success != value))
+				if ((this._LASTNAME != value))
 				{
-					this.OnSuccessChanging(value);
+					this.OnLASTNAMEChanging(value);
 					this.SendPropertyChanging();
-					this._Success = value;
-					this.SendPropertyChanged("Success");
-					this.OnSuccessChanged();
+					this._LASTNAME = value;
+					this.SendPropertyChanged("LASTNAME");
+					this.OnLASTNAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttemptNum", DbType="Int", IsPrimaryKey=true)]
-		public System.Nullable<int> AttemptNum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_APPROVED", DbType="Bit")]
+		public System.Nullable<bool> IS_APPROVED
 		{
 			get
 			{
-				return this._AttemptNum;
+				return this._IS_APPROVED;
 			}
 			set
 			{
-				if ((this._AttemptNum != value))
+				if ((this._IS_APPROVED != value))
 				{
-					this.OnAttemptNumChanging(value);
+					this.OnIS_APPROVEDChanging(value);
 					this.SendPropertyChanging();
-					this._AttemptNum = value;
-					this.SendPropertyChanged("AttemptNum");
-					this.OnAttemptNumChanged();
+					this._IS_APPROVED = value;
+					this.SendPropertyChanged("IS_APPROVED");
+					this.OnIS_APPROVEDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_BUILT", DbType="Bit")]
+		public System.Nullable<bool> IS_BUILT
+		{
+			get
+			{
+				return this._IS_BUILT;
+			}
+			set
+			{
+				if ((this._IS_BUILT != value))
+				{
+					this.OnIS_BUILTChanging(value);
+					this.SendPropertyChanging();
+					this._IS_BUILT = value;
+					this.SendPropertyChanged("IS_BUILT");
+					this.OnIS_BUILTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EQUIPMENTREQUEST_HARDWARE", Storage="_HARDWAREs", ThisKey="EQUIPMENT_REQUEST_NUM", OtherKey="EQUIPMENT_REQUEST_NUM")]
+		public EntitySet<HARDWARE> HARDWAREs
+		{
+			get
+			{
+				return this._HARDWAREs;
+			}
+			set
+			{
+				this._HARDWAREs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EQUIPMENTREQUEST_SOFTWARE", Storage="_SOFTWAREs", ThisKey="EQUIPMENT_REQUEST_NUM", OtherKey="EQUIPMENT_REQUEST_NUM")]
+		public EntitySet<SOFTWARE> SOFTWAREs
+		{
+			get
+			{
+				return this._SOFTWAREs;
+			}
+			set
+			{
+				this._SOFTWAREs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NEWHIRE_EQUIPMENTREQUEST", Storage="_NEWHIRE", ThisKey="NEWHIRE_NUM", OtherKey="NEWHIRE_NUM", IsForeignKey=true)]
+		public NEWHIRE NEWHIRE
+		{
+			get
+			{
+				return this._NEWHIRE.Entity;
+			}
+			set
+			{
+				NEWHIRE previousValue = this._NEWHIRE.Entity;
+				if (((previousValue != value) 
+							|| (this._NEWHIRE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NEWHIRE.Entity = null;
+						previousValue.EQUIPMENTREQUESTs.Remove(this);
+					}
+					this._NEWHIRE.Entity = value;
+					if ((value != null))
+					{
+						value.EQUIPMENTREQUESTs.Add(this);
+						this._NEWHIRE_NUM = value.NEWHIRE_NUM;
+					}
+					else
+					{
+						this._NEWHIRE_NUM = default(string);
+					}
+					this.SendPropertyChanged("NEWHIRE");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_HARDWAREs(HARDWARE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EQUIPMENTREQUEST = this;
+		}
+		
+		private void detach_HARDWAREs(HARDWARE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EQUIPMENTREQUEST = null;
+		}
+		
+		private void attach_SOFTWAREs(SOFTWARE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EQUIPMENTREQUEST = this;
+		}
+		
+		private void detach_SOFTWAREs(SOFTWARE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EQUIPMENTREQUEST = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HARDWARE")]
+	public partial class HARDWARE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _HARDWARE_NUM;
+		
+		private string _EQUIPMENT_REQUEST_NUM;
+		
+		private System.Nullable<bool> _HARDWARE_COMPLETE;
+		
+		private System.Nullable<int> _HARDWARE_OPTION;
+		
+		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnHARDWARE_NUMChanging(string value);
+    partial void OnHARDWARE_NUMChanged();
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanged();
+    partial void OnHARDWARE_COMPLETEChanging(System.Nullable<bool> value);
+    partial void OnHARDWARE_COMPLETEChanged();
+    partial void OnHARDWARE_OPTIONChanging(System.Nullable<int> value);
+    partial void OnHARDWARE_OPTIONChanged();
+    #endregion
+		
+		public HARDWARE()
+		{
+			this._EQUIPMENTREQUEST = default(EntityRef<EQUIPMENTREQUEST>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string HARDWARE_NUM
+		{
+			get
+			{
+				return this._HARDWARE_NUM;
+			}
+			set
+			{
+				if ((this._HARDWARE_NUM != value))
+				{
+					this.OnHARDWARE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._HARDWARE_NUM = value;
+					this.SendPropertyChanged("HARDWARE_NUM");
+					this.OnHARDWARE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EQUIPMENT_REQUEST_NUM
+		{
+			get
+			{
+				return this._EQUIPMENT_REQUEST_NUM;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_REQUEST_NUM != value))
+				{
+					if (this._EQUIPMENTREQUEST.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEQUIPMENT_REQUEST_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIPMENT_REQUEST_NUM = value;
+					this.SendPropertyChanged("EQUIPMENT_REQUEST_NUM");
+					this.OnEQUIPMENT_REQUEST_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_COMPLETE", DbType="Bit")]
+		public System.Nullable<bool> HARDWARE_COMPLETE
+		{
+			get
+			{
+				return this._HARDWARE_COMPLETE;
+			}
+			set
+			{
+				if ((this._HARDWARE_COMPLETE != value))
+				{
+					this.OnHARDWARE_COMPLETEChanging(value);
+					this.SendPropertyChanging();
+					this._HARDWARE_COMPLETE = value;
+					this.SendPropertyChanged("HARDWARE_COMPLETE");
+					this.OnHARDWARE_COMPLETEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_OPTION", DbType="Int")]
+		public System.Nullable<int> HARDWARE_OPTION
+		{
+			get
+			{
+				return this._HARDWARE_OPTION;
+			}
+			set
+			{
+				if ((this._HARDWARE_OPTION != value))
+				{
+					this.OnHARDWARE_OPTIONChanging(value);
+					this.SendPropertyChanging();
+					this._HARDWARE_OPTION = value;
+					this.SendPropertyChanged("HARDWARE_OPTION");
+					this.OnHARDWARE_OPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EQUIPMENTREQUEST_HARDWARE", Storage="_EQUIPMENTREQUEST", ThisKey="EQUIPMENT_REQUEST_NUM", OtherKey="EQUIPMENT_REQUEST_NUM", IsForeignKey=true)]
+		public EQUIPMENTREQUEST EQUIPMENTREQUEST
+		{
+			get
+			{
+				return this._EQUIPMENTREQUEST.Entity;
+			}
+			set
+			{
+				EQUIPMENTREQUEST previousValue = this._EQUIPMENTREQUEST.Entity;
+				if (((previousValue != value) 
+							|| (this._EQUIPMENTREQUEST.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EQUIPMENTREQUEST.Entity = null;
+						previousValue.HARDWAREs.Remove(this);
+					}
+					this._EQUIPMENTREQUEST.Entity = value;
+					if ((value != null))
+					{
+						value.HARDWAREs.Add(this);
+						this._EQUIPMENT_REQUEST_NUM = value.EQUIPMENT_REQUEST_NUM;
+					}
+					else
+					{
+						this._EQUIPMENT_REQUEST_NUM = default(string);
+					}
+					this.SendPropertyChanged("EQUIPMENTREQUEST");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NEWHIRE")]
+	public partial class NEWHIRE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _NEWHIRE_NUM;
+		
+		private string _EMPLOYEE_NUM;
+		
+		private string _FIRSTNAME;
+		
+		private string _LASTNAME;
+		
+		private string _GENDER;
+		
+		private System.Nullable<System.DateTime> _DATE_OF_BIRTH;
+		
+		private string _BACKGROUND_PASSED;
+		
+		private string _IS_HIRED;
+		
+		private EntitySet<EQUIPMENTREQUEST> _EQUIPMENTREQUESTs;
+		
+		private EntityRef<EMPLOYEE> _EMPLOYEE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNEWHIRE_NUMChanging(string value);
+    partial void OnNEWHIRE_NUMChanged();
+    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanged();
+    partial void OnFIRSTNAMEChanging(string value);
+    partial void OnFIRSTNAMEChanged();
+    partial void OnLASTNAMEChanging(string value);
+    partial void OnLASTNAMEChanged();
+    partial void OnGENDERChanging(string value);
+    partial void OnGENDERChanged();
+    partial void OnDATE_OF_BIRTHChanging(System.Nullable<System.DateTime> value);
+    partial void OnDATE_OF_BIRTHChanged();
+    partial void OnBACKGROUND_PASSEDChanging(string value);
+    partial void OnBACKGROUND_PASSEDChanged();
+    partial void OnIS_HIREDChanging(string value);
+    partial void OnIS_HIREDChanged();
+    #endregion
+		
+		public NEWHIRE()
+		{
+			this._EQUIPMENTREQUESTs = new EntitySet<EQUIPMENTREQUEST>(new Action<EQUIPMENTREQUEST>(this.attach_EQUIPMENTREQUESTs), new Action<EQUIPMENTREQUEST>(this.detach_EQUIPMENTREQUESTs));
+			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string NEWHIRE_NUM
+		{
+			get
+			{
+				return this._NEWHIRE_NUM;
+			}
+			set
+			{
+				if ((this._NEWHIRE_NUM != value))
+				{
+					this.OnNEWHIRE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._NEWHIRE_NUM = value;
+					this.SendPropertyChanged("NEWHIRE_NUM");
+					this.OnNEWHIRE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string EMPLOYEE_NUM
+		{
+			get
+			{
+				return this._EMPLOYEE_NUM;
+			}
+			set
+			{
+				if ((this._EMPLOYEE_NUM != value))
+				{
+					if (this._EMPLOYEE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEMPLOYEE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYEE_NUM = value;
+					this.SendPropertyChanged("EMPLOYEE_NUM");
+					this.OnEMPLOYEE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FIRSTNAME", DbType="VarChar(25)")]
+		public string FIRSTNAME
+		{
+			get
+			{
+				return this._FIRSTNAME;
+			}
+			set
+			{
+				if ((this._FIRSTNAME != value))
+				{
+					this.OnFIRSTNAMEChanging(value);
+					this.SendPropertyChanging();
+					this._FIRSTNAME = value;
+					this.SendPropertyChanged("FIRSTNAME");
+					this.OnFIRSTNAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LASTNAME", DbType="VarChar(25)")]
+		public string LASTNAME
+		{
+			get
+			{
+				return this._LASTNAME;
+			}
+			set
+			{
+				if ((this._LASTNAME != value))
+				{
+					this.OnLASTNAMEChanging(value);
+					this.SendPropertyChanging();
+					this._LASTNAME = value;
+					this.SendPropertyChanged("LASTNAME");
+					this.OnLASTNAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GENDER", DbType="VarChar(15)")]
+		public string GENDER
+		{
+			get
+			{
+				return this._GENDER;
+			}
+			set
+			{
+				if ((this._GENDER != value))
+				{
+					this.OnGENDERChanging(value);
+					this.SendPropertyChanging();
+					this._GENDER = value;
+					this.SendPropertyChanged("GENDER");
+					this.OnGENDERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE_OF_BIRTH", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE_OF_BIRTH
+		{
+			get
+			{
+				return this._DATE_OF_BIRTH;
+			}
+			set
+			{
+				if ((this._DATE_OF_BIRTH != value))
+				{
+					this.OnDATE_OF_BIRTHChanging(value);
+					this.SendPropertyChanging();
+					this._DATE_OF_BIRTH = value;
+					this.SendPropertyChanged("DATE_OF_BIRTH");
+					this.OnDATE_OF_BIRTHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BACKGROUND_PASSED", DbType="Char(10)")]
+		public string BACKGROUND_PASSED
+		{
+			get
+			{
+				return this._BACKGROUND_PASSED;
+			}
+			set
+			{
+				if ((this._BACKGROUND_PASSED != value))
+				{
+					this.OnBACKGROUND_PASSEDChanging(value);
+					this.SendPropertyChanging();
+					this._BACKGROUND_PASSED = value;
+					this.SendPropertyChanged("BACKGROUND_PASSED");
+					this.OnBACKGROUND_PASSEDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_HIRED", DbType="Char(10)")]
+		public string IS_HIRED
+		{
+			get
+			{
+				return this._IS_HIRED;
+			}
+			set
+			{
+				if ((this._IS_HIRED != value))
+				{
+					this.OnIS_HIREDChanging(value);
+					this.SendPropertyChanging();
+					this._IS_HIRED = value;
+					this.SendPropertyChanged("IS_HIRED");
+					this.OnIS_HIREDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NEWHIRE_EQUIPMENTREQUEST", Storage="_EQUIPMENTREQUESTs", ThisKey="NEWHIRE_NUM", OtherKey="NEWHIRE_NUM")]
+		public EntitySet<EQUIPMENTREQUEST> EQUIPMENTREQUESTs
+		{
+			get
+			{
+				return this._EQUIPMENTREQUESTs;
+			}
+			set
+			{
+				this._EQUIPMENTREQUESTs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE", Storage="_EMPLOYEE", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
+		public EMPLOYEE EMPLOYEE
+		{
+			get
+			{
+				return this._EMPLOYEE.Entity;
+			}
+			set
+			{
+				EMPLOYEE previousValue = this._EMPLOYEE.Entity;
+				if (((previousValue != value) 
+							|| (this._EMPLOYEE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EMPLOYEE.Entity = null;
+						previousValue.NEWHIREs.Remove(this);
+					}
+					this._EMPLOYEE.Entity = value;
+					if ((value != null))
+					{
+						value.NEWHIREs.Add(this);
+						this._EMPLOYEE_NUM = value.EMPLOYEE_NUM;
+					}
+					else
+					{
+						this._EMPLOYEE_NUM = default(string);
+					}
+					this.SendPropertyChanged("EMPLOYEE");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_EQUIPMENTREQUESTs(EQUIPMENTREQUEST entity)
+		{
+			this.SendPropertyChanging();
+			entity.NEWHIRE = this;
+		}
+		
+		private void detach_EQUIPMENTREQUESTs(EQUIPMENTREQUEST entity)
+		{
+			this.SendPropertyChanging();
+			entity.NEWHIRE = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SOFTWARE")]
+	public partial class SOFTWARE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _SOFTWARE_NUM;
+		
+		private string _EQUIPMENT_REQUEST_NUM;
+		
+		private System.Nullable<bool> _SOFTWARE_COMPLETE;
+		
+		private System.Nullable<int> _SOFTWARE_OPTION;
+		
+		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSOFTWARE_NUMChanging(string value);
+    partial void OnSOFTWARE_NUMChanged();
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanged();
+    partial void OnSOFTWARE_COMPLETEChanging(System.Nullable<bool> value);
+    partial void OnSOFTWARE_COMPLETEChanged();
+    partial void OnSOFTWARE_OPTIONChanging(System.Nullable<int> value);
+    partial void OnSOFTWARE_OPTIONChanged();
+    #endregion
+		
+		public SOFTWARE()
+		{
+			this._EQUIPMENTREQUEST = default(EntityRef<EQUIPMENTREQUEST>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string SOFTWARE_NUM
+		{
+			get
+			{
+				return this._SOFTWARE_NUM;
+			}
+			set
+			{
+				if ((this._SOFTWARE_NUM != value))
+				{
+					this.OnSOFTWARE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._SOFTWARE_NUM = value;
+					this.SendPropertyChanged("SOFTWARE_NUM");
+					this.OnSOFTWARE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string EQUIPMENT_REQUEST_NUM
+		{
+			get
+			{
+				return this._EQUIPMENT_REQUEST_NUM;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_REQUEST_NUM != value))
+				{
+					if (this._EQUIPMENTREQUEST.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEQUIPMENT_REQUEST_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIPMENT_REQUEST_NUM = value;
+					this.SendPropertyChanged("EQUIPMENT_REQUEST_NUM");
+					this.OnEQUIPMENT_REQUEST_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_COMPLETE", DbType="Bit")]
+		public System.Nullable<bool> SOFTWARE_COMPLETE
+		{
+			get
+			{
+				return this._SOFTWARE_COMPLETE;
+			}
+			set
+			{
+				if ((this._SOFTWARE_COMPLETE != value))
+				{
+					this.OnSOFTWARE_COMPLETEChanging(value);
+					this.SendPropertyChanging();
+					this._SOFTWARE_COMPLETE = value;
+					this.SendPropertyChanged("SOFTWARE_COMPLETE");
+					this.OnSOFTWARE_COMPLETEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_OPTION", DbType="Int")]
+		public System.Nullable<int> SOFTWARE_OPTION
+		{
+			get
+			{
+				return this._SOFTWARE_OPTION;
+			}
+			set
+			{
+				if ((this._SOFTWARE_OPTION != value))
+				{
+					this.OnSOFTWARE_OPTIONChanging(value);
+					this.SendPropertyChanging();
+					this._SOFTWARE_OPTION = value;
+					this.SendPropertyChanged("SOFTWARE_OPTION");
+					this.OnSOFTWARE_OPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EQUIPMENTREQUEST_SOFTWARE", Storage="_EQUIPMENTREQUEST", ThisKey="EQUIPMENT_REQUEST_NUM", OtherKey="EQUIPMENT_REQUEST_NUM", IsForeignKey=true)]
+		public EQUIPMENTREQUEST EQUIPMENTREQUEST
+		{
+			get
+			{
+				return this._EQUIPMENTREQUEST.Entity;
+			}
+			set
+			{
+				EQUIPMENTREQUEST previousValue = this._EQUIPMENTREQUEST.Entity;
+				if (((previousValue != value) 
+							|| (this._EQUIPMENTREQUEST.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EQUIPMENTREQUEST.Entity = null;
+						previousValue.SOFTWAREs.Remove(this);
+					}
+					this._EQUIPMENTREQUEST.Entity = value;
+					if ((value != null))
+					{
+						value.SOFTWAREs.Add(this);
+						this._EQUIPMENT_REQUEST_NUM = value.EQUIPMENT_REQUEST_NUM;
+					}
+					else
+					{
+						this._EQUIPMENT_REQUEST_NUM = default(string);
+					}
+					this.SendPropertyChanged("EQUIPMENTREQUEST");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SUPERVISOR")]
+	public partial class SUPERVISOR : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _SUPERVISOR_NUM;
+		
+		private string _EMPLOYEE_NUM;
+		
+		private string _CURRENT_AVAILABLE;
+		
+		private EntityRef<EMPLOYEE> _EMPLOYEE;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSUPERVISOR_NUMChanging(string value);
+    partial void OnSUPERVISOR_NUMChanged();
+    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanged();
+    partial void OnCURRENT_AVAILABLEChanging(string value);
+    partial void OnCURRENT_AVAILABLEChanged();
+    #endregion
+		
+		public SUPERVISOR()
+		{
+			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string SUPERVISOR_NUM
+		{
+			get
+			{
+				return this._SUPERVISOR_NUM;
+			}
+			set
+			{
+				if ((this._SUPERVISOR_NUM != value))
+				{
+					this.OnSUPERVISOR_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._SUPERVISOR_NUM = value;
+					this.SendPropertyChanged("SUPERVISOR_NUM");
+					this.OnSUPERVISOR_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string EMPLOYEE_NUM
+		{
+			get
+			{
+				return this._EMPLOYEE_NUM;
+			}
+			set
+			{
+				if ((this._EMPLOYEE_NUM != value))
+				{
+					if (this._EMPLOYEE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEMPLOYEE_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYEE_NUM = value;
+					this.SendPropertyChanged("EMPLOYEE_NUM");
+					this.OnEMPLOYEE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_AVAILABLE", DbType="Char(3)")]
+		public string CURRENT_AVAILABLE
+		{
+			get
+			{
+				return this._CURRENT_AVAILABLE;
+			}
+			set
+			{
+				if ((this._CURRENT_AVAILABLE != value))
+				{
+					this.OnCURRENT_AVAILABLEChanging(value);
+					this.SendPropertyChanging();
+					this._CURRENT_AVAILABLE = value;
+					this.SendPropertyChanged("CURRENT_AVAILABLE");
+					this.OnCURRENT_AVAILABLEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_SUPERVISOR", Storage="_EMPLOYEE", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
+		public EMPLOYEE EMPLOYEE
+		{
+			get
+			{
+				return this._EMPLOYEE.Entity;
+			}
+			set
+			{
+				EMPLOYEE previousValue = this._EMPLOYEE.Entity;
+				if (((previousValue != value) 
+							|| (this._EMPLOYEE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EMPLOYEE.Entity = null;
+						previousValue.SUPERVISORs.Remove(this);
+					}
+					this._EMPLOYEE.Entity = value;
+					if ((value != null))
+					{
+						value.SUPERVISORs.Add(this);
+						this._EMPLOYEE_NUM = value.EMPLOYEE_NUM;
+					}
+					else
+					{
+						this._EMPLOYEE_NUM = default(string);
+					}
+					this.SendPropertyChanged("EMPLOYEE");
 				}
 			}
 		}

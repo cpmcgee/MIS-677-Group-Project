@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChiltonDB.cs" />
+    <Compile Include="DBClasses.cs">
+      <DependentUpon>DBClasses.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DBClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

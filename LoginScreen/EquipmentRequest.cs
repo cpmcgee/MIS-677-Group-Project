@@ -32,7 +32,7 @@ namespace GroupProject
              * 6 - GET Version Control
              * 7 - Citrix Receiver
              * 8 - Citrix Developer Console
-             * */
+             * * * * * * * * * * * * * * * */
             SoftwareOptions = software;
 
             /* HARDWARE OPTIONS INDEXING
@@ -49,7 +49,7 @@ namespace GroupProject
              * 10 - Comfort Foot Mat
              * 11 - Telephone
              * 12 - Laptop Docking Station
-             * */
+             * * * * * * * * * * * * * * * */
             HardwareOptions = hardware;
 
             RequestedOn = DateTime.Now;
