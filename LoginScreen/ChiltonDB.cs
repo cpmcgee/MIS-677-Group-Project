@@ -38,13 +38,93 @@ namespace GroupProject
             return s;
         }
 
-        public List<NewHire> GetNewHireData()
+        /// <summary>
+        /// Queries the database
+        /// </summary>
+        /// <returns>returns a collection of NewHire objects complete with their EquipmentRequests</returns>
+        public IEnumerable<NewHire> GetNewHires()
         {
-            //call database stored procedure
-            //instantiate list of new hires
-            //add appropriate equipment request to each new hire
-            //return list to loginform
-            throw new NotImplementedException();
+            IEnumerable<NewHire> newHires = from e in NEWHIREs
+                                              select new NewHire(Convert.ToInt32(e.NEWHIRE_NUM), Convert.ToInt32(e.EMPLOYEE_NUM), e.FIRSTNAME, e.LASTNAME, e.GENDER, Convert.ToDateTime(e.DATE_OF_BIRTH), Convert.ToInt32(e.SUPERVISOR_NUM), false);
+            
+            foreach(NewHire nh in newHires)
+            {
+                nh.EquipmentReq = GetEquipmentRequest(nh.NewHireNum);
+            }
+
+            return newHires;
+        }
+
+        /// <summary>
+        /// Queries the database
+        /// </summary>
+        /// <returns>returns a collection of EquipmentRequest objects</returns>
+        public IEnumerable<EquipmentRequest> GetEquipmentRequests()
+        {
+            IEnumerable<EquipmentRequest> requests = from eq in EQUIPMENTREQUESTs
+                                               join nh in NEWHIREs on eq.NEWHIRE_NUM equals nh.NEWHIRE_NUM
+                                               select new EquipmentRequest(Convert.ToInt32(nh.NEWHIRE_NUM), GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM), GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM), Convert.ToInt32(nh.SUPERVISOR_NUM));
+            return requests;
+        }
+
+        /// <summary>
+        /// Queries the database
+        /// </summary>
+        /// <param name="requestNum">The number of the equipment request passed in</param>
+        /// <returns>returns the array of hardware options for the respective equipment request</returns>
+        public bool[] GetHardwareOptions(string requestNum)
+        {
+            int rqnum = Convert.ToInt32(requestNum);
+            bool[] options = new bool[13];
+
+            foreach (var r in HARDWAREs)
+            {
+                if (Convert.ToInt32(r.EQUIPMENT_REQUEST_NUM) == rqnum)
+                {
+                    options[Convert.ToInt32(r.HARDWARE_OPTION)] = r.USED;
+                }
+            }
+
+            return options;
+        }
+
+        /// <summary>
+        /// Queries the database
+        /// </summary>
+        /// <param name="requestNum">The number of the equipment request passed in</param>
+        /// <returns>returns the array of software options for the respective equipment request</returns>
+        public bool[] GetSoftwareOptions(string requestNum)
+        {
+            int rqnum = Convert.ToInt32(requestNum);
+            
+            bool[] options = new bool[9];
+
+            foreach (var r in HARDWAREs)
+            {
+                if (Convert.ToInt32(r.EQUIPMENT_REQUEST_NUM) == rqnum)
+                {
+                    options[Convert.ToInt32(r.HARDWARE_OPTION)] = r.USED;
+                }
+            }
+
+            return options;
+        }
+
+        /// <summary>
+        /// Returns the equipment request assigned to a new hire
+        /// </summary>
+        /// <param name="newHireNum">The new hire number passed in</param>
+        /// <returns>An EquipmentRequest object</returns>
+        public EquipmentRequest GetEquipmentRequest(int newHireNum)
+        {
+            foreach (var er in GetEquipmentRequests())
+            {
+                if (er.NewHireNum == newHireNum)
+                {
+                    return er;
+                }
+            }
+            return null;
         }
 
         public static void Close()

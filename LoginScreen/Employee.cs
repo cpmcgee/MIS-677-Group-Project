@@ -8,21 +8,22 @@ namespace GroupProject
 {
     public abstract class Employee
     {
-        public int EmployeeNum { get; private set; }
+        public int EmployeeNum { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Employee Supervisor { get; set; }
+        public int SupervisorNum { get; set; }
         public bool IsSuperUser { get; set; }
 
-        public Employee(string firstName, string lastName, string gender, DateTime dob, Employee supervisor, bool isSu = false)
+        public Employee(int num, string firstName, string lastName, string gender, DateTime dob, int supervisorNum, bool isSu = false)
         {
+            EmployeeNum = num;
             FirstName = firstName;
             LastName = lastName;
             Gender = gender;
             DateOfBirth = dob;
-            Supervisor = supervisor;
+            SupervisorNum = supervisorNum;
             IsSuperUser = isSu;
         }
 

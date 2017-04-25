@@ -1,4 +1,4 @@
-namespace LoginScreen
+namespace GroupProject
 {
 
     partial class SUPERVISOR

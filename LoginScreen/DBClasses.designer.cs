@@ -148,6 +148,8 @@ namespace GroupProject
 		
 		private string _EMPLOYEE_NUM;
 		
+		private string _SUPERVISOR_NUM;
+		
 		private string _FIRST_NAME;
 		
 		private string _LAST_NAME;
@@ -170,6 +172,8 @@ namespace GroupProject
     partial void OnCreated();
     partial void OnEMPLOYEE_NUMChanging(string value);
     partial void OnEMPLOYEE_NUMChanged();
+    partial void OnSUPERVISOR_NUMChanging(string value);
+    partial void OnSUPERVISOR_NUMChanged();
     partial void OnFIRST_NAMEChanging(string value);
     partial void OnFIRST_NAMEChanged();
     partial void OnLAST_NAMEChanging(string value);
@@ -206,6 +210,26 @@ namespace GroupProject
 					this._EMPLOYEE_NUM = value;
 					this.SendPropertyChanged("EMPLOYEE_NUM");
 					this.OnEMPLOYEE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string SUPERVISOR_NUM
+		{
+			get
+			{
+				return this._SUPERVISOR_NUM;
+			}
+			set
+			{
+				if ((this._SUPERVISOR_NUM != value))
+				{
+					this.OnSUPERVISOR_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._SUPERVISOR_NUM = value;
+					this.SendPropertyChanged("SUPERVISOR_NUM");
+					this.OnSUPERVISOR_NUMChanged();
 				}
 			}
 		}
@@ -615,13 +639,11 @@ namespace GroupProject
 		
 		private string _NEWHIRE_NUM;
 		
-		private string _FIRSTNAME;
-		
-		private string _LASTNAME;
-		
 		private System.Nullable<bool> _IS_APPROVED;
 		
 		private System.Nullable<bool> _IS_BUILT;
+		
+		private System.Nullable<bool> _IS_Delivered;
 		
 		private EntitySet<HARDWARE> _HARDWAREs;
 		
@@ -637,14 +659,12 @@ namespace GroupProject
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
     partial void OnNEWHIRE_NUMChanging(string value);
     partial void OnNEWHIRE_NUMChanged();
-    partial void OnFIRSTNAMEChanging(string value);
-    partial void OnFIRSTNAMEChanged();
-    partial void OnLASTNAMEChanging(string value);
-    partial void OnLASTNAMEChanged();
     partial void OnIS_APPROVEDChanging(System.Nullable<bool> value);
     partial void OnIS_APPROVEDChanged();
     partial void OnIS_BUILTChanging(System.Nullable<bool> value);
     partial void OnIS_BUILTChanged();
+    partial void OnIS_DeliveredChanging(System.Nullable<bool> value);
+    partial void OnIS_DeliveredChanged();
     #endregion
 		
 		public EQUIPMENTREQUEST()
@@ -699,46 +719,6 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FIRSTNAME", DbType="VarChar(25)")]
-		public string FIRSTNAME
-		{
-			get
-			{
-				return this._FIRSTNAME;
-			}
-			set
-			{
-				if ((this._FIRSTNAME != value))
-				{
-					this.OnFIRSTNAMEChanging(value);
-					this.SendPropertyChanging();
-					this._FIRSTNAME = value;
-					this.SendPropertyChanged("FIRSTNAME");
-					this.OnFIRSTNAMEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LASTNAME", DbType="VarChar(25)")]
-		public string LASTNAME
-		{
-			get
-			{
-				return this._LASTNAME;
-			}
-			set
-			{
-				if ((this._LASTNAME != value))
-				{
-					this.OnLASTNAMEChanging(value);
-					this.SendPropertyChanging();
-					this._LASTNAME = value;
-					this.SendPropertyChanged("LASTNAME");
-					this.OnLASTNAMEChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_APPROVED", DbType="Bit")]
 		public System.Nullable<bool> IS_APPROVED
 		{
@@ -775,6 +755,26 @@ namespace GroupProject
 					this._IS_BUILT = value;
 					this.SendPropertyChanged("IS_BUILT");
 					this.OnIS_BUILTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_Delivered", DbType="Bit")]
+		public System.Nullable<bool> IS_Delivered
+		{
+			get
+			{
+				return this._IS_Delivered;
+			}
+			set
+			{
+				if ((this._IS_Delivered != value))
+				{
+					this.OnIS_DeliveredChanging(value);
+					this.SendPropertyChanging();
+					this._IS_Delivered = value;
+					this.SendPropertyChanged("IS_Delivered");
+					this.OnIS_DeliveredChanged();
 				}
 			}
 		}
@@ -890,13 +890,13 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _HARDWARE_NUM;
+		private string _HARDWARE_UID;
 		
 		private string _EQUIPMENT_REQUEST_NUM;
 		
-		private System.Nullable<bool> _HARDWARE_COMPLETE;
-		
 		private System.Nullable<int> _HARDWARE_OPTION;
+		
+		private bool _USED;
 		
 		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
 		
@@ -904,14 +904,14 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnHARDWARE_NUMChanging(string value);
-    partial void OnHARDWARE_NUMChanged();
+    partial void OnHARDWARE_UIDChanging(string value);
+    partial void OnHARDWARE_UIDChanged();
     partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
-    partial void OnHARDWARE_COMPLETEChanging(System.Nullable<bool> value);
-    partial void OnHARDWARE_COMPLETEChanged();
     partial void OnHARDWARE_OPTIONChanging(System.Nullable<int> value);
     partial void OnHARDWARE_OPTIONChanged();
+    partial void OnUSEDChanging(bool value);
+    partial void OnUSEDChanged();
     #endregion
 		
 		public HARDWARE()
@@ -920,22 +920,22 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string HARDWARE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_UID", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string HARDWARE_UID
 		{
 			get
 			{
-				return this._HARDWARE_NUM;
+				return this._HARDWARE_UID;
 			}
 			set
 			{
-				if ((this._HARDWARE_NUM != value))
+				if ((this._HARDWARE_UID != value))
 				{
-					this.OnHARDWARE_NUMChanging(value);
+					this.OnHARDWARE_UIDChanging(value);
 					this.SendPropertyChanging();
-					this._HARDWARE_NUM = value;
-					this.SendPropertyChanged("HARDWARE_NUM");
-					this.OnHARDWARE_NUMChanged();
+					this._HARDWARE_UID = value;
+					this.SendPropertyChanged("HARDWARE_UID");
+					this.OnHARDWARE_UIDChanged();
 				}
 			}
 		}
@@ -964,26 +964,6 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_COMPLETE", DbType="Bit")]
-		public System.Nullable<bool> HARDWARE_COMPLETE
-		{
-			get
-			{
-				return this._HARDWARE_COMPLETE;
-			}
-			set
-			{
-				if ((this._HARDWARE_COMPLETE != value))
-				{
-					this.OnHARDWARE_COMPLETEChanging(value);
-					this.SendPropertyChanging();
-					this._HARDWARE_COMPLETE = value;
-					this.SendPropertyChanged("HARDWARE_COMPLETE");
-					this.OnHARDWARE_COMPLETEChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_OPTION", DbType="Int")]
 		public System.Nullable<int> HARDWARE_OPTION
 		{
@@ -1000,6 +980,26 @@ namespace GroupProject
 					this._HARDWARE_OPTION = value;
 					this.SendPropertyChanged("HARDWARE_OPTION");
 					this.OnHARDWARE_OPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED")]
+		public bool USED
+		{
+			get
+			{
+				return this._USED;
+			}
+			set
+			{
+				if ((this._USED != value))
+				{
+					this.OnUSEDChanging(value);
+					this.SendPropertyChanging();
+					this._USED = value;
+					this.SendPropertyChanged("USED");
+					this.OnUSEDChanged();
 				}
 			}
 		}
@@ -1081,6 +1081,8 @@ namespace GroupProject
 		
 		private string _IS_HIRED;
 		
+		private string _SUPERVISOR_NUM;
+		
 		private EntitySet<EQUIPMENTREQUEST> _EQUIPMENTREQUESTs;
 		
 		private EntityRef<EMPLOYEE> _EMPLOYEE;
@@ -1105,6 +1107,8 @@ namespace GroupProject
     partial void OnBACKGROUND_PASSEDChanged();
     partial void OnIS_HIREDChanging(string value);
     partial void OnIS_HIREDChanged();
+    partial void OnSUPERVISOR_NUMChanging(string value);
+    partial void OnSUPERVISOR_NUMChanged();
     #endregion
 		
 		public NEWHIRE()
@@ -1278,6 +1282,26 @@ namespace GroupProject
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", CanBeNull=false)]
+		public string SUPERVISOR_NUM
+		{
+			get
+			{
+				return this._SUPERVISOR_NUM;
+			}
+			set
+			{
+				if ((this._SUPERVISOR_NUM != value))
+				{
+					this.OnSUPERVISOR_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._SUPERVISOR_NUM = value;
+					this.SendPropertyChanged("SUPERVISOR_NUM");
+					this.OnSUPERVISOR_NUMChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NEWHIRE_EQUIPMENTREQUEST", Storage="_EQUIPMENTREQUESTs", ThisKey="NEWHIRE_NUM", OtherKey="NEWHIRE_NUM")]
 		public EntitySet<EQUIPMENTREQUEST> EQUIPMENTREQUESTs
 		{
@@ -1364,13 +1388,13 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _SOFTWARE_NUM;
+		private string _SOFTWARE_UID;
 		
 		private string _EQUIPMENT_REQUEST_NUM;
 		
-		private System.Nullable<bool> _SOFTWARE_COMPLETE;
-		
 		private System.Nullable<int> _SOFTWARE_OPTION;
+		
+		private bool _USED;
 		
 		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
 		
@@ -1378,14 +1402,14 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnSOFTWARE_NUMChanging(string value);
-    partial void OnSOFTWARE_NUMChanged();
+    partial void OnSOFTWARE_UIDChanging(string value);
+    partial void OnSOFTWARE_UIDChanged();
     partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
-    partial void OnSOFTWARE_COMPLETEChanging(System.Nullable<bool> value);
-    partial void OnSOFTWARE_COMPLETEChanged();
     partial void OnSOFTWARE_OPTIONChanging(System.Nullable<int> value);
     partial void OnSOFTWARE_OPTIONChanged();
+    partial void OnUSEDChanging(bool value);
+    partial void OnUSEDChanged();
     #endregion
 		
 		public SOFTWARE()
@@ -1394,22 +1418,22 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string SOFTWARE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_UID", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string SOFTWARE_UID
 		{
 			get
 			{
-				return this._SOFTWARE_NUM;
+				return this._SOFTWARE_UID;
 			}
 			set
 			{
-				if ((this._SOFTWARE_NUM != value))
+				if ((this._SOFTWARE_UID != value))
 				{
-					this.OnSOFTWARE_NUMChanging(value);
+					this.OnSOFTWARE_UIDChanging(value);
 					this.SendPropertyChanging();
-					this._SOFTWARE_NUM = value;
-					this.SendPropertyChanged("SOFTWARE_NUM");
-					this.OnSOFTWARE_NUMChanged();
+					this._SOFTWARE_UID = value;
+					this.SendPropertyChanged("SOFTWARE_UID");
+					this.OnSOFTWARE_UIDChanged();
 				}
 			}
 		}
@@ -1438,26 +1462,6 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_COMPLETE", DbType="Bit")]
-		public System.Nullable<bool> SOFTWARE_COMPLETE
-		{
-			get
-			{
-				return this._SOFTWARE_COMPLETE;
-			}
-			set
-			{
-				if ((this._SOFTWARE_COMPLETE != value))
-				{
-					this.OnSOFTWARE_COMPLETEChanging(value);
-					this.SendPropertyChanging();
-					this._SOFTWARE_COMPLETE = value;
-					this.SendPropertyChanged("SOFTWARE_COMPLETE");
-					this.OnSOFTWARE_COMPLETEChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_OPTION", DbType="Int")]
 		public System.Nullable<int> SOFTWARE_OPTION
 		{
@@ -1474,6 +1478,26 @@ namespace GroupProject
 					this._SOFTWARE_OPTION = value;
 					this.SendPropertyChanged("SOFTWARE_OPTION");
 					this.OnSOFTWARE_OPTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED")]
+		public bool USED
+		{
+			get
+			{
+				return this._USED;
+			}
+			set
+			{
+				if ((this._USED != value))
+				{
+					this.OnUSEDChanging(value);
+					this.SendPropertyChanging();
+					this._USED = value;
+					this.SendPropertyChanged("USED");
+					this.OnUSEDChanged();
 				}
 			}
 		}

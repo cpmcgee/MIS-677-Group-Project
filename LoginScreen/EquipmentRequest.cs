@@ -8,20 +8,21 @@ namespace GroupProject
 {
     public class EquipmentRequest
     {
-        public NewHire hire { get; set; }
+        public int NewHireNum { get; set; }
         public bool IsApproved { get; set; }
         public bool IsBuilt { get; set; }
         public bool[] SoftwareOptions = new bool[9];
         public bool[] HardwareOptions = new bool[13];
         public Employee ApprovedBy { get; set; }
         public DateTime ApprovedOn { get; set; }
-        public Employee RequestedBy { get; set; }
+        public int RequestedBy { get; set; }
         public DateTime RequestedOn { get; set; }
         public DateTime CompletedOn { get; set; }
         public bool IsDelivered { get; set; }
 
-        public EquipmentRequest(bool[] software, bool[] hardware, Employee requestedBy)
+        public EquipmentRequest(int newHireNum, bool[] software, bool[] hardware, int supervisorNum)
         {
+            NewHireNum = newHireNum;
             /*SOFTWARE OPTIONS INDEXING
              * 0 - Office 2017 Suite
              * 1 - Project Manager
@@ -53,7 +54,7 @@ namespace GroupProject
             HardwareOptions = hardware;
 
             RequestedOn = DateTime.Now;
-            RequestedBy = requestedBy;
+            RequestedBy = supervisorNum;
         }
 
         public void Approve(Employee approvedBy)

@@ -38,10 +38,10 @@ namespace GroupProject
         {
             //For portability and debugging purposes, this load method contains (un)commented logic for erasing and setting up the database on each run
             //instantiate dummy data
-            User defaultUser = new User();
-            defaultUser.UserID = 0;
-            defaultUser.Username = "admin";
-            defaultUser.Password = "admin";
+            USER defaultUser = new USER();
+            //defaultUser.UserID = 0;
+            //defaultUser.Username = "admin";
+            //defaultUser.Password = "admin";
             form2 = new Form2(this);
 
             ChiltonDB dbase = ChiltonDB.GetInstance();
@@ -83,14 +83,14 @@ namespace GroupProject
             }
             else
             {
-                foreach (User u in dbase.Users) //loop through database table to check for user
+                foreach (USER u in dbase.USERs) //loop through database table to check for user
                 {
-                    string user = u.Username;
-                    inID = u.UserID.ToString();
+                    string user = u.USER_ID;
+                    inID = u.USER_NUM.ToString();
                     if (user == inUser)
                     {
                         validUser = true;
-                        pass = u.Password; //save users actual password
+                        pass = u.PASSWORD; //save users actual password
                     }
                 }
 
@@ -113,17 +113,17 @@ namespace GroupProject
                 }
             }
 
-            LoginAttempt la = new LoginAttempt //create new login attempt object (based on current state) to add to database
-            {
-                //UserID = Convert.ToInt32(inID),
-                Username = inUser,
-                TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
-                //TimeStamp = dbase.GetSystemDate().ToString(),
-                Success = validAcct.ToString(),
-                AttemptNum = _attempts,
-            };
+            //LoginAttempt la = new LoginAttempt //create new login attempt object (based on current state) to add to database
+            //{
+            //    //UserID = Convert.ToInt32(inID),
+            //    Username = inUser,
+            //    TimeStamp = DateTime.Now.ToString("MM/dd/yy HH:mm:ss"),
+            //    //TimeStamp = dbase.GetSystemDate().ToString(),
+            //    Success = validAcct.ToString(),
+            //    AttemptNum = _attempts,
+            //};
 
-            dbase.LoginAttempts.InsertOnSubmit(la);
+            //dbase.LoginAttempts.InsertOnSubmit(la);
             dbase.SubmitChanges(); //insert new login attempt record to database
             dbase.Connection.Close();
             validPass = false;
@@ -137,6 +137,11 @@ namespace GroupProject
         {
             txtPassword.Text = "";
             txtUsername.Text = "";
+            ChiltonDB dbase = ChiltonDB.GetInstance();
+
+
+
+
             form2.Show();
             this.Hide();
         }

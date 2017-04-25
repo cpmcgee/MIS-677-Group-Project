@@ -7,8 +7,8 @@
     <ProjectGuid>{1696B5B4-E9CF-434C-8CAC-DFF5E20D763D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoginScreen</RootNamespace>
-    <AssemblyName>LoginScreen</AssemblyName>
+    <RootNamespace>GroupProject</RootNamespace>
+    <AssemblyName>GroupProject</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -104,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DBClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
