@@ -20,7 +20,6 @@ namespace GroupProject
         //- database design patterns
 
 
-        Form2 form2;
         bool validUser = false;
         bool validPass = false;
         bool validAcct = false;
@@ -42,7 +41,8 @@ namespace GroupProject
             //defaultUser.UserID = 0;
             //defaultUser.Username = "admin";
             //defaultUser.Password = "admin";
-            form2 = new Form2(this);
+
+            //form2 = new Form2(this);
 
             ChiltonDB dbase = ChiltonDB.GetInstance();
 
@@ -142,7 +142,7 @@ namespace GroupProject
 
 
 
-            form2.Show();
+            //form2.Show();
             this.Hide();
         }
 
