@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupProject
 {
-    class JsonDataObject
+    public class JsonDataObject
     {
         public string firstName { get; set; }
         public string lastName { get; set; }

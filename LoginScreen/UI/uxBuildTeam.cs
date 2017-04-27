@@ -12,8 +12,11 @@ namespace GroupProject
 {
     public partial class uxBuildTeam : Form
     {
-        public uxBuildTeam(List<EquipmentRequest> requests)
+        private Employee User { get; set; }
+
+        public uxBuildTeam(Employee user, List<EquipmentRequest> requests)
         {
+            User = user;
             InitializeComponent();
         }
     }

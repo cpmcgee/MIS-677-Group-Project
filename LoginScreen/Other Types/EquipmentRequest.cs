@@ -19,13 +19,14 @@ namespace GroupProject
         public DateTime CompletedOn { get; set; }
 
         /* Equipement Request Status
-         * 0 - Not created
-         * 1 - Created, Pending Approval From Manager
+         * 0 - Created
+         * 1 - Pending Approval From Manager
          * 2 - Approved By Manager, Ready to send to build team
-         * 3 - Sent to build team
-         * 4 - Built, pending build approval
-         * 5 - Build approved, ready to be picked up
-         * 6 - Picked up
+         * 3 - Denied by manager
+         * 4 - Sent to build team
+         * 5 - Built, pending build approval
+         * 6 - Build approved, ready to be picked up
+         * 7 - Picked up
          * */
 
         public EquipmentRequest(int newHireNum, int status, bool[] software, bool[] hardware, int supervisorNum)

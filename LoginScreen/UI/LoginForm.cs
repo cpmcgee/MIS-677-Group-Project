@@ -37,12 +37,6 @@ namespace GroupProject
         {
             ChiltonDB dbase = ChiltonDB.GetInstance();
 
-            var ser = new JavaScriptSerializer();
-            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
-            foreach (JsonDataObject j in jsonData)
-            {
-                MessageBox.Show(j.firstName + "\n" + j.lastName + "\n" + j.dateOfBirth + "\n" + j.sex + "\n" + j.backgroundStatus);
-            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -98,8 +92,12 @@ namespace GroupProject
             _attempts++;
         }
 
-        //accept user, load form2
-        public void Authenticate(string username, string password)
+        /// <summary>
+        /// accept user, show form relevant to their position
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        private void Authenticate(string username, string password)
         {
             txtPassword.Text = "";
             txtUsername.Text = "";
@@ -109,45 +107,64 @@ namespace GroupProject
                 Employee user = dbase.GetUser(username, password);
                 if (user.GetType() == typeof(BuildTeamMember))
                 {
-                    List<EquipmentRequest> buildTeamRequests = new List<EquipmentRequest>();
-                    foreach (var eq in dbase.EquipmentRequests)
-                    {
-                        if (eq.Status == 3)
-                            buildTeamRequests.Add(eq);
-                    }
-                    uxBuildTeam form = new uxBuildTeam(buildTeamRequests);
-                    form.Show();
+                    LoginBuildTeam(user, dbase);
                 }
                 else if (user.GetType() == typeof(Supervisor))
                 {
-                    uxSupervisor form = new uxSupervisor();
-                    form.Show();
+                    LoginSupervisor(user, dbase);
                 }
                 else if (user.GetType() == typeof(HRRep))
                 {
-                    uxHRRep form = new uxHRRep();
-                    form.Show();
+                    LoginHRRep(user, dbase);
                 }
                 else if (user.GetType() == typeof(Manager))
                 {
-                    uxSeniorManager form = new uxSeniorManager();
-                    form.Show();
+                    LoginManager(user, dbase);
                 }
                 else
                 {
                     throw new Exception("Couldnt load form for user of role " + user.GetType().ToString());
                 }
+                this.Hide();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
-
-            this.Hide();
         }
 
-        public void Suspend()
+        private void LoginBuildTeam(Employee user, ChiltonDB dbase)
+        {
+            List<EquipmentRequest> buildTeamRequests = dbase.GetBuildTeamData();
+            uxBuildTeam form = new uxBuildTeam(user, buildTeamRequests);
+            form.Show();
+        }
+
+        private void LoginSupervisor(Employee user, ChiltonDB dbase)
+        {
+            List<NewHire> hiresNoRequest;
+            List<EquipmentRequest> supervisorRequests = dbase.GetSupervisorData(out hiresNoRequest);
+            uxSupervisor form = new uxSupervisor(hiresNoRequest, supervisorRequests);
+            form.Show();
+        }
+
+        private void LoginHRRep(Employee user, ChiltonDB dbase)
+        {
+            var ser = new JavaScriptSerializer();
+            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
+            List<EquipmentRequest> hrRequests = dbase.GetHRData();
+            uxHRRep form = new uxHRRep(jsonData, hrRequests);
+            form.Show();
+        }
+
+        private void LoginManager(Employee user, ChiltonDB dbase)
+        {
+            List<EquipmentRequest> mgrRequests = dbase.GetManagerData();
+            uxSeniorManager form = new uxSeniorManager();
+            form.Show();
+        }
+
+        private void Suspend()
         {
             _ct++;
             if (!validUser) //user was not found
@@ -189,7 +206,7 @@ namespace GroupProject
             Shutdown();
         }
 
-        public void ShowError(string error)
+        private void ShowError(string error)
         {
             MessageBox.Show(error);
         }
