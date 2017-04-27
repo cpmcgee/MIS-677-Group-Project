@@ -13,17 +13,15 @@ namespace GroupProject
         public string LastName { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int SupervisorNum { get; set; }
         public bool IsSuperUser { get; set; }
 
-        public Employee(int num, string firstName, string lastName, string gender, DateTime dob, int supervisorNum, bool isSu = false)
+        public Employee(int num, string firstName, string lastName, string gender, DateTime dob, bool isSu = false)
         {
             EmployeeNum = num;
             FirstName = firstName;
             LastName = lastName;
             Gender = gender;
             DateOfBirth = dob;
-            SupervisorNum = supervisorNum;
             IsSuperUser = isSu;
         }
 

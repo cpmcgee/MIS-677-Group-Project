@@ -9,18 +9,26 @@ namespace GroupProject
     public class EquipmentRequest
     {
         public int NewHireNum { get; set; }
-        public bool IsApproved { get; set; }
-        public bool IsBuilt { get; set; }
         public bool[] SoftwareOptions = new bool[9];
         public bool[] HardwareOptions = new bool[13];
-        public Employee ApprovedBy { get; set; }
+        public int ApprovedBy { get; set; }
+        public int Status { get; set; }
         public DateTime ApprovedOn { get; set; }
         public int RequestedBy { get; set; }
         public DateTime RequestedOn { get; set; }
         public DateTime CompletedOn { get; set; }
-        public bool IsDelivered { get; set; }
 
-        public EquipmentRequest(int newHireNum, bool[] software, bool[] hardware, int supervisorNum)
+        /* Equipement Request Status
+         * 0 - Not created
+         * 1 - Created, Pending Approval From Manager
+         * 2 - Approved By Manager, Ready to send to build team
+         * 3 - Sent to build team
+         * 4 - Built, pending build approval
+         * 5 - Build approved, ready to be picked up
+         * 6 - Picked up
+         * */
+
+        public EquipmentRequest(int newHireNum, int status, bool[] software, bool[] hardware, int supervisorNum)
         {
             NewHireNum = newHireNum;
             /*SOFTWARE OPTIONS INDEXING
@@ -55,18 +63,36 @@ namespace GroupProject
 
             RequestedOn = DateTime.Now;
             RequestedBy = supervisorNum;
+            Status = status;
         }
+
+
 
         public void Approve(Employee approvedBy)
         {
-            IsApproved = true;
+            Status = 2;
             ApprovedOn = DateTime.Now;
+            ApprovedBy = approvedBy.EmployeeNum;
         }
 
-        public void Complete()
+        public void SendToBuildTeam()
         {
-            CompletedOn = DateTime.Now;
-            IsBuilt = true;
+            Status = 3;
+        }
+
+        public void Build()
+        {
+            Status = 4;
+        }
+
+        public void ApproveBuild()
+        {
+            Status = 5;
+        }
+
+        public void Deliver()
+        {
+            Status = 6;
         }
 
         public void UpdateRequest(bool[] hardware, bool[] software)

@@ -2,8 +2,8 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=10.135.85.168;Initial Catalog=Group2;Persist Security Info=True;User ID=Group2" SettingsObjectName="GroupProject.Properties.Settings" SettingsPropertyName="Group2ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.EMPLOYEE" Member="EMPLOYEEs">
     <Type Name="EMPLOYEE">
-      <Column Name="EMPLOYEE_NUM" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="SUPERVISOR_NUM" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SUPERVISOR_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FIRST_NAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="LAST_NAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="GENDER" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
@@ -11,13 +11,14 @@
       <Column Name="TITLE" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Association Name="EMPLOYEE_USER" Member="USERs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="USER" />
       <Association Name="EMPLOYEE_NEWHIRE" Member="NEWHIREs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="NEWHIRE" />
+      <Association Name="EMPLOYEE_NEWHIRE1" Member="NEWHIREs1" ThisKey="EMPLOYEE_NUM" OtherKey="SUPERVISOR_NUM" Type="NEWHIRE" />
       <Association Name="EMPLOYEE_SUPERVISOR" Member="SUPERVISORs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="SUPERVISOR" />
     </Type>
   </Table>
   <Table Name="dbo.USERS" Member="USERs">
     <Type Name="USER">
-      <Column Name="USER_NUM" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EMPLOYEE_NUM" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="USER_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="USER_ID" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="PASSWORD" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="ACCESS_LEVEL" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -26,11 +27,9 @@
   </Table>
   <Table Name="dbo.EQUIPMENTREQUEST" Member="EQUIPMENTREQUESTs">
     <Type Name="EQUIPMENTREQUEST">
-      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NEWHIRE_NUM" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="IS_APPROVED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IS_BUILT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IS_Delivered" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NEWHIRE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="EQUIPMENTREQUEST_HARDWARE" Member="HARDWAREs" ThisKey="EQUIPMENT_REQUEST_NUM" OtherKey="EQUIPMENT_REQUEST_NUM" Type="HARDWARE" />
       <Association Name="EQUIPMENTREQUEST_SOFTWARE" Member="SOFTWAREs" ThisKey="EQUIPMENT_REQUEST_NUM" OtherKey="EQUIPMENT_REQUEST_NUM" Type="SOFTWARE" />
       <Association Name="NEWHIRE_EQUIPMENTREQUEST" Member="NEWHIRE" ThisKey="NEWHIRE_NUM" OtherKey="NEWHIRE_NUM" Type="NEWHIRE" IsForeignKey="true" />
@@ -38,42 +37,43 @@
   </Table>
   <Table Name="dbo.HARDWARE" Member="HARDWAREs">
     <Type Name="HARDWARE">
-      <Column Name="HARDWARE_UID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="HARDWARE_UID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="HARDWARE_OPTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Member="USED" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="USED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="EQUIPMENTREQUEST_HARDWARE" Member="EQUIPMENTREQUEST" ThisKey="EQUIPMENT_REQUEST_NUM" OtherKey="EQUIPMENT_REQUEST_NUM" Type="EQUIPMENTREQUEST" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.NEWHIRE" Member="NEWHIREs">
     <Type Name="NEWHIRE">
-      <Column Name="NEWHIRE_NUM" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EMPLOYEE_NUM" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NEWHIRE_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SUPERVISOR_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FIRSTNAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="LASTNAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="GENDER" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="DATE_OF_BIRTH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="BACKGROUND_PASSED" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="IS_HIRED" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Member="SUPERVISOR_NUM" Type="System.String" CanBeNull="false" />
+      <Column Name="BACKGROUND_PASSED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IS_HIRED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="NEWHIRE_EQUIPMENTREQUEST" Member="EQUIPMENTREQUESTs" ThisKey="NEWHIRE_NUM" OtherKey="NEWHIRE_NUM" Type="EQUIPMENTREQUEST" />
       <Association Name="EMPLOYEE_NEWHIRE" Member="EMPLOYEE" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
+      <Association Name="EMPLOYEE_NEWHIRE1" Member="EMPLOYEE1" ThisKey="SUPERVISOR_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SOFTWARE" Member="SOFTWAREs">
     <Type Name="SOFTWARE">
-      <Column Name="SOFTWARE_UID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SOFTWARE_UID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EQUIPMENT_REQUEST_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="SOFTWARE_OPTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Member="USED" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="USED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="EQUIPMENTREQUEST_SOFTWARE" Member="EQUIPMENTREQUEST" ThisKey="EQUIPMENT_REQUEST_NUM" OtherKey="EQUIPMENT_REQUEST_NUM" Type="EQUIPMENTREQUEST" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SUPERVISOR" Member="SUPERVISORs">
     <Type Name="SUPERVISOR">
-      <Column Name="SUPERVISOR_NUM" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EMPLOYEE_NUM" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="CURRENT_AVAILABLE" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="SUPERVISOR_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CURRENT_AVAILABLE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="EMPLOYEE_SUPERVISOR" Member="EMPLOYEE" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
     </Type>
   </Table>

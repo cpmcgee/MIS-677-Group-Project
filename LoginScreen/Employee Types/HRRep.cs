@@ -8,7 +8,7 @@ namespace GroupProject
 {
     public class HRRep : Employee
     {
-        public HRRep(string firstName, string lastName, string gender, DateTime dob, Employee supervisor, bool isAvail = false) : base(firstName, lastName, gender, dob, supervisor)
+        public HRRep(int emplNum, string firstName, string lastName, string gender, DateTime dob, bool isSu = false) : base(emplNum, firstName, lastName, gender, dob)
         {
 
         }

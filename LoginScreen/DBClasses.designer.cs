@@ -146,9 +146,9 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _EMPLOYEE_NUM;
+		private int _EMPLOYEE_NUM;
 		
-		private string _SUPERVISOR_NUM;
+		private int _SUPERVISOR_NUM;
 		
 		private string _FIRST_NAME;
 		
@@ -164,15 +164,17 @@ namespace GroupProject
 		
 		private EntitySet<NEWHIRE> _NEWHIREs;
 		
+		private EntitySet<NEWHIRE> _NEWHIREs1;
+		
 		private EntitySet<SUPERVISOR> _SUPERVISORs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanging(int value);
     partial void OnEMPLOYEE_NUMChanged();
-    partial void OnSUPERVISOR_NUMChanging(string value);
+    partial void OnSUPERVISOR_NUMChanging(int value);
     partial void OnSUPERVISOR_NUMChanged();
     partial void OnFIRST_NAMEChanging(string value);
     partial void OnFIRST_NAMEChanged();
@@ -190,12 +192,13 @@ namespace GroupProject
 		{
 			this._USERs = new EntitySet<USER>(new Action<USER>(this.attach_USERs), new Action<USER>(this.detach_USERs));
 			this._NEWHIREs = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs), new Action<NEWHIRE>(this.detach_NEWHIREs));
+			this._NEWHIREs1 = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs1), new Action<NEWHIRE>(this.detach_NEWHIREs1));
 			this._SUPERVISORs = new EntitySet<SUPERVISOR>(new Action<SUPERVISOR>(this.attach_SUPERVISORs), new Action<SUPERVISOR>(this.detach_SUPERVISORs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string EMPLOYEE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int EMPLOYEE_NUM
 		{
 			get
 			{
@@ -214,8 +217,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string SUPERVISOR_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Int NOT NULL")]
+		public int SUPERVISOR_NUM
 		{
 			get
 			{
@@ -360,6 +363,19 @@ namespace GroupProject
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE1", Storage="_NEWHIREs1", ThisKey="EMPLOYEE_NUM", OtherKey="SUPERVISOR_NUM")]
+		public EntitySet<NEWHIRE> NEWHIREs1
+		{
+			get
+			{
+				return this._NEWHIREs1;
+			}
+			set
+			{
+				this._NEWHIREs1.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_SUPERVISOR", Storage="_SUPERVISORs", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM")]
 		public EntitySet<SUPERVISOR> SUPERVISORs
 		{
@@ -417,6 +433,18 @@ namespace GroupProject
 			entity.EMPLOYEE = null;
 		}
 		
+		private void attach_NEWHIREs1(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE1 = this;
+		}
+		
+		private void detach_NEWHIREs1(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.EMPLOYEE1 = null;
+		}
+		
 		private void attach_SUPERVISORs(SUPERVISOR entity)
 		{
 			this.SendPropertyChanging();
@@ -436,9 +464,9 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _USER_NUM;
+		private int _USER_NUM;
 		
-		private string _EMPLOYEE_NUM;
+		private int _EMPLOYEE_NUM;
 		
 		private string _USER_ID;
 		
@@ -452,9 +480,9 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUSER_NUMChanging(string value);
+    partial void OnUSER_NUMChanging(int value);
     partial void OnUSER_NUMChanged();
-    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanging(int value);
     partial void OnEMPLOYEE_NUMChanged();
     partial void OnUSER_IDChanging(string value);
     partial void OnUSER_IDChanged();
@@ -470,8 +498,8 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string USER_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_NUM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int USER_NUM
 		{
 			get
 			{
@@ -490,8 +518,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string EMPLOYEE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Int NOT NULL")]
+		public int EMPLOYEE_NUM
 		{
 			get
 			{
@@ -601,7 +629,7 @@ namespace GroupProject
 					}
 					else
 					{
-						this._EMPLOYEE_NUM = default(string);
+						this._EMPLOYEE_NUM = default(int);
 					}
 					this.SendPropertyChanged("EMPLOYEE");
 				}
@@ -635,15 +663,11 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _EQUIPMENT_REQUEST_NUM;
+		private int _EQUIPMENT_REQUEST_NUM;
 		
-		private string _NEWHIRE_NUM;
+		private int _NEWHIRE_NUM;
 		
-		private System.Nullable<bool> _IS_APPROVED;
-		
-		private System.Nullable<bool> _IS_BUILT;
-		
-		private System.Nullable<bool> _IS_Delivered;
+		private System.Nullable<int> _STATUS;
 		
 		private EntitySet<HARDWARE> _HARDWAREs;
 		
@@ -655,16 +679,12 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(int value);
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
-    partial void OnNEWHIRE_NUMChanging(string value);
+    partial void OnNEWHIRE_NUMChanging(int value);
     partial void OnNEWHIRE_NUMChanged();
-    partial void OnIS_APPROVEDChanging(System.Nullable<bool> value);
-    partial void OnIS_APPROVEDChanged();
-    partial void OnIS_BUILTChanging(System.Nullable<bool> value);
-    partial void OnIS_BUILTChanged();
-    partial void OnIS_DeliveredChanging(System.Nullable<bool> value);
-    partial void OnIS_DeliveredChanged();
+    partial void OnSTATUSChanging(System.Nullable<int> value);
+    partial void OnSTATUSChanged();
     #endregion
 		
 		public EQUIPMENTREQUEST()
@@ -675,8 +695,8 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string EQUIPMENT_REQUEST_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int EQUIPMENT_REQUEST_NUM
 		{
 			get
 			{
@@ -695,8 +715,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string NEWHIRE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Int NOT NULL")]
+		public int NEWHIRE_NUM
 		{
 			get
 			{
@@ -719,62 +739,22 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_APPROVED", DbType="Bit")]
-		public System.Nullable<bool> IS_APPROVED
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
+		public System.Nullable<int> STATUS
 		{
 			get
 			{
-				return this._IS_APPROVED;
+				return this._STATUS;
 			}
 			set
 			{
-				if ((this._IS_APPROVED != value))
+				if ((this._STATUS != value))
 				{
-					this.OnIS_APPROVEDChanging(value);
+					this.OnSTATUSChanging(value);
 					this.SendPropertyChanging();
-					this._IS_APPROVED = value;
-					this.SendPropertyChanged("IS_APPROVED");
-					this.OnIS_APPROVEDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_BUILT", DbType="Bit")]
-		public System.Nullable<bool> IS_BUILT
-		{
-			get
-			{
-				return this._IS_BUILT;
-			}
-			set
-			{
-				if ((this._IS_BUILT != value))
-				{
-					this.OnIS_BUILTChanging(value);
-					this.SendPropertyChanging();
-					this._IS_BUILT = value;
-					this.SendPropertyChanged("IS_BUILT");
-					this.OnIS_BUILTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_Delivered", DbType="Bit")]
-		public System.Nullable<bool> IS_Delivered
-		{
-			get
-			{
-				return this._IS_Delivered;
-			}
-			set
-			{
-				if ((this._IS_Delivered != value))
-				{
-					this.OnIS_DeliveredChanging(value);
-					this.SendPropertyChanging();
-					this._IS_Delivered = value;
-					this.SendPropertyChanged("IS_Delivered");
-					this.OnIS_DeliveredChanged();
+					this._STATUS = value;
+					this.SendPropertyChanged("STATUS");
+					this.OnSTATUSChanged();
 				}
 			}
 		}
@@ -832,7 +812,7 @@ namespace GroupProject
 					}
 					else
 					{
-						this._NEWHIRE_NUM = default(string);
+						this._NEWHIRE_NUM = default(int);
 					}
 					this.SendPropertyChanged("NEWHIRE");
 				}
@@ -890,13 +870,13 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _HARDWARE_UID;
+		private int _HARDWARE_UID;
 		
-		private string _EQUIPMENT_REQUEST_NUM;
+		private int _EQUIPMENT_REQUEST_NUM;
 		
 		private System.Nullable<int> _HARDWARE_OPTION;
 		
-		private bool _USED;
+		private System.Nullable<bool> _USED;
 		
 		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
 		
@@ -904,13 +884,13 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnHARDWARE_UIDChanging(string value);
+    partial void OnHARDWARE_UIDChanging(int value);
     partial void OnHARDWARE_UIDChanged();
-    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(int value);
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
     partial void OnHARDWARE_OPTIONChanging(System.Nullable<int> value);
     partial void OnHARDWARE_OPTIONChanged();
-    partial void OnUSEDChanging(bool value);
+    partial void OnUSEDChanging(System.Nullable<bool> value);
     partial void OnUSEDChanged();
     #endregion
 		
@@ -920,8 +900,8 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_UID", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string HARDWARE_UID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HARDWARE_UID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int HARDWARE_UID
 		{
 			get
 			{
@@ -940,8 +920,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string EQUIPMENT_REQUEST_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="Int NOT NULL")]
+		public int EQUIPMENT_REQUEST_NUM
 		{
 			get
 			{
@@ -984,8 +964,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED")]
-		public bool USED
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED", DbType="Bit")]
+		public System.Nullable<bool> USED
 		{
 			get
 			{
@@ -1031,7 +1011,7 @@ namespace GroupProject
 					}
 					else
 					{
-						this._EQUIPMENT_REQUEST_NUM = default(string);
+						this._EQUIPMENT_REQUEST_NUM = default(int);
 					}
 					this.SendPropertyChanged("EQUIPMENTREQUEST");
 				}
@@ -1065,9 +1045,11 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _NEWHIRE_NUM;
+		private int _NEWHIRE_NUM;
 		
-		private string _EMPLOYEE_NUM;
+		private int _EMPLOYEE_NUM;
+		
+		private int _SUPERVISOR_NUM;
 		
 		private string _FIRSTNAME;
 		
@@ -1077,24 +1059,26 @@ namespace GroupProject
 		
 		private System.Nullable<System.DateTime> _DATE_OF_BIRTH;
 		
-		private string _BACKGROUND_PASSED;
+		private System.Nullable<bool> _BACKGROUND_PASSED;
 		
-		private string _IS_HIRED;
-		
-		private string _SUPERVISOR_NUM;
+		private System.Nullable<bool> _IS_HIRED;
 		
 		private EntitySet<EQUIPMENTREQUEST> _EQUIPMENTREQUESTs;
 		
 		private EntityRef<EMPLOYEE> _EMPLOYEE;
 		
+		private EntityRef<EMPLOYEE> _EMPLOYEE1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnNEWHIRE_NUMChanging(string value);
+    partial void OnNEWHIRE_NUMChanging(int value);
     partial void OnNEWHIRE_NUMChanged();
-    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanging(int value);
     partial void OnEMPLOYEE_NUMChanged();
+    partial void OnSUPERVISOR_NUMChanging(int value);
+    partial void OnSUPERVISOR_NUMChanged();
     partial void OnFIRSTNAMEChanging(string value);
     partial void OnFIRSTNAMEChanged();
     partial void OnLASTNAMEChanging(string value);
@@ -1103,23 +1087,22 @@ namespace GroupProject
     partial void OnGENDERChanged();
     partial void OnDATE_OF_BIRTHChanging(System.Nullable<System.DateTime> value);
     partial void OnDATE_OF_BIRTHChanged();
-    partial void OnBACKGROUND_PASSEDChanging(string value);
+    partial void OnBACKGROUND_PASSEDChanging(System.Nullable<bool> value);
     partial void OnBACKGROUND_PASSEDChanged();
-    partial void OnIS_HIREDChanging(string value);
+    partial void OnIS_HIREDChanging(System.Nullable<bool> value);
     partial void OnIS_HIREDChanged();
-    partial void OnSUPERVISOR_NUMChanging(string value);
-    partial void OnSUPERVISOR_NUMChanged();
     #endregion
 		
 		public NEWHIRE()
 		{
 			this._EQUIPMENTREQUESTs = new EntitySet<EQUIPMENTREQUEST>(new Action<EQUIPMENTREQUEST>(this.attach_EQUIPMENTREQUESTs), new Action<EQUIPMENTREQUEST>(this.detach_EQUIPMENTREQUESTs));
 			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
+			this._EMPLOYEE1 = default(EntityRef<EMPLOYEE>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string NEWHIRE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEWHIRE_NUM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int NEWHIRE_NUM
 		{
 			get
 			{
@@ -1138,8 +1121,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string EMPLOYEE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Int NOT NULL")]
+		public int EMPLOYEE_NUM
 		{
 			get
 			{
@@ -1158,6 +1141,30 @@ namespace GroupProject
 					this._EMPLOYEE_NUM = value;
 					this.SendPropertyChanged("EMPLOYEE_NUM");
 					this.OnEMPLOYEE_NUMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Int NOT NULL")]
+		public int SUPERVISOR_NUM
+		{
+			get
+			{
+				return this._SUPERVISOR_NUM;
+			}
+			set
+			{
+				if ((this._SUPERVISOR_NUM != value))
+				{
+					if (this._EMPLOYEE1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSUPERVISOR_NUMChanging(value);
+					this.SendPropertyChanging();
+					this._SUPERVISOR_NUM = value;
+					this.SendPropertyChanged("SUPERVISOR_NUM");
+					this.OnSUPERVISOR_NUMChanged();
 				}
 			}
 		}
@@ -1242,8 +1249,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BACKGROUND_PASSED", DbType="Char(10)")]
-		public string BACKGROUND_PASSED
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BACKGROUND_PASSED", DbType="Bit")]
+		public System.Nullable<bool> BACKGROUND_PASSED
 		{
 			get
 			{
@@ -1262,8 +1269,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_HIRED", DbType="Char(10)")]
-		public string IS_HIRED
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IS_HIRED", DbType="Bit")]
+		public System.Nullable<bool> IS_HIRED
 		{
 			get
 			{
@@ -1278,26 +1285,6 @@ namespace GroupProject
 					this._IS_HIRED = value;
 					this.SendPropertyChanged("IS_HIRED");
 					this.OnIS_HIREDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", CanBeNull=false)]
-		public string SUPERVISOR_NUM
-		{
-			get
-			{
-				return this._SUPERVISOR_NUM;
-			}
-			set
-			{
-				if ((this._SUPERVISOR_NUM != value))
-				{
-					this.OnSUPERVISOR_NUMChanging(value);
-					this.SendPropertyChanging();
-					this._SUPERVISOR_NUM = value;
-					this.SendPropertyChanged("SUPERVISOR_NUM");
-					this.OnSUPERVISOR_NUMChanged();
 				}
 			}
 		}
@@ -1342,9 +1329,43 @@ namespace GroupProject
 					}
 					else
 					{
-						this._EMPLOYEE_NUM = default(string);
+						this._EMPLOYEE_NUM = default(int);
 					}
 					this.SendPropertyChanged("EMPLOYEE");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE1", Storage="_EMPLOYEE1", ThisKey="SUPERVISOR_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
+		public EMPLOYEE EMPLOYEE1
+		{
+			get
+			{
+				return this._EMPLOYEE1.Entity;
+			}
+			set
+			{
+				EMPLOYEE previousValue = this._EMPLOYEE1.Entity;
+				if (((previousValue != value) 
+							|| (this._EMPLOYEE1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EMPLOYEE1.Entity = null;
+						previousValue.NEWHIREs1.Remove(this);
+					}
+					this._EMPLOYEE1.Entity = value;
+					if ((value != null))
+					{
+						value.NEWHIREs1.Add(this);
+						this._SUPERVISOR_NUM = value.EMPLOYEE_NUM;
+					}
+					else
+					{
+						this._SUPERVISOR_NUM = default(int);
+					}
+					this.SendPropertyChanged("EMPLOYEE1");
 				}
 			}
 		}
@@ -1388,13 +1409,13 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _SOFTWARE_UID;
+		private int _SOFTWARE_UID;
 		
-		private string _EQUIPMENT_REQUEST_NUM;
+		private int _EQUIPMENT_REQUEST_NUM;
 		
 		private System.Nullable<int> _SOFTWARE_OPTION;
 		
-		private bool _USED;
+		private System.Nullable<bool> _USED;
 		
 		private EntityRef<EQUIPMENTREQUEST> _EQUIPMENTREQUEST;
 		
@@ -1402,13 +1423,13 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnSOFTWARE_UIDChanging(string value);
+    partial void OnSOFTWARE_UIDChanging(int value);
     partial void OnSOFTWARE_UIDChanged();
-    partial void OnEQUIPMENT_REQUEST_NUMChanging(string value);
+    partial void OnEQUIPMENT_REQUEST_NUMChanging(int value);
     partial void OnEQUIPMENT_REQUEST_NUMChanged();
     partial void OnSOFTWARE_OPTIONChanging(System.Nullable<int> value);
     partial void OnSOFTWARE_OPTIONChanged();
-    partial void OnUSEDChanging(bool value);
+    partial void OnUSEDChanging(System.Nullable<bool> value);
     partial void OnUSEDChanged();
     #endregion
 		
@@ -1418,8 +1439,8 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_UID", DbType="VarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string SOFTWARE_UID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOFTWARE_UID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SOFTWARE_UID
 		{
 			get
 			{
@@ -1438,8 +1459,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string EQUIPMENT_REQUEST_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_REQUEST_NUM", DbType="Int NOT NULL")]
+		public int EQUIPMENT_REQUEST_NUM
 		{
 			get
 			{
@@ -1482,8 +1503,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED")]
-		public bool USED
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USED", DbType="Bit")]
+		public System.Nullable<bool> USED
 		{
 			get
 			{
@@ -1529,7 +1550,7 @@ namespace GroupProject
 					}
 					else
 					{
-						this._EQUIPMENT_REQUEST_NUM = default(string);
+						this._EQUIPMENT_REQUEST_NUM = default(int);
 					}
 					this.SendPropertyChanged("EQUIPMENTREQUEST");
 				}
@@ -1563,11 +1584,11 @@ namespace GroupProject
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _SUPERVISOR_NUM;
+		private int _SUPERVISOR_NUM;
 		
-		private string _EMPLOYEE_NUM;
+		private int _EMPLOYEE_NUM;
 		
-		private string _CURRENT_AVAILABLE;
+		private System.Nullable<bool> _CURRENT_AVAILABLE;
 		
 		private EntityRef<EMPLOYEE> _EMPLOYEE;
 		
@@ -1575,11 +1596,11 @@ namespace GroupProject
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnSUPERVISOR_NUMChanging(string value);
+    partial void OnSUPERVISOR_NUMChanging(int value);
     partial void OnSUPERVISOR_NUMChanged();
-    partial void OnEMPLOYEE_NUMChanging(string value);
+    partial void OnEMPLOYEE_NUMChanging(int value);
     partial void OnEMPLOYEE_NUMChanged();
-    partial void OnCURRENT_AVAILABLEChanging(string value);
+    partial void OnCURRENT_AVAILABLEChanging(System.Nullable<bool> value);
     partial void OnCURRENT_AVAILABLEChanged();
     #endregion
 		
@@ -1589,8 +1610,8 @@ namespace GroupProject
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string SUPERVISOR_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SUPERVISOR_NUM
 		{
 			get
 			{
@@ -1609,8 +1630,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string EMPLOYEE_NUM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_NUM", DbType="Int NOT NULL")]
+		public int EMPLOYEE_NUM
 		{
 			get
 			{
@@ -1633,8 +1654,8 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_AVAILABLE", DbType="Char(3)")]
-		public string CURRENT_AVAILABLE
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_AVAILABLE", DbType="Bit")]
+		public System.Nullable<bool> CURRENT_AVAILABLE
 		{
 			get
 			{
@@ -1680,7 +1701,7 @@ namespace GroupProject
 					}
 					else
 					{
-						this._EMPLOYEE_NUM = default(string);
+						this._EMPLOYEE_NUM = default(int);
 					}
 					this.SendPropertyChanged("EMPLOYEE");
 				}

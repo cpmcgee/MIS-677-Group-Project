@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GroupProject
 {
-    class Supervisor : Employee
+    public class Supervisor : Employee
     {
         public bool IsAvailable { get; set; }
 
-        public Supervisor(string firstName, string lastName, string gender, DateTime dob, Employee supervisor, bool isAvail = false) : base(firstName, lastName, gender, dob, supervisor)
+        public Supervisor(int emplNum, string firstName, string lastName, string gender, DateTime dob, bool isAvail = false) : base(emplNum, firstName, lastName, gender, dob)
         {
             IsAvailable = isAvail;
         }

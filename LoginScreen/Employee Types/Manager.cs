@@ -8,7 +8,7 @@ namespace GroupProject
 {
     public class Manager : Employee
     {
-        public Manager(string firstName, string lastName, string gender, DateTime dob, Employee supervisor, bool isAvail = false) : base(firstName, lastName, gender, dob, supervisor)
+        public Manager(int emplNum, string firstName, string lastName, string gender, DateTime dob, bool isAvail = false) : base(emplNum, firstName, lastName, gender, dob)
         {
 
         }

@@ -12,7 +12,7 @@ namespace GroupProject
 {
     public partial class uxBuildTeam : Form
     {
-        public uxBuildTeam()
+        public uxBuildTeam(List<EquipmentRequest> requests)
         {
             InitializeComponent();
         }
