@@ -12,7 +12,7 @@ namespace GroupProject
 {
     public partial class uxSupervisor : Form
     {
-        public uxSupervisor(List<NewHire> hiresNoRequest, List<EquipmentRequest> requests)
+        public uxSupervisor(List<NewHire> hires)
         {
             InitializeComponent();
         }

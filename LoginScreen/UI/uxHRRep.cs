@@ -12,7 +12,7 @@ namespace GroupProject
 {
     public partial class uxHRRep : Form
     {
-        public uxHRRep(JsonDataObject[] jsonData, List<EquipmentRequest> requests)
+        public uxHRRep(JsonDataObject[] jsonData, List<NewHire> hires)
         {
             InitializeComponent();
         }

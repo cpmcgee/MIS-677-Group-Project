@@ -9,6 +9,7 @@ namespace GroupProject
     public class EquipmentRequest
     {
         public int NewHireNum { get; set; }
+        public int RequestNum { get; set; }
         public bool[] SoftwareOptions = new bool[9];
         public bool[] HardwareOptions = new bool[13];
         public int ApprovedBy { get; set; }
@@ -29,7 +30,7 @@ namespace GroupProject
          * 7 - Picked up
          * */
 
-        public EquipmentRequest(int newHireNum, int status, bool[] software, bool[] hardware, int supervisorNum)
+        public EquipmentRequest(int newHireNum, int requestNum, int status, bool[] software, bool[] hardware, int supervisorNum)
         {
             NewHireNum = newHireNum;
             /*SOFTWARE OPTIONS INDEXING

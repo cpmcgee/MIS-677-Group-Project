@@ -15,11 +15,6 @@ namespace GroupProject
 {
     public partial class LoginForm : Form
     {
-        //TODO:
-        //- implement data sync and duplicate removal
-        //- database design patterns
-
-
         bool validUser = false;
         bool validPass = false;
         bool validAcct = false;
@@ -35,61 +30,69 @@ namespace GroupProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ChiltonDB dbase = ChiltonDB.GetInstance();
-
+           
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            ChiltonDB dbase = ChiltonDB.GetInstance();
-            inUser = txtUsername.Text;
-            inPass = txtPassword.Text;
-            string inID = null;
-            string pass = null;
-
-            if (inUser.Contains("\"") || inPass.Contains("\""))
+            using (ChiltonDB dbase = new ChiltonDB())
             {
-                MessageBox.Show("Username and Password field cannot contain quotation marks.");
-                _ct++;
-            }
-            else
-            {
-                foreach (USER u in dbase.USERs) //loop through database table to check for user
+                try
                 {
-                    string user = u.USER_ID;
-                    inID = u.USER_NUM.ToString();
-                    if (user == inUser)
+                    inUser = txtUsername.Text;
+                    inPass = txtPassword.Text;
+                    string inID = null;
+                    string pass = null;
+
+                    if (inUser.Contains("\"") || inPass.Contains("\""))
                     {
-                        validUser = true;
-                        pass = u.PASSWORD; //save users actual password
+                        MessageBox.Show("Username and Password field cannot contain quotation marks.");
+                        _ct++;
                     }
-                }
+                    else
+                    {
+                        foreach (USER u in dbase.USERs) //loop through database table to check for user
+                        {
+                            string user = u.USER_ID;
+                            inID = u.USER_NUM.ToString();
+                            if (user == inUser)
+                            {
+                                validUser = true;
+                                pass = u.PASSWORD; //save users actual password
+                            }
+                        }
 
-                if (pass == inPass) //check if valid password matches password from textbox
-                {
-                    validPass = true;
-                }
-                if (validUser && validPass)
-                {
-                    validAcct = true;
-                }
+                        if (pass == inPass) //check if valid password matches password from textbox
+                        {
+                            validPass = true;
+                        }
+                        if (validUser && validPass)
+                        {
+                            validAcct = true;
+                        }
 
-                if (validAcct)
-                {
-                    Authenticate(inUser, inPass); //let user in
+                        if (validAcct)
+                        {
+                            Authenticate(inUser, inPass); //let user in
+                        }
+                        else
+                        {
+                            Suspend(); //reset form, lock user out if 3 failed attempts
+                        }
+                    }
+
+                    dbase.SubmitChanges(); //insert new login attempt record to database
+                    dbase.Connection.Close();
+                    validPass = false;
+                    validUser = false;
+                    validAcct = false;
+                    _attempts++;
                 }
-                else
+                catch(Exception ex)
                 {
-                    Suspend(); //reset form, lock user out if 3 failed attempts
+                    MessageBox.Show(ex.Message);
                 }
             }
-
-            dbase.SubmitChanges(); //insert new login attempt record to database
-            dbase.Connection.Close();
-            validPass = false;
-            validUser = false;
-            validAcct = false;
-            _attempts++;
         }
 
         /// <summary>
@@ -101,35 +104,40 @@ namespace GroupProject
         {
             txtPassword.Text = "";
             txtUsername.Text = "";
-            ChiltonDB dbase = ChiltonDB.GetInstance();
-            try
+            using (ChiltonDB dbase = new ChiltonDB())
             {
-                Employee user = dbase.GetUser(username, password);
-                if (user.GetType() == typeof(BuildTeamMember))
+                try
                 {
-                    LoginBuildTeam(user, dbase);
+                    Employee user = dbase.GetUser(username, password);
+                    if (user.GetType() == typeof(BuildTeamMember))
+                    {
+                        LoginBuildTeam(user, dbase);
+                        return;
+                    }
+                    else if (user.GetType() == typeof(Supervisor))
+                    {
+                        LoginSupervisor(user, dbase);
+                        return;
+                    }
+                    else if (user.GetType() == typeof(HRRep))
+                    {
+                        LoginHRRep(user, dbase);
+                        return;
+                    }
+                    else if (user.GetType() == typeof(Manager))
+                    {
+                        LoginManager(user, dbase);
+                        return;
+                    }
+                    else
+                    {
+                        throw new Exception("Couldnt load form for user of role " + user.GetType().ToString());
+                    }
                 }
-                else if (user.GetType() == typeof(Supervisor))
+                catch (Exception ex)
                 {
-                    LoginSupervisor(user, dbase);
+                    MessageBox.Show(ex.Message);
                 }
-                else if (user.GetType() == typeof(HRRep))
-                {
-                    LoginHRRep(user, dbase);
-                }
-                else if (user.GetType() == typeof(Manager))
-                {
-                    LoginManager(user, dbase);
-                }
-                else
-                {
-                    throw new Exception("Couldnt load form for user of role " + user.GetType().ToString());
-                }
-                this.Hide();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -137,14 +145,15 @@ namespace GroupProject
         {
             List<EquipmentRequest> buildTeamRequests = dbase.GetBuildTeamData();
             uxBuildTeam form = new uxBuildTeam(user, buildTeamRequests);
+            Hide();
             form.Show();
         }
 
         private void LoginSupervisor(Employee user, ChiltonDB dbase)
         {
-            List<NewHire> hiresNoRequest;
-            List<EquipmentRequest> supervisorRequests = dbase.GetSupervisorData(out hiresNoRequest);
-            uxSupervisor form = new uxSupervisor(hiresNoRequest, supervisorRequests);
+            List<NewHire> hires  = dbase.GetSupervisorData();
+            uxSupervisor form = new uxSupervisor(hires);
+            Hide();
             form.Show();
         }
 
@@ -152,15 +161,17 @@ namespace GroupProject
         {
             var ser = new JavaScriptSerializer();
             JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
-            List<EquipmentRequest> hrRequests = dbase.GetHRData();
-            uxHRRep form = new uxHRRep(jsonData, hrRequests);
+            List<NewHire> hires = dbase.GetHRData();
+            uxHRRep form = new uxHRRep(jsonData, hires);
+            Hide();
             form.Show();
         }
 
         private void LoginManager(Employee user, ChiltonDB dbase)
         {
-            List<EquipmentRequest> mgrRequests = dbase.GetManagerData();
+            List<NewHire> hires = dbase.GetManagerData();
             uxSeniorManager form = new uxSeniorManager();
+            Hide();
             form.Show();
         }
 
@@ -213,9 +224,7 @@ namespace GroupProject
 
         public void Shutdown()
         {
-            //form2.Close();
-            //form2.Dispose();
-            ChiltonDB.Close();
+            
             Close();
             Dispose(); 
         }

@@ -15,30 +15,6 @@ namespace GroupProject
         //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
 
-        /// <summary>
-        /// Singleton constructor
-        /// </summary>
-        /// <param name="connection"></param>
-        public ChiltonDB(string connection = CONNECTIONSTRING) : base(connection)
-        {
-            if (instance != null)
-            {
-                throw new Exception("a db connection already exists");
-            }
-            else
-            {
-                instance = this;
-            }
-        }
-
-        /// <summary>
-        /// Return singleton
-        /// </summary>
-        /// <returns></returns>
-        public static ChiltonDB GetInstance()
-        {
-            return instance;
-        }
 
         /// <summary>
         /// Returns the user having the login information authenticated
@@ -118,7 +94,12 @@ namespace GroupProject
         {
             IEnumerable<Supervisor> supervisors = from e in EMPLOYEEs
                                                   join s in SUPERVISORs on e.EMPLOYEE_NUM equals s.EMPLOYEE_NUM
-                                                  select new Supervisor(e.EMPLOYEE_NUM, e.FIRST_NAME, e.LAST_NAME, e.GENDER, Convert.ToDateTime(e.DATE_OF_BIRTH), (bool)s.CURRENT_AVAILABLE);
+                                                  select new Supervisor(e.EMPLOYEE_NUM, 
+                                                                        e.FIRST_NAME, 
+                                                                        e.LAST_NAME, 
+                                                                        e.GENDER, 
+                                                                        Convert.ToDateTime(e.DATE_OF_BIRTH), 
+                                                                        (bool)s.CURRENT_AVAILABLE);
             return supervisors.ToList();
         }
 
@@ -130,8 +111,30 @@ namespace GroupProject
         {
             IEnumerable<EquipmentRequest> requests = from eq in EQUIPMENTREQUESTs
                                                      join nh in NEWHIREs on eq.NEWHIRE_NUM equals nh.NEWHIRE_NUM
-                                                     select new EquipmentRequest(nh.NEWHIRE_NUM, (int)eq.STATUS, GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM), GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM), nh.SUPERVISOR_NUM);
+                                                     select new EquipmentRequest(nh.NEWHIRE_NUM,
+                                                                                 eq.EQUIPMENT_REQUEST_NUM,
+                                                                                 (int)eq.STATUS,
+                                                                                 GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM),
+                                                                                 GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM),
+                                                                                 nh.SUPERVISOR_NUM);
             return requests.ToList();
+        }
+        
+        /// <summary>
+        /// Returns the equipment request assigned to a new hire
+        /// </summary>
+        /// <param name="newHireNum">The new hire number passed in</param>
+        /// <returns>An EquipmentRequest object</returns>
+        public EquipmentRequest GetEquipmentRequest(int newHireNum)
+        {
+            foreach (var er in GetEquipmentRequests())
+            {
+                if (er.NewHireNum == newHireNum)
+                {
+                    return er;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -175,50 +178,33 @@ namespace GroupProject
         }
 
         /// <summary>
-        /// Returns the equipment request assigned to a new hire
-        /// </summary>
-        /// <param name="newHireNum">The new hire number passed in</param>
-        /// <returns>An EquipmentRequest object</returns>
-        public EquipmentRequest GetEquipmentRequest(int newHireNum)
-        {
-            foreach (var er in GetEquipmentRequests())
-            {
-                if (er.NewHireNum == newHireNum)
-                {
-                    return er;
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Gets data relevant to HR Reps
         /// </summary>
         /// <returns></returns>
-        public List<EquipmentRequest> GetHRData()
+        public List<NewHire> GetHRData()
         {
-            List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            foreach (var eq in GetEquipmentRequests())
+            var hires = new List<NewHire>();
+            foreach (var nh in GetNewHires())
             {
-                if (eq.Status == 5 || eq.Status == 0 || eq.Status == 2)
-                    requests.Add(eq);
+                if ((nh.EquipmentReq.Status == 5 || nh.EquipmentReq.Status == 0 || nh.EquipmentReq.Status == 2))
+                    hires.Add(nh);
             }
-            return requests;
+            return hires;
         }
 
         /// <summary>
         /// Gets data relevant to Senior managers
         /// </summary>
         /// <returns></returns>
-        public List<EquipmentRequest> GetManagerData()
+        public List<NewHire> GetManagerData()
         {
-            List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            foreach (var eq in GetEquipmentRequests())
+            var hires = new List<NewHire>();
+            foreach (var nh in GetNewHires())
             {
-                if (eq.Status == 1)
-                    requests.Add(eq);
+                if (nh.EquipmentReq.Status == 1)
+                    hires.Add(nh);
             }
-            return requests;
+            return hires;
         }
 
         /// <summary>
@@ -241,29 +227,74 @@ namespace GroupProject
         /// </summary>
         /// <param name="hiresNoRequest"></param>
         /// <returns></returns>
-        public List<EquipmentRequest> GetSupervisorData(out List<NewHire> hiresNoRequest)
+        public List<NewHire> GetSupervisorData()
         {
-            hiresNoRequest = new List<NewHire>();
+            var hires = new List<NewHire>();
             foreach (var nh in GetNewHires())
             {
-                if (nh.EquipmentReq == null)
+                if (nh.EquipmentReq == null || nh.EquipmentReq.Status == 3 || nh.EquipmentReq.Status == 6)
                 {
-                    hiresNoRequest.Add(nh);
+                    hires.Add(nh);
                 }
             }
-            List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            foreach (var eq in GetEquipmentRequests())
-            {
-                if (eq.Status == 3 || eq.Status == 6)
-                    requests.Add(eq);
-            }
-            return requests;
+            //List<EquipmentRequest> requests = new List<EquipmentRequest>();
+            //foreach (var eq in GetEquipmentRequests())
+            //{
+            //    if (eq.Status == 3 || eq.Status == 6)
+            //        requests.Add(eq);
+            //}
+            return hires;
         }
 
-        public static void Close()
+        /// <summary>
+        /// Alters database table to update an equipment request
+        /// </summary>
+        /// <param name="update"></param>
+        /// <param name="requestNum"></param>
+        public void UpdateEquipmentRequest(EquipmentRequest update, int requestNum)
         {
-            instance.Connection.Close();
-            instance.Dispose();
+            foreach (var eq in EQUIPMENTREQUESTs)
+            {
+                if (eq.EQUIPMENT_REQUEST_NUM == requestNum)
+                {
+                    eq.STATUS = update.Status;
+                }
+            }
+            SubmitChanges();
+        }
+
+        /// <summary>
+        /// Updates an option on the hardware request matching the given equipment request number
+        /// </summary>
+        /// <param name="requestNum"></param>
+        /// <param name="optionNum"></param>
+        public void UpdateHardwareOption(EquipmentRequest update)
+        {
+            foreach (var hw in HARDWAREs)
+            {
+                if (hw.EQUIPMENT_REQUEST_NUM == update.RequestNum)
+                {
+                    hw.USED = update.HardwareOptions[(int)hw.HARDWARE_OPTION];
+                }
+            }
+            SubmitChanges();
+        }
+
+        /// <summary>
+        /// Updates an option on the software request matching the given equipment request number
+        /// </summary>
+        /// <param name="requestNum"></param>
+        /// <param name="optionNum"></param>
+        public void UpdateSoftwareOption(EquipmentRequest update)
+        {
+            foreach (var sw in SOFTWAREs)
+            {
+                if (sw.EQUIPMENT_REQUEST_NUM == update.RequestNum)
+                {
+                    sw.USED = update.HardwareOptions[(int)sw.SOFTWARE_OPTION];
+                }
+            }
+            SubmitChanges();
         }
     } 
 }
