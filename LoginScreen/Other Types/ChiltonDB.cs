@@ -9,9 +9,8 @@ using System.Reflection;
 namespace GroupProject
 {
 
-    public class ChiltonDB : DBClassesDataContext //currently no modified logic in this subclass implementation
+    public class ChiltonDB : DBClassesDataContext
     {
-        public static ChiltonDB instance = null;
         //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
 
