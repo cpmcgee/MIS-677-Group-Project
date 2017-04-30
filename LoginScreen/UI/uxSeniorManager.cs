@@ -12,9 +12,18 @@ namespace GroupProject
 {
     public partial class uxSeniorManager : Form
     {
-        public uxSeniorManager()
+        Employee User;
+        List<NewHire> hires;
+        public uxSeniorManager(Employee user, List<NewHire> hires)
         {
+            this.hires = hires;
+            User = user;
             InitializeComponent();
+        }
+
+        private void uxApprove_Click(object sender, EventArgs e)
+        {
+            //write to ApprovedOn field
         }
     }
 }

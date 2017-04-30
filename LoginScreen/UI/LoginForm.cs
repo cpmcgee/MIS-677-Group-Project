@@ -30,7 +30,12 @@ namespace GroupProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+           //TODO:
+           //Implement front end logic for uxBuildTeam and uxSeniorManager
+           //Add date fields to equipmentrequest db: requested on, completed on, approved on
+
+
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -152,7 +157,7 @@ namespace GroupProject
         private void LoginSupervisor(Employee user, ChiltonDB dbase)
         {
             List<NewHire> hires  = dbase.GetSupervisorData();
-            uxSupervisor form = new uxSupervisor(hires);
+            uxSupervisor form = new uxSupervisor(user, hires);
             Hide();
             form.Show();
         }
@@ -163,7 +168,7 @@ namespace GroupProject
             JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
             List<Supervisor> supervisors;
             List<NewHire> hires = dbase.GetHRData(out supervisors);
-            uxHRRep form = new uxHRRep(supervisors, jsonData, hires);
+            uxHRRep form = new uxHRRep(user, supervisors, jsonData, hires);
             Hide();
             form.Show();
         }
@@ -171,7 +176,7 @@ namespace GroupProject
         private void LoginManager(Employee user, ChiltonDB dbase)
         {
             List<NewHire> hires = dbase.GetManagerData();
-            uxSeniorManager form = new uxSeniorManager();
+            uxSeniorManager form = new uxSeniorManager(user, hires);
             Hide();
             form.Show();
         }

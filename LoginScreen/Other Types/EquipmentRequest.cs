@@ -10,8 +10,8 @@ namespace GroupProject
     {
         public int NewHireNum { get; set; }
         public int RequestNum { get; set; }
-        public bool[] SoftwareOptions = new bool[9];
-        public bool[] HardwareOptions = new bool[13];
+        public bool[] SoftwareOptions;
+        public bool[] HardwareOptions;
         public int ApprovedBy { get; set; }
         public int Status { get; set; }
         public DateTime ApprovedOn { get; set; }

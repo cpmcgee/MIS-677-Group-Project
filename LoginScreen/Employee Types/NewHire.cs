@@ -30,7 +30,10 @@ namespace GroupProject
                     if (req.EQUIPMENT_REQUEST_NUM > reqNum)
                         reqNum = req.EQUIPMENT_REQUEST_NUM;
                 }
-                this.EquipmentReq = new EquipmentRequest(NewHireNum, reqNum, 0, software, hardware, this.SupervisorNum);
+                var eq = new EquipmentRequest(NewHireNum, reqNum, 0, software, hardware, this.SupervisorNum);
+                eq.RequestedOn = DateTime.Now;
+                this.EquipmentReq = eq;
+                dbase.InsertEquipmentRequest(eq);
             }
         }
     }

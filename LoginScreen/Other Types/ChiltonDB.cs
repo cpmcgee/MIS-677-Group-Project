@@ -268,8 +268,60 @@ namespace GroupProject
                 NEWHIRE_NUM = eq.NewHireNum,
                 STATUS = eq.Status,
             };
+            InsertSoftwareOptions(eq);
+            InsertHardwareOptions(eq);
             EQUIPMENTREQUESTs.InsertOnSubmit(eqr);
             SubmitChanges();
+        }
+
+        /// <summary>
+        /// Inserts Software options set to the database
+        /// </summary>
+        /// <param name="eq"></param>
+        public void InsertSoftwareOptions(EquipmentRequest eq)
+        {
+            int max = 0;
+            foreach (var r in SOFTWAREs)
+            {
+                if (r.SOFTWARE_UID > max)
+                    max = r.SOFTWARE_UID;
+            }
+
+            for (int i = 0; i < eq.SoftwareOptions.Length; i++)
+            {
+                SOFTWARE option = new SOFTWARE
+                {
+                    SOFTWARE_UID = ++max,
+                    EQUIPMENT_REQUEST_NUM = eq.RequestNum,
+                    SOFTWARE_OPTION = i,
+                    USED = eq.SoftwareOptions[i]
+                };
+            }
+        }
+
+        /// <summary>
+        /// Inserts software options set to the database
+        /// </summary>
+        /// <param name="eq"></param>
+        public void InsertHardwareOptions(EquipmentRequest eq)
+        {
+            int max = 0;
+            foreach (var r in HARDWAREs)
+            {
+                if (r.HARDWARE_UID > max)
+                    max = r.HARDWARE_UID;
+            }
+
+            for (int i = 0; i < eq.SoftwareOptions.Length; i++)
+            {
+                HARDWARE option = new HARDWARE
+                {
+                    HARDWARE_UID = ++max,
+                    EQUIPMENT_REQUEST_NUM = eq.RequestNum,
+                    HARDWARE_OPTION = i,
+                    USED = eq.SoftwareOptions[i]
+                };
+            }
         }
 
         /// <summary>
@@ -277,7 +329,7 @@ namespace GroupProject
         /// </summary>
         /// <param name="update"></param>
         /// <param name="requestNum"></param>
-        public void UpdateEquipmentRequest(int requestNum, int update)
+        public void UpdateEquipmentRequestStatus(int requestNum, int update)
         {
             foreach (var eq in EQUIPMENTREQUESTs)
             {
@@ -290,11 +342,34 @@ namespace GroupProject
         }
 
         /// <summary>
-        /// Updates an option on the hardware request matching the given equipment request number
+        /// Deletes ann equipment request from the database
+        /// </summary>
+        /// <param name="requestNum"></param>
+        public void DeleteEquipmentRequest(int requestNum)
+        {
+            var deleteDetails = from e in EQUIPMENTREQUESTs
+                                where e.EQUIPMENT_REQUEST_NUM == requestNum
+                                select e;
+
+            EQUIPMENTREQUESTs.DeleteOnSubmit(deleteDetails.First());
+            SubmitChanges();
+        }
+
+        /// <summary>
+        /// Updates the hardware and software options of an equipmentRequest
+        /// </summary>
+        /// <param name="update"></param>
+        public void EditEquipmentRequest(EquipmentRequest update)
+        {
+            UpdateHardwareOptions(update);
+            UpdateSoftwareOptions(update);
+        }
+        /// <summary>
+        /// Updates the hardware request matching the given equipment request number
         /// </summary>
         /// <param name="requestNum"></param>
         /// <param name="optionNum"></param>
-        public void UpdateHardwareOption(EquipmentRequest update)
+        public void UpdateHardwareOptions(EquipmentRequest update)
         {
             foreach (var hw in HARDWAREs)
             {
@@ -307,11 +382,11 @@ namespace GroupProject
         }
 
         /// <summary>
-        /// Updates an option on the software request matching the given equipment request number
+        /// Updates the software request matching the given equipment request number
         /// </summary>
         /// <param name="requestNum"></param>
         /// <param name="optionNum"></param>
-        public void UpdateSoftwareOption(EquipmentRequest update)
+        public void UpdateSoftwareOptions(EquipmentRequest update)
         {
             foreach (var sw in SOFTWAREs)
             {

@@ -14,9 +14,11 @@ namespace GroupProject
     {
         JsonDataObject[] unAssignedHires;
         List<Supervisor> supervisors;
-        public uxHRRep(List<Supervisor> supervisors, JsonDataObject[] jsonData, List<NewHire> hires)
+        Employee User;
+        public uxHRRep(Employee user, List<Supervisor> supervisors, JsonDataObject[] jsonData, List<NewHire> hires)
         {
             InitializeComponent();
+            User = user;
             this.supervisors = supervisors;
             unAssignedHires = jsonData;
             foreach (var hire in jsonData)
@@ -108,7 +110,7 @@ namespace GroupProject
                     {
                         if ((string)row.Cells[5].Value == "Requested")
                         {
-                            dbase.UpdateEquipmentRequest((int)row.Cells[0].Value, 1);
+                            dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 1);
                             row.Cells[5].Value = "Sent to Manager";
                         }
                     }
@@ -131,7 +133,7 @@ namespace GroupProject
                     {
                         if ((string)row.Cells[5].Value == "Approved")
                         {
-                            dbase.UpdateEquipmentRequest((int)row.Cells[0].Value, 4);
+                            dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 4);
                             row.Cells[5].Value = "Sent to Build Team";
                         }
                     }
@@ -152,7 +154,7 @@ namespace GroupProject
                 {
                     foreach (DataGridViewRow row in uxGridViewCompleted.SelectedRows)
                     {
-                        dbase.UpdateEquipmentRequest((int)row.Cells[0].Value, 6);
+                        dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 6);
                         uxGridViewCompleted.Rows.Remove(row);
                     }
                 }
@@ -172,7 +174,7 @@ namespace GroupProject
                 {
                     foreach (DataGridViewRow row in uxGridViewCompleted.SelectedRows)
                     {
-                        dbase.UpdateEquipmentRequest((int)row.Cells[0].Value, 4);
+                        dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 4);
                         uxGridViewCompleted.Rows.Remove(row);
                     }
                 }

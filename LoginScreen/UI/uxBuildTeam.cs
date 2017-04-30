@@ -12,12 +12,18 @@ namespace GroupProject
 {
     public partial class uxBuildTeam : Form
     {
-        private Employee User { get; set; }
-
+        Employee User;
+        List<EquipmentRequest> requests;
         public uxBuildTeam(Employee user, List<EquipmentRequest> requests)
         {
+            this.requests = requests;
             User = user;
             InitializeComponent();
+        }
+
+        private void btnMarkCompleted_Click(object sender, EventArgs e)
+        {
+            //write to completed on field
         }
     }
 }
