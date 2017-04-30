@@ -14,7 +14,7 @@ namespace GroupProject
         public EquipmentRequest EquipmentReq { get; set; }
         public bool IsHired { get; set; }
         
-        public NewHire(int nhNum, int employeeNum, string firstName, string lastName, string gender, DateTime dob, int supervisorNum, bool isSu = false) : base(employeeNum, firstName, lastName, gender, dob)
+        public NewHire(int nhNum, string firstName, string lastName, string gender, DateTime dob, int supervisorNum, bool isSu = false) : base(0, firstName, lastName, gender, dob)
         {
             NewHireNum = nhNum;
             SupervisorNum = supervisorNum;
@@ -22,7 +22,16 @@ namespace GroupProject
 
         public void AssignRequest(bool[] software, bool[] hardware)
         {
-            this.EquipmentReq = new EquipmentRequest(NewHireNum, 1, software, hardware, this.SupervisorNum);
+            using (ChiltonDB dbase = new ChiltonDB())
+            {
+                int reqNum = 0;
+                foreach (var req in dbase.EQUIPMENTREQUESTs)
+                {
+                    if (req.EQUIPMENT_REQUEST_NUM > reqNum)
+                        reqNum = req.EQUIPMENT_REQUEST_NUM;
+                }
+                this.EquipmentReq = new EquipmentRequest(NewHireNum, reqNum, 0, software, hardware, this.SupervisorNum);
+            }
         }
     }
 }

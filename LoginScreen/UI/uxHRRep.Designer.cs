@@ -42,6 +42,15 @@
             this.btnDelay = new System.Windows.Forms.Button();
             this.btnSendToBuildTeam = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.colCompNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReqNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequestedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewCompleted)).BeginInit();
             this.SuspendLayout();
@@ -49,138 +58,211 @@
             // lstUnnasigned
             // 
             this.lstUnnasigned.FormattingEnabled = true;
-            this.lstUnnasigned.ItemHeight = 16;
-            this.lstUnnasigned.Location = new System.Drawing.Point(12, 39);
+            this.lstUnnasigned.Location = new System.Drawing.Point(9, 32);
+            this.lstUnnasigned.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstUnnasigned.Name = "lstUnnasigned";
-            this.lstUnnasigned.Size = new System.Drawing.Size(209, 164);
+            this.lstUnnasigned.Size = new System.Drawing.Size(158, 134);
             this.lstUnnasigned.TabIndex = 0;
             // 
             // lblUnassigned
             // 
             this.lblUnassigned.AutoSize = true;
             this.lblUnassigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnassigned.Location = new System.Drawing.Point(13, 11);
+            this.lblUnassigned.Location = new System.Drawing.Point(10, 9);
+            this.lblUnassigned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUnassigned.Name = "lblUnassigned";
-            this.lblUnassigned.Size = new System.Drawing.Size(176, 25);
+            this.lblUnassigned.Size = new System.Drawing.Size(142, 20);
             this.lblUnassigned.TabIndex = 1;
             this.lblUnassigned.Text = "Un-Assigned Hires";
             // 
             // lstSupervisors
             // 
             this.lstSupervisors.FormattingEnabled = true;
-            this.lstSupervisors.ItemHeight = 16;
-            this.lstSupervisors.Location = new System.Drawing.Point(228, 39);
+            this.lstSupervisors.Location = new System.Drawing.Point(171, 32);
+            this.lstSupervisors.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstSupervisors.Name = "lstSupervisors";
-            this.lstSupervisors.Size = new System.Drawing.Size(207, 164);
+            this.lstSupervisors.Size = new System.Drawing.Size(156, 134);
             this.lstSupervisors.TabIndex = 2;
             // 
             // lblSupervisors
             // 
             this.lblSupervisors.AutoSize = true;
             this.lblSupervisors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSupervisors.Location = new System.Drawing.Point(223, 11);
+            this.lblSupervisors.Location = new System.Drawing.Point(167, 9);
+            this.lblSupervisors.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSupervisors.Name = "lblSupervisors";
-            this.lblSupervisors.Size = new System.Drawing.Size(201, 25);
+            this.lblSupervisors.Size = new System.Drawing.Size(159, 20);
             this.lblSupervisors.TabIndex = 3;
             this.lblSupervisors.Text = "Available Supervisors";
             // 
             // btnAssign
             // 
-            this.btnAssign.Location = new System.Drawing.Point(12, 209);
+            this.btnAssign.Location = new System.Drawing.Point(9, 170);
+            this.btnAssign.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(423, 37);
+            this.btnAssign.Size = new System.Drawing.Size(317, 30);
             this.btnAssign.TabIndex = 4;
             this.btnAssign.Text = "Assign Hire to Supervisor";
             this.btnAssign.UseVisualStyleBackColor = true;
+            this.btnAssign.Click += new System.EventHandler(this.btnAssign_Click);
             // 
             // uxGridViewRequests
             // 
             this.uxGridViewRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.uxGridViewRequests.Location = new System.Drawing.Point(12, 290);
+            this.uxGridViewRequests.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colReqNum,
+            this.colFirst,
+            this.colLast,
+            this.colDate,
+            this.colRequestedBy,
+            this.colStatus});
+            this.uxGridViewRequests.Location = new System.Drawing.Point(9, 236);
+            this.uxGridViewRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxGridViewRequests.Name = "uxGridViewRequests";
             this.uxGridViewRequests.RowTemplate.Height = 24;
-            this.uxGridViewRequests.Size = new System.Drawing.Size(869, 178);
+            this.uxGridViewRequests.Size = new System.Drawing.Size(650, 145);
             this.uxGridViewRequests.TabIndex = 5;
             // 
             // btnSendToManager
             // 
-            this.btnSendToManager.Location = new System.Drawing.Point(10, 474);
+            this.btnSendToManager.Location = new System.Drawing.Point(8, 385);
+            this.btnSendToManager.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSendToManager.Name = "btnSendToManager";
-            this.btnSendToManager.Size = new System.Drawing.Size(211, 37);
+            this.btnSendToManager.Size = new System.Drawing.Size(158, 30);
             this.btnSendToManager.TabIndex = 6;
             this.btnSendToManager.Text = "Send to Manager for Approval";
             this.btnSendToManager.UseVisualStyleBackColor = true;
+            this.btnSendToManager.Click += new System.EventHandler(this.btnSendToManager_Click);
             // 
             // uxGridViewCompleted
             // 
             this.uxGridViewCompleted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.uxGridViewCompleted.Location = new System.Drawing.Point(458, 39);
+            this.uxGridViewCompleted.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCompNum,
+            this.colCompName,
+            this.colCompDate});
+            this.uxGridViewCompleted.Location = new System.Drawing.Point(344, 33);
+            this.uxGridViewCompleted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.uxGridViewCompleted.Name = "uxGridViewCompleted";
             this.uxGridViewCompleted.RowTemplate.Height = 24;
-            this.uxGridViewCompleted.Size = new System.Drawing.Size(423, 164);
+            this.uxGridViewCompleted.Size = new System.Drawing.Size(317, 133);
             this.uxGridViewCompleted.TabIndex = 7;
             // 
             // lblComplete
             // 
             this.lblComplete.AutoSize = true;
             this.lblComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComplete.Location = new System.Drawing.Point(453, 11);
+            this.lblComplete.Location = new System.Drawing.Point(340, 9);
+            this.lblComplete.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblComplete.Name = "lblComplete";
-            this.lblComplete.Size = new System.Drawing.Size(194, 25);
+            this.lblComplete.Size = new System.Drawing.Size(133, 20);
             this.lblComplete.TabIndex = 9;
-            this.lblComplete.Text = "Completed Requests";
+            this.lblComplete.Text = "Completed Builds";
             // 
             // lblPending
             // 
             this.lblPending.AutoSize = true;
             this.lblPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPending.Location = new System.Drawing.Point(12, 262);
+            this.lblPending.Location = new System.Drawing.Point(9, 213);
+            this.lblPending.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPending.Name = "lblPending";
-            this.lblPending.Size = new System.Drawing.Size(171, 25);
+            this.lblPending.Size = new System.Drawing.Size(140, 20);
             this.lblPending.TabIndex = 10;
             this.lblPending.Text = "Pending Requests";
             // 
             // btnApprove
             // 
-            this.btnApprove.Location = new System.Drawing.Point(458, 209);
+            this.btnApprove.Location = new System.Drawing.Point(344, 170);
+            this.btnApprove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(141, 37);
+            this.btnApprove.Size = new System.Drawing.Size(106, 30);
             this.btnApprove.TabIndex = 11;
-            this.btnApprove.Text = "Approve Request";
+            this.btnApprove.Text = "Approve Build";
             this.btnApprove.UseVisualStyleBackColor = true;
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnDelay
             // 
-            this.btnDelay.Location = new System.Drawing.Point(740, 209);
+            this.btnDelay.Location = new System.Drawing.Point(555, 170);
+            this.btnDelay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelay.Name = "btnDelay";
-            this.btnDelay.Size = new System.Drawing.Size(141, 37);
+            this.btnDelay.Size = new System.Drawing.Size(106, 30);
             this.btnDelay.TabIndex = 12;
             this.btnDelay.Text = "Delay Request";
             this.btnDelay.UseVisualStyleBackColor = true;
+            this.btnDelay.Click += new System.EventHandler(this.btnDelay_Click);
             // 
             // btnSendToBuildTeam
             // 
-            this.btnSendToBuildTeam.Location = new System.Drawing.Point(670, 474);
+            this.btnSendToBuildTeam.Location = new System.Drawing.Point(502, 385);
+            this.btnSendToBuildTeam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSendToBuildTeam.Name = "btnSendToBuildTeam";
-            this.btnSendToBuildTeam.Size = new System.Drawing.Size(211, 37);
+            this.btnSendToBuildTeam.Size = new System.Drawing.Size(158, 30);
             this.btnSendToBuildTeam.TabIndex = 13;
             this.btnSendToBuildTeam.Text = "Send to Build Team";
             this.btnSendToBuildTeam.UseVisualStyleBackColor = true;
+            this.btnSendToBuildTeam.Click += new System.EventHandler(this.btnSendToBuildTeam_Click);
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(806, 3);
+            this.btnLogout.Location = new System.Drawing.Point(604, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(75, 33);
+            this.btnLogout.Size = new System.Drawing.Size(56, 27);
             this.btnLogout.TabIndex = 14;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
             // 
+            // colCompNum
+            // 
+            this.colCompNum.HeaderText = "Request #";
+            this.colCompNum.Name = "colCompNum";
+            // 
+            // colCompName
+            // 
+            this.colCompName.HeaderText = "Last Name";
+            this.colCompName.Name = "colCompName";
+            // 
+            // colCompDate
+            // 
+            this.colCompDate.HeaderText = "Completed Date";
+            this.colCompDate.Name = "colCompDate";
+            // 
+            // colReqNum
+            // 
+            this.colReqNum.HeaderText = "Request #";
+            this.colReqNum.Name = "colReqNum";
+            // 
+            // colFirst
+            // 
+            this.colFirst.HeaderText = "First Name";
+            this.colFirst.Name = "colFirst";
+            // 
+            // colLast
+            // 
+            this.colLast.HeaderText = "Last Name";
+            this.colLast.Name = "colLast";
+            // 
+            // colDate
+            // 
+            this.colDate.HeaderText = "Requested Date";
+            this.colDate.Name = "colDate";
+            // 
+            // colRequestedBy
+            // 
+            this.colRequestedBy.HeaderText = "Requested By";
+            this.colRequestedBy.Name = "colRequestedBy";
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            // 
             // uxHRRep
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 524);
+            this.ClientSize = new System.Drawing.Size(670, 421);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSendToBuildTeam);
             this.Controls.Add(this.btnDelay);
@@ -195,6 +277,7 @@
             this.Controls.Add(this.lstSupervisors);
             this.Controls.Add(this.lblUnassigned);
             this.Controls.Add(this.lstUnnasigned);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "uxHRRep";
             this.Text = "Dashboard - HR";
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewRequests)).EndInit();
@@ -220,5 +303,14 @@
         private System.Windows.Forms.Button btnDelay;
         private System.Windows.Forms.Button btnSendToBuildTeam;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReqNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFirst;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLast;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestedBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

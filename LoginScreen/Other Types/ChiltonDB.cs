@@ -70,7 +70,6 @@ namespace GroupProject
         {
             IEnumerable<NewHire> newHires = from e in NEWHIREs
                                             select new NewHire(e.NEWHIRE_NUM,
-                                                               e.EMPLOYEE_NUM,
                                                                e.FIRSTNAME, e.LASTNAME,
                                                                e.GENDER,
                                                                Convert.ToDateTime(e.DATE_OF_BIRTH),
@@ -180,13 +179,21 @@ namespace GroupProject
         /// Gets data relevant to HR Reps
         /// </summary>
         /// <returns></returns>
-        public List<NewHire> GetHRData()
+        public List<NewHire> GetHRData(out List<Supervisor> supervisors)
         {
             var hires = new List<NewHire>();
             foreach (var nh in GetNewHires())
             {
                 if ((nh.EquipmentReq.Status == 5 || nh.EquipmentReq.Status == 0 || nh.EquipmentReq.Status == 2))
                     hires.Add(nh);
+            }
+            supervisors = new List<Supervisor>();
+            foreach (var s in GetSupervisors())
+            {
+                if (s.IsAvailable)
+                {
+                    supervisors.Add(s);
+                }
             }
             return hires;
         }
@@ -236,13 +243,33 @@ namespace GroupProject
                     hires.Add(nh);
                 }
             }
-            //List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            //foreach (var eq in GetEquipmentRequests())
-            //{
-            //    if (eq.Status == 3 || eq.Status == 6)
-            //        requests.Add(eq);
-            //}
             return hires;
+        }
+
+        public void InsertNewHire(NewHire nh)
+        {
+            NEWHIRE nhr = new NEWHIRE
+            {
+
+            };
+            NEWHIREs.InsertOnSubmit(nhr);
+            SubmitChanges();
+        }
+
+        /// <summary>
+        /// Adds an EquipmentRequest to the database
+        /// </summary>
+        /// <param name="eq"></param>
+        public void InsertEquipmentRequest(EquipmentRequest eq)
+        {
+            EQUIPMENTREQUEST eqr = new EQUIPMENTREQUEST
+            {
+                EQUIPMENT_REQUEST_NUM = eq.RequestNum,
+                NEWHIRE_NUM = eq.NewHireNum,
+                STATUS = eq.Status,
+            };
+            EQUIPMENTREQUESTs.InsertOnSubmit(eqr);
+            SubmitChanges();
         }
 
         /// <summary>
@@ -250,13 +277,13 @@ namespace GroupProject
         /// </summary>
         /// <param name="update"></param>
         /// <param name="requestNum"></param>
-        public void UpdateEquipmentRequest(EquipmentRequest update, int requestNum)
+        public void UpdateEquipmentRequest(int requestNum, int update)
         {
             foreach (var eq in EQUIPMENTREQUESTs)
             {
                 if (eq.EQUIPMENT_REQUEST_NUM == requestNum)
                 {
-                    eq.STATUS = update.Status;
+                    eq.STATUS = update;
                 }
             }
             SubmitChanges();
@@ -294,6 +321,38 @@ namespace GroupProject
                 }
             }
             SubmitChanges();
+        }
+
+        /// <summary>
+        /// Loops through the new hires in the database and gets the next new hire number
+        /// </summary>
+        /// <returns></returns>
+        public int GetNewHireNumber()
+        {
+            int max = 0;
+            foreach (var nh in NEWHIREs)
+            {
+                if (nh.NEWHIRE_NUM > max)
+                    max = nh.NEWHIRE_NUM;
+            }
+            return max;
+        }
+
+        /// <summary>
+        /// Get the name of an employee from their number
+        /// </summary>
+        /// <param name="employeeNum"></param>
+        /// <returns></returns>
+        public string GetEmployeeName(int employeeNum)
+        {
+            foreach (var e in EMPLOYEEs)
+            {
+                if (e.EMPLOYEE_NUM == employeeNum)
+                {
+                    return e.FIRST_NAME + " " + e.LAST_NAME;
+                }
+            }
+            return null;
         }
     } 
 }

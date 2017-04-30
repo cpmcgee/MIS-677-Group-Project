@@ -161,8 +161,9 @@ namespace GroupProject
         {
             var ser = new JavaScriptSerializer();
             JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
-            List<NewHire> hires = dbase.GetHRData();
-            uxHRRep form = new uxHRRep(jsonData, hires);
+            List<Supervisor> supervisors;
+            List<NewHire> hires = dbase.GetHRData(out supervisors);
+            uxHRRep form = new uxHRRep(supervisors, jsonData, hires);
             Hide();
             form.Show();
         }
