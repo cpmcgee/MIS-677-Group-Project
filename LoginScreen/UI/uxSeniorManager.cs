@@ -64,7 +64,9 @@ namespace GroupProject
                     {
                         using (ChiltonDB dbase = new ChiltonDB())
                         {
-                            dbase.UpdateEquipmentRequestStatus(hire.EquipmentReq.RequestNum, 2);
+                            hire.EquipmentReq.Status = 2;
+                            hire.EquipmentReq.ApprovedOn = DateTime.Now;
+                            dbase.UpdateEquipmentRequest(hire.EquipmentReq);
 
                             //update approval date
 
@@ -88,7 +90,8 @@ namespace GroupProject
                     {
                         using (ChiltonDB dbase = new ChiltonDB())
                         {
-                            dbase.UpdateEquipmentRequestStatus(hire.EquipmentReq.RequestNum, 3);
+                            hire.EquipmentReq.Status = 3;
+                            dbase.UpdateEquipmentRequest(hire.EquipmentReq);
                         }
                     }
                 }
@@ -125,6 +128,13 @@ namespace GroupProject
                     return;
                 }
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+            login.Show();
+            Close();
         }
     }
 }

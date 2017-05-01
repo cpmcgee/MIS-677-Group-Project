@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.uxDataGridRequests = new System.Windows.Forms.DataGridView();
+            this.colNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReqDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uxApprove = new System.Windows.Forms.Button();
             this.uxLabel = new System.Windows.Forms.Label();
             this.uxDeny = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lstHardware = new System.Windows.Forms.ListBox();
             this.lstSoftware = new System.Windows.Forms.ListBox();
-            this.colNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReqDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uxDataGridRequests)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             this.colLast,
             this.colReqDate});
             this.uxDataGridRequests.Location = new System.Drawing.Point(9, 36);
-            this.uxDataGridRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxDataGridRequests.Margin = new System.Windows.Forms.Padding(2);
             this.uxDataGridRequests.MultiSelect = false;
             this.uxDataGridRequests.Name = "uxDataGridRequests";
             this.uxDataGridRequests.RowTemplate.Height = 24;
@@ -62,67 +62,6 @@
             this.uxDataGridRequests.Size = new System.Drawing.Size(419, 221);
             this.uxDataGridRequests.TabIndex = 0;
             this.uxDataGridRequests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.uxDataGridRequests_CellContentClick);
-            // 
-            // uxApprove
-            // 
-            this.uxApprove.Location = new System.Drawing.Point(9, 261);
-            this.uxApprove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.uxApprove.Name = "uxApprove";
-            this.uxApprove.Size = new System.Drawing.Size(67, 27);
-            this.uxApprove.TabIndex = 1;
-            this.uxApprove.Text = "Approve";
-            this.uxApprove.UseVisualStyleBackColor = true;
-            this.uxApprove.Click += new System.EventHandler(this.uxApprove_Click);
-            // 
-            // uxLabel
-            // 
-            this.uxLabel.AutoSize = true;
-            this.uxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxLabel.Location = new System.Drawing.Point(10, 11);
-            this.uxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.uxLabel.Name = "uxLabel";
-            this.uxLabel.Size = new System.Drawing.Size(349, 20);
-            this.uxLabel.TabIndex = 2;
-            this.uxLabel.Text = "Current Equipment Requests Needing Approval:";
-            // 
-            // uxDeny
-            // 
-            this.uxDeny.Location = new System.Drawing.Point(361, 261);
-            this.uxDeny.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.uxDeny.Name = "uxDeny";
-            this.uxDeny.Size = new System.Drawing.Size(67, 27);
-            this.uxDeny.TabIndex = 3;
-            this.uxDeny.Text = "Deny";
-            this.uxDeny.UseVisualStyleBackColor = true;
-            this.uxDeny.Click += new System.EventHandler(this.uxDeny_Click);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Location = new System.Drawing.Point(715, 7);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(67, 24);
-            this.btnLogout.TabIndex = 4;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            // 
-            // lstHardware
-            // 
-            this.lstHardware.FormattingEnabled = true;
-            this.lstHardware.Location = new System.Drawing.Point(609, 35);
-            this.lstHardware.Margin = new System.Windows.Forms.Padding(2);
-            this.lstHardware.Name = "lstHardware";
-            this.lstHardware.Size = new System.Drawing.Size(173, 251);
-            this.lstHardware.TabIndex = 6;
-            // 
-            // lstSoftware
-            // 
-            this.lstSoftware.FormattingEnabled = true;
-            this.lstSoftware.Location = new System.Drawing.Point(432, 36);
-            this.lstSoftware.Margin = new System.Windows.Forms.Padding(2);
-            this.lstSoftware.Name = "lstSoftware";
-            this.lstSoftware.Size = new System.Drawing.Size(173, 251);
-            this.lstSoftware.TabIndex = 5;
             // 
             // colNum
             // 
@@ -148,6 +87,68 @@
             this.colReqDate.Name = "colReqDate";
             this.colReqDate.Width = 101;
             // 
+            // uxApprove
+            // 
+            this.uxApprove.Location = new System.Drawing.Point(9, 261);
+            this.uxApprove.Margin = new System.Windows.Forms.Padding(2);
+            this.uxApprove.Name = "uxApprove";
+            this.uxApprove.Size = new System.Drawing.Size(67, 27);
+            this.uxApprove.TabIndex = 1;
+            this.uxApprove.Text = "Approve";
+            this.uxApprove.UseVisualStyleBackColor = true;
+            this.uxApprove.Click += new System.EventHandler(this.uxApprove_Click);
+            // 
+            // uxLabel
+            // 
+            this.uxLabel.AutoSize = true;
+            this.uxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxLabel.Location = new System.Drawing.Point(10, 11);
+            this.uxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.uxLabel.Name = "uxLabel";
+            this.uxLabel.Size = new System.Drawing.Size(349, 20);
+            this.uxLabel.TabIndex = 2;
+            this.uxLabel.Text = "Current Equipment Requests Needing Approval:";
+            // 
+            // uxDeny
+            // 
+            this.uxDeny.Location = new System.Drawing.Point(361, 261);
+            this.uxDeny.Margin = new System.Windows.Forms.Padding(2);
+            this.uxDeny.Name = "uxDeny";
+            this.uxDeny.Size = new System.Drawing.Size(67, 27);
+            this.uxDeny.TabIndex = 3;
+            this.uxDeny.Text = "Deny";
+            this.uxDeny.UseVisualStyleBackColor = true;
+            this.uxDeny.Click += new System.EventHandler(this.uxDeny_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(715, 7);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(67, 24);
+            this.btnLogout.TabIndex = 4;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // lstHardware
+            // 
+            this.lstHardware.FormattingEnabled = true;
+            this.lstHardware.Location = new System.Drawing.Point(609, 35);
+            this.lstHardware.Margin = new System.Windows.Forms.Padding(2);
+            this.lstHardware.Name = "lstHardware";
+            this.lstHardware.Size = new System.Drawing.Size(173, 251);
+            this.lstHardware.TabIndex = 6;
+            // 
+            // lstSoftware
+            // 
+            this.lstSoftware.FormattingEnabled = true;
+            this.lstSoftware.Location = new System.Drawing.Point(432, 36);
+            this.lstSoftware.Margin = new System.Windows.Forms.Padding(2);
+            this.lstSoftware.Name = "lstSoftware";
+            this.lstSoftware.Size = new System.Drawing.Size(173, 251);
+            this.lstSoftware.TabIndex = 5;
+            // 
             // uxSeniorManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,7 +161,7 @@
             this.Controls.Add(this.uxLabel);
             this.Controls.Add(this.uxApprove);
             this.Controls.Add(this.uxDataGridRequests);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxSeniorManager";
             this.Text = "Dashboard - Senior Manager";
             ((System.ComponentModel.ISupportInitialize)(this.uxDataGridRequests)).EndInit();

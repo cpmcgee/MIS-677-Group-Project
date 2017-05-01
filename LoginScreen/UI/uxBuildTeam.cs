@@ -58,7 +58,12 @@ namespace GroupProject
             {
                 using (ChiltonDB dbase = new ChiltonDB())
                 {
-                    dbase.UpdateEquipmentRequestStatus(Convert.ToInt32(lstRequests.SelectedItem), 5);
+                    var updatedRequest = dbase.GetEquipmentRequestByNum((int)lstRequests.SelectedItem);
+                    updatedRequest.Status = 5;
+
+                    updatedRequest.CompletedOn = DateTime.Now;
+
+                    dbase.UpdateEquipmentRequest(updatedRequest);
 
                     //update completed-on field
 
@@ -99,6 +104,13 @@ namespace GroupProject
                     return;
                 }
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+            login.Show();
+            Close();
         }
     }
 }

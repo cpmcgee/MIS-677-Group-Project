@@ -21,7 +21,7 @@ namespace GroupProject
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Employee GetUser(string username, string password)
+        public dynamic GetUser(string username, string password)
         {
             var employee = from u in USERs
                            where u.USER_ID == username && u.PASSWORD == password
@@ -128,6 +128,23 @@ namespace GroupProject
             foreach (var er in GetEquipmentRequests())
             {
                 if (er.NewHireNum == newHireNum)
+                {
+                    return er;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the equipment request with the given request number
+        /// </summary>
+        /// <param name="requestNum"></param>
+        /// <returns></returns>
+        public EquipmentRequest GetEquipmentRequestByNum(int requestNum)
+        {
+            foreach (var er in GetEquipmentRequests())
+            {
+                if (er.RequestNum == requestNum)
                 {
                     return er;
                 }
@@ -329,13 +346,18 @@ namespace GroupProject
         /// </summary>
         /// <param name="update"></param>
         /// <param name="requestNum"></param>
-        public void UpdateEquipmentRequestStatus(int requestNum, int update)
+        public void UpdateEquipmentRequest(EquipmentRequest request)
         {
             foreach (var eq in EQUIPMENTREQUESTs)
             {
-                if (eq.EQUIPMENT_REQUEST_NUM == requestNum)
+                if (eq.EQUIPMENT_REQUEST_NUM == request.RequestNum)
                 {
-                    eq.STATUS = update;
+                    eq.STATUS = request.Status;
+                    //eq.REQUESTED_ON = request.RequestedOn;
+                    //eq.APPROVED_ON = request.ApprovedOn;
+                    //eq.COMPLETED_ON = request.CompletedOn;
+                    //eq.REQUESTED_BY = request.RequestedBy;
+                    //eq.APPROVED_BY = request.ApprovedBy;
                 }
             }
             SubmitChanges();

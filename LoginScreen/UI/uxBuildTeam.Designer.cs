@@ -53,7 +53,7 @@
             // 
             this.lstSoftware.FormattingEnabled = true;
             this.lstSoftware.Location = new System.Drawing.Point(292, 33);
-            this.lstSoftware.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstSoftware.Margin = new System.Windows.Forms.Padding(2);
             this.lstSoftware.Name = "lstSoftware";
             this.lstSoftware.Size = new System.Drawing.Size(173, 212);
             this.lstSoftware.TabIndex = 2;
@@ -62,7 +62,7 @@
             // 
             this.lstHardware.FormattingEnabled = true;
             this.lstHardware.Location = new System.Drawing.Point(469, 33);
-            this.lstHardware.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstHardware.Margin = new System.Windows.Forms.Padding(2);
             this.lstHardware.Name = "lstHardware";
             this.lstHardware.Size = new System.Drawing.Size(173, 212);
             this.lstHardware.TabIndex = 3;
@@ -92,7 +92,7 @@
             // btnMarkCompleted
             // 
             this.btnMarkCompleted.Location = new System.Drawing.Point(292, 251);
-            this.btnMarkCompleted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMarkCompleted.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarkCompleted.Name = "btnMarkCompleted";
             this.btnMarkCompleted.Size = new System.Drawing.Size(349, 28);
             this.btnMarkCompleted.TabIndex = 6;
@@ -103,12 +103,13 @@
             // btnLogout
             // 
             this.btnLogout.Location = new System.Drawing.Point(586, 3);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(56, 26);
             this.btnLogout.TabIndex = 7;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lstRequests
             // 
@@ -134,7 +135,7 @@
             this.Controls.Add(this.lstHardware);
             this.Controls.Add(this.lstSoftware);
             this.Controls.Add(this.lblRequests);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxBuildTeam";
             this.Text = "Dashboard - Build Team";
             this.ResumeLayout(false);

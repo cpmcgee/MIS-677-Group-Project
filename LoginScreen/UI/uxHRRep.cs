@@ -110,7 +110,9 @@ namespace GroupProject
                     {
                         if ((string)row.Cells[5].Value == "Requested")
                         {
-                            dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 1);
+                            var updatedRequest = dbase.GetEquipmentRequestByNum((int)row.Cells[0].Value);
+                            updatedRequest.Status = 1;
+                            dbase.UpdateEquipmentRequest(updatedRequest);
                             row.Cells[5].Value = "Sent to Manager";
                         }
                     }
@@ -133,7 +135,9 @@ namespace GroupProject
                     {
                         if ((string)row.Cells[5].Value == "Approved")
                         {
-                            dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 4);
+                            var updatedRequest = dbase.GetEquipmentRequestByNum((int)row.Cells[0].Value);
+                            updatedRequest.Status = 4;
+                            dbase.UpdateEquipmentRequest(updatedRequest);
                             row.Cells[5].Value = "Sent to Build Team";
                         }
                     }
@@ -153,8 +157,10 @@ namespace GroupProject
                 using (ChiltonDB dbase = new ChiltonDB())
                 {
                     foreach (DataGridViewRow row in uxGridViewCompleted.SelectedRows)
-                    {
-                        dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 6);
+                    { 
+                        var updatedRequest = dbase.GetEquipmentRequestByNum((int)row.Cells[0].Value);
+                        updatedRequest.Status = 6;
+                        dbase.UpdateEquipmentRequest(updatedRequest);
                         uxGridViewCompleted.Rows.Remove(row);
                     }
                 }
@@ -174,7 +180,9 @@ namespace GroupProject
                 {
                     foreach (DataGridViewRow row in uxGridViewCompleted.SelectedRows)
                     {
-                        dbase.UpdateEquipmentRequestStatus((int)row.Cells[0].Value, 4);
+                        var updatedRequest = dbase.GetEquipmentRequestByNum((int)row.Cells[0].Value);
+                        updatedRequest.Status = 4;
+                        dbase.UpdateEquipmentRequest(updatedRequest);
                         uxGridViewCompleted.Rows.Remove(row);
                     }
                 }
@@ -183,6 +191,13 @@ namespace GroupProject
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+            login.Show();
+            Close();
         }
     }
 }

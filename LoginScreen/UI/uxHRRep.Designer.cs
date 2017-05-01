@@ -34,23 +34,23 @@
             this.lblSupervisors = new System.Windows.Forms.Label();
             this.btnAssign = new System.Windows.Forms.Button();
             this.uxGridViewRequests = new System.Windows.Forms.DataGridView();
-            this.btnSendToManager = new System.Windows.Forms.Button();
-            this.uxGridViewCompleted = new System.Windows.Forms.DataGridView();
-            this.lblComplete = new System.Windows.Forms.Label();
-            this.lblPending = new System.Windows.Forms.Label();
-            this.btnApprove = new System.Windows.Forms.Button();
-            this.btnDelay = new System.Windows.Forms.Button();
-            this.btnSendToBuildTeam = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.colCompNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReqNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSendToManager = new System.Windows.Forms.Button();
+            this.uxGridViewCompleted = new System.Windows.Forms.DataGridView();
+            this.colCompNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblComplete = new System.Windows.Forms.Label();
+            this.lblPending = new System.Windows.Forms.Label();
+            this.btnApprove = new System.Windows.Forms.Button();
+            this.btnDelay = new System.Windows.Forms.Button();
+            this.btnSendToBuildTeam = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewCompleted)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             this.lstUnnasigned.FormattingEnabled = true;
             this.lstUnnasigned.Location = new System.Drawing.Point(9, 32);
-            this.lstUnnasigned.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstUnnasigned.Margin = new System.Windows.Forms.Padding(2);
             this.lstUnnasigned.Name = "lstUnnasigned";
             this.lstUnnasigned.Size = new System.Drawing.Size(158, 134);
             this.lstUnnasigned.TabIndex = 0;
@@ -79,7 +79,7 @@
             // 
             this.lstSupervisors.FormattingEnabled = true;
             this.lstSupervisors.Location = new System.Drawing.Point(171, 32);
-            this.lstSupervisors.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstSupervisors.Margin = new System.Windows.Forms.Padding(2);
             this.lstSupervisors.Name = "lstSupervisors";
             this.lstSupervisors.Size = new System.Drawing.Size(156, 134);
             this.lstSupervisors.TabIndex = 2;
@@ -98,7 +98,7 @@
             // btnAssign
             // 
             this.btnAssign.Location = new System.Drawing.Point(9, 170);
-            this.btnAssign.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAssign.Margin = new System.Windows.Forms.Padding(2);
             this.btnAssign.Name = "btnAssign";
             this.btnAssign.Size = new System.Drawing.Size(317, 30);
             this.btnAssign.TabIndex = 4;
@@ -119,122 +119,13 @@
             this.colRequestedBy,
             this.colStatus});
             this.uxGridViewRequests.Location = new System.Drawing.Point(9, 236);
-            this.uxGridViewRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxGridViewRequests.Margin = new System.Windows.Forms.Padding(2);
             this.uxGridViewRequests.MultiSelect = false;
             this.uxGridViewRequests.Name = "uxGridViewRequests";
             this.uxGridViewRequests.RowTemplate.Height = 24;
             this.uxGridViewRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridViewRequests.Size = new System.Drawing.Size(650, 145);
             this.uxGridViewRequests.TabIndex = 5;
-            // 
-            // btnSendToManager
-            // 
-            this.btnSendToManager.Location = new System.Drawing.Point(8, 385);
-            this.btnSendToManager.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSendToManager.Name = "btnSendToManager";
-            this.btnSendToManager.Size = new System.Drawing.Size(158, 30);
-            this.btnSendToManager.TabIndex = 6;
-            this.btnSendToManager.Text = "Send to Manager for Approval";
-            this.btnSendToManager.UseVisualStyleBackColor = true;
-            this.btnSendToManager.Click += new System.EventHandler(this.btnSendToManager_Click);
-            // 
-            // uxGridViewCompleted
-            // 
-            this.uxGridViewCompleted.AllowUserToAddRows = false;
-            this.uxGridViewCompleted.AllowUserToDeleteRows = false;
-            this.uxGridViewCompleted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.uxGridViewCompleted.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCompNum,
-            this.colCompName,
-            this.colCompDate});
-            this.uxGridViewCompleted.Location = new System.Drawing.Point(344, 33);
-            this.uxGridViewCompleted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.uxGridViewCompleted.MultiSelect = false;
-            this.uxGridViewCompleted.Name = "uxGridViewCompleted";
-            this.uxGridViewCompleted.RowTemplate.Height = 24;
-            this.uxGridViewCompleted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.uxGridViewCompleted.Size = new System.Drawing.Size(317, 133);
-            this.uxGridViewCompleted.TabIndex = 7;
-            // 
-            // lblComplete
-            // 
-            this.lblComplete.AutoSize = true;
-            this.lblComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComplete.Location = new System.Drawing.Point(340, 9);
-            this.lblComplete.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblComplete.Name = "lblComplete";
-            this.lblComplete.Size = new System.Drawing.Size(133, 20);
-            this.lblComplete.TabIndex = 9;
-            this.lblComplete.Text = "Completed Builds";
-            // 
-            // lblPending
-            // 
-            this.lblPending.AutoSize = true;
-            this.lblPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPending.Location = new System.Drawing.Point(9, 213);
-            this.lblPending.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPending.Name = "lblPending";
-            this.lblPending.Size = new System.Drawing.Size(140, 20);
-            this.lblPending.TabIndex = 10;
-            this.lblPending.Text = "Pending Requests";
-            // 
-            // btnApprove
-            // 
-            this.btnApprove.Location = new System.Drawing.Point(344, 170);
-            this.btnApprove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(106, 30);
-            this.btnApprove.TabIndex = 11;
-            this.btnApprove.Text = "Approve Build";
-            this.btnApprove.UseVisualStyleBackColor = true;
-            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
-            // 
-            // btnDelay
-            // 
-            this.btnDelay.Location = new System.Drawing.Point(555, 170);
-            this.btnDelay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnDelay.Name = "btnDelay";
-            this.btnDelay.Size = new System.Drawing.Size(106, 30);
-            this.btnDelay.TabIndex = 12;
-            this.btnDelay.Text = "Delay Request";
-            this.btnDelay.UseVisualStyleBackColor = true;
-            this.btnDelay.Click += new System.EventHandler(this.btnDelay_Click);
-            // 
-            // btnSendToBuildTeam
-            // 
-            this.btnSendToBuildTeam.Location = new System.Drawing.Point(502, 385);
-            this.btnSendToBuildTeam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSendToBuildTeam.Name = "btnSendToBuildTeam";
-            this.btnSendToBuildTeam.Size = new System.Drawing.Size(158, 30);
-            this.btnSendToBuildTeam.TabIndex = 13;
-            this.btnSendToBuildTeam.Text = "Send to Build Team";
-            this.btnSendToBuildTeam.UseVisualStyleBackColor = true;
-            this.btnSendToBuildTeam.Click += new System.EventHandler(this.btnSendToBuildTeam_Click);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Location = new System.Drawing.Point(604, 2);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(56, 27);
-            this.btnLogout.TabIndex = 14;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            // 
-            // colCompNum
-            // 
-            this.colCompNum.HeaderText = "Request #";
-            this.colCompNum.Name = "colCompNum";
-            // 
-            // colCompName
-            // 
-            this.colCompName.HeaderText = "Last Name";
-            this.colCompName.Name = "colCompName";
-            // 
-            // colCompDate
-            // 
-            this.colCompDate.HeaderText = "Completed Date";
-            this.colCompDate.Name = "colCompDate";
             // 
             // colReqNum
             // 
@@ -266,6 +157,116 @@
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
             // 
+            // btnSendToManager
+            // 
+            this.btnSendToManager.Location = new System.Drawing.Point(8, 385);
+            this.btnSendToManager.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSendToManager.Name = "btnSendToManager";
+            this.btnSendToManager.Size = new System.Drawing.Size(158, 30);
+            this.btnSendToManager.TabIndex = 6;
+            this.btnSendToManager.Text = "Send to Manager for Approval";
+            this.btnSendToManager.UseVisualStyleBackColor = true;
+            this.btnSendToManager.Click += new System.EventHandler(this.btnSendToManager_Click);
+            // 
+            // uxGridViewCompleted
+            // 
+            this.uxGridViewCompleted.AllowUserToAddRows = false;
+            this.uxGridViewCompleted.AllowUserToDeleteRows = false;
+            this.uxGridViewCompleted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.uxGridViewCompleted.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCompNum,
+            this.colCompName,
+            this.colCompDate});
+            this.uxGridViewCompleted.Location = new System.Drawing.Point(344, 33);
+            this.uxGridViewCompleted.Margin = new System.Windows.Forms.Padding(2);
+            this.uxGridViewCompleted.MultiSelect = false;
+            this.uxGridViewCompleted.Name = "uxGridViewCompleted";
+            this.uxGridViewCompleted.RowTemplate.Height = 24;
+            this.uxGridViewCompleted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.uxGridViewCompleted.Size = new System.Drawing.Size(317, 133);
+            this.uxGridViewCompleted.TabIndex = 7;
+            // 
+            // colCompNum
+            // 
+            this.colCompNum.HeaderText = "Request #";
+            this.colCompNum.Name = "colCompNum";
+            // 
+            // colCompName
+            // 
+            this.colCompName.HeaderText = "Last Name";
+            this.colCompName.Name = "colCompName";
+            // 
+            // colCompDate
+            // 
+            this.colCompDate.HeaderText = "Completed Date";
+            this.colCompDate.Name = "colCompDate";
+            // 
+            // lblComplete
+            // 
+            this.lblComplete.AutoSize = true;
+            this.lblComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblComplete.Location = new System.Drawing.Point(340, 9);
+            this.lblComplete.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblComplete.Name = "lblComplete";
+            this.lblComplete.Size = new System.Drawing.Size(133, 20);
+            this.lblComplete.TabIndex = 9;
+            this.lblComplete.Text = "Completed Builds";
+            // 
+            // lblPending
+            // 
+            this.lblPending.AutoSize = true;
+            this.lblPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPending.Location = new System.Drawing.Point(9, 213);
+            this.lblPending.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPending.Name = "lblPending";
+            this.lblPending.Size = new System.Drawing.Size(140, 20);
+            this.lblPending.TabIndex = 10;
+            this.lblPending.Text = "Pending Requests";
+            // 
+            // btnApprove
+            // 
+            this.btnApprove.Location = new System.Drawing.Point(344, 170);
+            this.btnApprove.Margin = new System.Windows.Forms.Padding(2);
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(106, 30);
+            this.btnApprove.TabIndex = 11;
+            this.btnApprove.Text = "Approve Build";
+            this.btnApprove.UseVisualStyleBackColor = true;
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            // 
+            // btnDelay
+            // 
+            this.btnDelay.Location = new System.Drawing.Point(555, 170);
+            this.btnDelay.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDelay.Name = "btnDelay";
+            this.btnDelay.Size = new System.Drawing.Size(106, 30);
+            this.btnDelay.TabIndex = 12;
+            this.btnDelay.Text = "Delay Request";
+            this.btnDelay.UseVisualStyleBackColor = true;
+            this.btnDelay.Click += new System.EventHandler(this.btnDelay_Click);
+            // 
+            // btnSendToBuildTeam
+            // 
+            this.btnSendToBuildTeam.Location = new System.Drawing.Point(502, 385);
+            this.btnSendToBuildTeam.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSendToBuildTeam.Name = "btnSendToBuildTeam";
+            this.btnSendToBuildTeam.Size = new System.Drawing.Size(158, 30);
+            this.btnSendToBuildTeam.TabIndex = 13;
+            this.btnSendToBuildTeam.Text = "Send to Build Team";
+            this.btnSendToBuildTeam.UseVisualStyleBackColor = true;
+            this.btnSendToBuildTeam.Click += new System.EventHandler(this.btnSendToBuildTeam_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(604, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(56, 27);
+            this.btnLogout.TabIndex = 14;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // uxHRRep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,7 +286,7 @@
             this.Controls.Add(this.lstSupervisors);
             this.Controls.Add(this.lblUnassigned);
             this.Controls.Add(this.lstUnnasigned);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxHRRep";
             this.Text = "Dashboard - HR";
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewRequests)).EndInit();

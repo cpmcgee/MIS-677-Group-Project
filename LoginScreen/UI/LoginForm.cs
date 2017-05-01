@@ -34,11 +34,13 @@ namespace GroupProject
            //Debug front end and backend logic
            //Add date fields to equipmentrequest db: requested on, completed on, approved on
            //Add update and insert for above fields
-
-
-
         }
-
+        
+        /// <summary>
+        /// Handles login button, looks up user, displays correct form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             using (ChiltonDB dbase = new ChiltonDB())
@@ -114,31 +116,8 @@ namespace GroupProject
             {
                 try
                 {
-                    Employee user = dbase.GetUser(username, password);
-                    if (user.GetType() == typeof(BuildTeamMember))
-                    {
-                        LoginBuildTeam(user, dbase);
-                        return;
-                    }
-                    else if (user.GetType() == typeof(Supervisor))
-                    {
-                        LoginSupervisor(user, dbase);
-                        return;
-                    }
-                    else if (user.GetType() == typeof(HRRep))
-                    {
-                        LoginHRRep(user, dbase);
-                        return;
-                    }
-                    else if (user.GetType() == typeof(Manager))
-                    {
-                        LoginManager(user, dbase);
-                        return;
-                    }
-                    else
-                    {
-                        throw new Exception("Couldnt load form for user of role " + user.GetType().ToString());
-                    }
+                    var user = dbase.GetUser(username, password);
+                    Login(user, dbase);
                 }
                 catch (Exception ex)
                 {
@@ -147,41 +126,49 @@ namespace GroupProject
             }
         }
 
-        private void LoginBuildTeam(Employee user, ChiltonDB dbase)
+        /// <summary>
+        /// Below overload methods grab correct data and display correct form
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="dbase"></param>
+        private void Login(Employee user, ChiltonDB dbase)
         {
             List<EquipmentRequest> buildTeamRequests = dbase.GetBuildTeamData();
             uxBuildTeam form = new uxBuildTeam(user, buildTeamRequests);
-            Hide();
+            Close();
             form.Show();
         }
 
-        private void LoginSupervisor(Employee user, ChiltonDB dbase)
+        private void Login(Supervisor user, ChiltonDB dbase)
         {
             List<NewHire> hires  = dbase.GetSupervisorData();
             uxSupervisor form = new uxSupervisor(user, hires);
-            Hide();
+            Close();
             form.Show();
         }
 
-        private void LoginHRRep(Employee user, ChiltonDB dbase)
+        private void Login(HRRep user, ChiltonDB dbase)
         {
             var ser = new JavaScriptSerializer();
             JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
             List<Supervisor> supervisors;
             List<NewHire> hires = dbase.GetHRData(out supervisors);
             uxHRRep form = new uxHRRep(user, supervisors, jsonData, hires);
-            Hide();
+            Close();
             form.Show();
         }
 
-        private void LoginManager(Employee user, ChiltonDB dbase)
+        private void LoginManager(Manager user, ChiltonDB dbase)
         {
             List<NewHire> hires = dbase.GetManagerData();
             uxSeniorManager form = new uxSeniorManager(user, hires);
-            Hide();
+            Close();
             form.Show();
         }
 
+        /// <summary>
+        /// If too many unsuccesful login attemps, freeze screen
+        /// </summary>
         private void Suspend()
         {
             _ct++;
@@ -216,24 +203,17 @@ namespace GroupProject
             }
         }
 
-
+        /// <summary>
+        /// Shut down program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtPassword.Text = "";
             txtUsername.Text = "";
-            Shutdown();
-        }
-
-        private void ShowError(string error)
-        {
-            MessageBox.Show(error);
-        }
-
-        public void Shutdown()
-        {
-            
             Close();
-            Dispose(); 
+            Dispose();
         }
     }
 }

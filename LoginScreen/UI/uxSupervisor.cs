@@ -118,11 +118,11 @@ namespace GroupProject
                     {
                         using (ChiltonDB dbase = new ChiltonDB())
                         {
-
+                            hire.EquipmentReq.Status = 4;
                             hire.EquipmentReq.SoftwareOptions = CreateSoftwareRequest();
                             hire.EquipmentReq.HardwareOptions = CreateHardwareRequest();
                             dbase.EditEquipmentRequest(hire.EquipmentReq);
-                            dbase.UpdateEquipmentRequestStatus(hire.EquipmentReq.RequestNum, 4);
+                            dbase.UpdateEquipmentRequest(hire.EquipmentReq);
                             uxGridNewHires.Rows.Remove(uxGridNewHires.SelectedRows[0]);
                         }
                     }
@@ -142,11 +142,19 @@ namespace GroupProject
                 {
                     using (ChiltonDB dbase = new ChiltonDB())
                     {
-                        dbase.UpdateEquipmentRequestStatus(hire.EquipmentReq.RequestNum, 7);
+                        hire.EquipmentReq.Status = 7;
+                        dbase.UpdateEquipmentRequest(hire.EquipmentReq);
                         uxGridPickup.Rows.Remove(uxGridPickup.SelectedRows[0]);
                     }
                 }
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            LoginForm login = new LoginForm();
+            login.Show();
+            Close();
         }
     }
 }
