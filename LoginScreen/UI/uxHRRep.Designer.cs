@@ -108,6 +108,8 @@
             // 
             // uxGridViewRequests
             // 
+            this.uxGridViewRequests.AllowUserToAddRows = false;
+            this.uxGridViewRequests.AllowUserToDeleteRows = false;
             this.uxGridViewRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGridViewRequests.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colReqNum,
@@ -118,8 +120,10 @@
             this.colStatus});
             this.uxGridViewRequests.Location = new System.Drawing.Point(9, 236);
             this.uxGridViewRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxGridViewRequests.MultiSelect = false;
             this.uxGridViewRequests.Name = "uxGridViewRequests";
             this.uxGridViewRequests.RowTemplate.Height = 24;
+            this.uxGridViewRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridViewRequests.Size = new System.Drawing.Size(650, 145);
             this.uxGridViewRequests.TabIndex = 5;
             // 
@@ -136,6 +140,8 @@
             // 
             // uxGridViewCompleted
             // 
+            this.uxGridViewCompleted.AllowUserToAddRows = false;
+            this.uxGridViewCompleted.AllowUserToDeleteRows = false;
             this.uxGridViewCompleted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGridViewCompleted.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCompNum,
@@ -143,8 +149,10 @@
             this.colCompDate});
             this.uxGridViewCompleted.Location = new System.Drawing.Point(344, 33);
             this.uxGridViewCompleted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.uxGridViewCompleted.MultiSelect = false;
             this.uxGridViewCompleted.Name = "uxGridViewCompleted";
             this.uxGridViewCompleted.RowTemplate.Height = 24;
+            this.uxGridViewCompleted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridViewCompleted.Size = new System.Drawing.Size(317, 133);
             this.uxGridViewCompleted.TabIndex = 7;
             // 

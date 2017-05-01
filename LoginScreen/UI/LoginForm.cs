@@ -31,8 +31,9 @@ namespace GroupProject
         private void Form1_Load(object sender, EventArgs e)
         {
            //TODO:
-           //Implement front end logic for uxBuildTeam and uxSeniorManager
+           //Debug front end and backend logic
            //Add date fields to equipmentrequest db: requested on, completed on, approved on
+           //Add update and insert for above fields
 
 
 

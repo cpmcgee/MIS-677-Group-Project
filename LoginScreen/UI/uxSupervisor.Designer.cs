@@ -137,6 +137,8 @@
             // 
             // uxGridDenied
             // 
+            this.uxGridDenied.AllowUserToAddRows = false;
+            this.uxGridDenied.AllowUserToDeleteRows = false;
             this.uxGridDenied.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGridDenied.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colReqNum,
@@ -144,8 +146,10 @@
             this.colLast2});
             this.uxGridDenied.Location = new System.Drawing.Point(352, 188);
             this.uxGridDenied.Margin = new System.Windows.Forms.Padding(2);
+            this.uxGridDenied.MultiSelect = false;
             this.uxGridDenied.Name = "uxGridDenied";
             this.uxGridDenied.RowTemplate.Height = 24;
+            this.uxGridDenied.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridDenied.Size = new System.Drawing.Size(284, 142);
             this.uxGridDenied.TabIndex = 7;
             // 
@@ -205,6 +209,8 @@
             // 
             // uxGridPickup
             // 
+            this.uxGridPickup.AllowUserToAddRows = false;
+            this.uxGridPickup.AllowUserToDeleteRows = false;
             this.uxGridPickup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGridPickup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colReqNum2,
@@ -213,8 +219,10 @@
             this.colCompleteDate});
             this.uxGridPickup.Location = new System.Drawing.Point(92, 359);
             this.uxGridPickup.Margin = new System.Windows.Forms.Padding(2);
+            this.uxGridPickup.MultiSelect = false;
             this.uxGridPickup.Name = "uxGridPickup";
             this.uxGridPickup.RowTemplate.Height = 24;
+            this.uxGridPickup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridPickup.Size = new System.Drawing.Size(393, 136);
             this.uxGridPickup.TabIndex = 12;
             // 
@@ -332,6 +340,7 @@
             // 
             // uxGridNewHires
             // 
+            this.uxGridNewHires.AllowUserToAddRows = false;
             this.uxGridNewHires.AllowUserToDeleteRows = false;
             this.uxGridNewHires.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uxGridNewHires.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -343,6 +352,7 @@
             this.uxGridNewHires.MultiSelect = false;
             this.uxGridNewHires.Name = "uxGridNewHires";
             this.uxGridNewHires.RowTemplate.Height = 24;
+            this.uxGridNewHires.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxGridNewHires.Size = new System.Drawing.Size(284, 138);
             this.uxGridNewHires.TabIndex = 4;
             // 

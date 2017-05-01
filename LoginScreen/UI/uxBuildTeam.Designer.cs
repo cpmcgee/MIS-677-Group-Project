@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uxGridRequests = new System.Windows.Forms.DataGridView();
             this.lblRequests = new System.Windows.Forms.Label();
             this.lstSoftware = new System.Windows.Forms.ListBox();
             this.lstHardware = new System.Windows.Forms.ListBox();
@@ -36,18 +35,8 @@
             this.lblSoftware = new System.Windows.Forms.Label();
             this.btnMarkCompleted = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.uxGridRequests)).BeginInit();
+            this.lstRequests = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // uxGridRequests
-            // 
-            this.uxGridRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.uxGridRequests.Location = new System.Drawing.Point(9, 33);
-            this.uxGridRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.uxGridRequests.Name = "uxGridRequests";
-            this.uxGridRequests.RowTemplate.Height = 24;
-            this.uxGridRequests.Size = new System.Drawing.Size(279, 249);
-            this.uxGridRequests.TabIndex = 0;
             // 
             // lblRequests
             // 
@@ -66,7 +55,7 @@
             this.lstSoftware.Location = new System.Drawing.Point(292, 33);
             this.lstSoftware.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstSoftware.Name = "lstSoftware";
-            this.lstSoftware.Size = new System.Drawing.Size(173, 251);
+            this.lstSoftware.Size = new System.Drawing.Size(173, 212);
             this.lstSoftware.TabIndex = 2;
             // 
             // lstHardware
@@ -75,7 +64,7 @@
             this.lstHardware.Location = new System.Drawing.Point(469, 33);
             this.lstHardware.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstHardware.Name = "lstHardware";
-            this.lstHardware.Size = new System.Drawing.Size(173, 251);
+            this.lstHardware.Size = new System.Drawing.Size(173, 212);
             this.lstHardware.TabIndex = 3;
             // 
             // lblHardware
@@ -102,10 +91,10 @@
             // 
             // btnMarkCompleted
             // 
-            this.btnMarkCompleted.Location = new System.Drawing.Point(9, 287);
+            this.btnMarkCompleted.Location = new System.Drawing.Point(292, 251);
             this.btnMarkCompleted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMarkCompleted.Name = "btnMarkCompleted";
-            this.btnMarkCompleted.Size = new System.Drawing.Size(632, 28);
+            this.btnMarkCompleted.Size = new System.Drawing.Size(349, 28);
             this.btnMarkCompleted.TabIndex = 6;
             this.btnMarkCompleted.Text = "Mark Request as Completed";
             this.btnMarkCompleted.UseVisualStyleBackColor = true;
@@ -121,11 +110,23 @@
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
             // 
+            // lstRequests
+            // 
+            this.lstRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstRequests.FormattingEnabled = true;
+            this.lstRequests.ItemHeight = 16;
+            this.lstRequests.Location = new System.Drawing.Point(14, 35);
+            this.lstRequests.Name = "lstRequests";
+            this.lstRequests.Size = new System.Drawing.Size(273, 244);
+            this.lstRequests.TabIndex = 8;
+            this.lstRequests.SelectedIndexChanged += new System.EventHandler(this.lstRequests_SelectedIndexChanged);
+            // 
             // uxBuildTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 326);
+            this.ClientSize = new System.Drawing.Size(652, 296);
+            this.Controls.Add(this.lstRequests);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnMarkCompleted);
             this.Controls.Add(this.lblSoftware);
@@ -133,19 +134,15 @@
             this.Controls.Add(this.lstHardware);
             this.Controls.Add(this.lstSoftware);
             this.Controls.Add(this.lblRequests);
-            this.Controls.Add(this.uxGridRequests);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "uxBuildTeam";
             this.Text = "Dashboard - Build Team";
-            ((System.ComponentModel.ISupportInitialize)(this.uxGridRequests)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView uxGridRequests;
         private System.Windows.Forms.Label lblRequests;
         private System.Windows.Forms.ListBox lstSoftware;
         private System.Windows.Forms.ListBox lstHardware;
@@ -153,5 +150,6 @@
         private System.Windows.Forms.Label lblSoftware;
         private System.Windows.Forms.Button btnMarkCompleted;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.ListBox lstRequests;
     }
 }
