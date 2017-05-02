@@ -148,8 +148,6 @@ namespace GroupProject
 		
 		private int _EMPLOYEE_NUM;
 		
-		private int _SUPERVISOR_NUM;
-		
 		private string _FIRST_NAME;
 		
 		private string _LAST_NAME;
@@ -164,8 +162,6 @@ namespace GroupProject
 		
 		private EntitySet<NEWHIRE> _NEWHIREs;
 		
-		private EntitySet<NEWHIRE> _NEWHIREs1;
-		
 		private EntitySet<SUPERVISOR> _SUPERVISORs;
 		
     #region Extensibility Method Definitions
@@ -174,8 +170,6 @@ namespace GroupProject
     partial void OnCreated();
     partial void OnEMPLOYEE_NUMChanging(int value);
     partial void OnEMPLOYEE_NUMChanged();
-    partial void OnSUPERVISOR_NUMChanging(int value);
-    partial void OnSUPERVISOR_NUMChanged();
     partial void OnFIRST_NAMEChanging(string value);
     partial void OnFIRST_NAMEChanged();
     partial void OnLAST_NAMEChanging(string value);
@@ -192,7 +186,6 @@ namespace GroupProject
 		{
 			this._USERs = new EntitySet<USER>(new Action<USER>(this.attach_USERs), new Action<USER>(this.detach_USERs));
 			this._NEWHIREs = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs), new Action<NEWHIRE>(this.detach_NEWHIREs));
-			this._NEWHIREs1 = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs1), new Action<NEWHIRE>(this.detach_NEWHIREs1));
 			this._SUPERVISORs = new EntitySet<SUPERVISOR>(new Action<SUPERVISOR>(this.attach_SUPERVISORs), new Action<SUPERVISOR>(this.detach_SUPERVISORs));
 			OnCreated();
 		}
@@ -213,26 +206,6 @@ namespace GroupProject
 					this._EMPLOYEE_NUM = value;
 					this.SendPropertyChanged("EMPLOYEE_NUM");
 					this.OnEMPLOYEE_NUMChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERVISOR_NUM", DbType="Int NOT NULL")]
-		public int SUPERVISOR_NUM
-		{
-			get
-			{
-				return this._SUPERVISOR_NUM;
-			}
-			set
-			{
-				if ((this._SUPERVISOR_NUM != value))
-				{
-					this.OnSUPERVISOR_NUMChanging(value);
-					this.SendPropertyChanging();
-					this._SUPERVISOR_NUM = value;
-					this.SendPropertyChanged("SUPERVISOR_NUM");
-					this.OnSUPERVISOR_NUMChanged();
 				}
 			}
 		}
@@ -363,19 +336,6 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE1", Storage="_NEWHIREs1", ThisKey="EMPLOYEE_NUM", OtherKey="SUPERVISOR_NUM")]
-		public EntitySet<NEWHIRE> NEWHIREs1
-		{
-			get
-			{
-				return this._NEWHIREs1;
-			}
-			set
-			{
-				this._NEWHIREs1.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_SUPERVISOR", Storage="_SUPERVISORs", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM")]
 		public EntitySet<SUPERVISOR> SUPERVISORs
 		{
@@ -431,18 +391,6 @@ namespace GroupProject
 		{
 			this.SendPropertyChanging();
 			entity.EMPLOYEE = null;
-		}
-		
-		private void attach_NEWHIREs1(NEWHIRE entity)
-		{
-			this.SendPropertyChanging();
-			entity.EMPLOYEE1 = this;
-		}
-		
-		private void detach_NEWHIREs1(NEWHIRE entity)
-		{
-			this.SendPropertyChanging();
-			entity.EMPLOYEE1 = null;
 		}
 		
 		private void attach_SUPERVISORs(SUPERVISOR entity)
@@ -669,6 +617,14 @@ namespace GroupProject
 		
 		private System.Nullable<int> _STATUS;
 		
+		private System.Nullable<int> _APPROVED_BY;
+		
+		private System.Nullable<int> _REQUESTED_BY;
+		
+		private System.Nullable<System.DateTime> _COMPLETED_ON;
+		
+		private System.Nullable<System.DateTime> _REQUESTED_ON;
+		
 		private EntitySet<HARDWARE> _HARDWAREs;
 		
 		private EntitySet<SOFTWARE> _SOFTWAREs;
@@ -685,6 +641,14 @@ namespace GroupProject
     partial void OnNEWHIRE_NUMChanged();
     partial void OnSTATUSChanging(System.Nullable<int> value);
     partial void OnSTATUSChanged();
+    partial void OnAPPROVED_BYChanging(System.Nullable<int> value);
+    partial void OnAPPROVED_BYChanged();
+    partial void OnREQUESTED_BYChanging(System.Nullable<int> value);
+    partial void OnREQUESTED_BYChanged();
+    partial void OnCOMPLETED_ONChanging(System.Nullable<System.DateTime> value);
+    partial void OnCOMPLETED_ONChanged();
+    partial void OnREQUESTED_ONChanging(System.Nullable<System.DateTime> value);
+    partial void OnREQUESTED_ONChanged();
     #endregion
 		
 		public EQUIPMENTREQUEST()
@@ -755,6 +719,86 @@ namespace GroupProject
 					this._STATUS = value;
 					this.SendPropertyChanged("STATUS");
 					this.OnSTATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVED_BY", DbType="Int")]
+		public System.Nullable<int> APPROVED_BY
+		{
+			get
+			{
+				return this._APPROVED_BY;
+			}
+			set
+			{
+				if ((this._APPROVED_BY != value))
+				{
+					this.OnAPPROVED_BYChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVED_BY = value;
+					this.SendPropertyChanged("APPROVED_BY");
+					this.OnAPPROVED_BYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REQUESTED_BY", DbType="Int")]
+		public System.Nullable<int> REQUESTED_BY
+		{
+			get
+			{
+				return this._REQUESTED_BY;
+			}
+			set
+			{
+				if ((this._REQUESTED_BY != value))
+				{
+					this.OnREQUESTED_BYChanging(value);
+					this.SendPropertyChanging();
+					this._REQUESTED_BY = value;
+					this.SendPropertyChanged("REQUESTED_BY");
+					this.OnREQUESTED_BYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COMPLETED_ON", DbType="Date")]
+		public System.Nullable<System.DateTime> COMPLETED_ON
+		{
+			get
+			{
+				return this._COMPLETED_ON;
+			}
+			set
+			{
+				if ((this._COMPLETED_ON != value))
+				{
+					this.OnCOMPLETED_ONChanging(value);
+					this.SendPropertyChanging();
+					this._COMPLETED_ON = value;
+					this.SendPropertyChanged("COMPLETED_ON");
+					this.OnCOMPLETED_ONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REQUESTED_ON", DbType="Date")]
+		public System.Nullable<System.DateTime> REQUESTED_ON
+		{
+			get
+			{
+				return this._REQUESTED_ON;
+			}
+			set
+			{
+				if ((this._REQUESTED_ON != value))
+				{
+					this.OnREQUESTED_ONChanging(value);
+					this.SendPropertyChanging();
+					this._REQUESTED_ON = value;
+					this.SendPropertyChanged("REQUESTED_ON");
+					this.OnREQUESTED_ONChanged();
 				}
 			}
 		}
@@ -1067,7 +1111,7 @@ namespace GroupProject
 		
 		private EntityRef<EMPLOYEE> _EMPLOYEE;
 		
-		private EntityRef<EMPLOYEE> _EMPLOYEE1;
+		private EntityRef<SUPERVISOR> _SUPERVISOR;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1097,7 +1141,7 @@ namespace GroupProject
 		{
 			this._EQUIPMENTREQUESTs = new EntitySet<EQUIPMENTREQUEST>(new Action<EQUIPMENTREQUEST>(this.attach_EQUIPMENTREQUESTs), new Action<EQUIPMENTREQUEST>(this.detach_EQUIPMENTREQUESTs));
 			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
-			this._EMPLOYEE1 = default(EntityRef<EMPLOYEE>);
+			this._SUPERVISOR = default(EntityRef<SUPERVISOR>);
 			OnCreated();
 		}
 		
@@ -1156,7 +1200,7 @@ namespace GroupProject
 			{
 				if ((this._SUPERVISOR_NUM != value))
 				{
-					if (this._EMPLOYEE1.HasLoadedOrAssignedValue)
+					if (this._SUPERVISOR.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1336,36 +1380,36 @@ namespace GroupProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_NEWHIRE1", Storage="_EMPLOYEE1", ThisKey="SUPERVISOR_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
-		public EMPLOYEE EMPLOYEE1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SUPERVISOR_NEWHIRE", Storage="_SUPERVISOR", ThisKey="SUPERVISOR_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
+		public SUPERVISOR SUPERVISOR
 		{
 			get
 			{
-				return this._EMPLOYEE1.Entity;
+				return this._SUPERVISOR.Entity;
 			}
 			set
 			{
-				EMPLOYEE previousValue = this._EMPLOYEE1.Entity;
+				SUPERVISOR previousValue = this._SUPERVISOR.Entity;
 				if (((previousValue != value) 
-							|| (this._EMPLOYEE1.HasLoadedOrAssignedValue == false)))
+							|| (this._SUPERVISOR.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._EMPLOYEE1.Entity = null;
-						previousValue.NEWHIREs1.Remove(this);
+						this._SUPERVISOR.Entity = null;
+						previousValue.NEWHIREs.Remove(this);
 					}
-					this._EMPLOYEE1.Entity = value;
+					this._SUPERVISOR.Entity = value;
 					if ((value != null))
 					{
-						value.NEWHIREs1.Add(this);
+						value.NEWHIREs.Add(this);
 						this._SUPERVISOR_NUM = value.EMPLOYEE_NUM;
 					}
 					else
 					{
 						this._SUPERVISOR_NUM = default(int);
 					}
-					this.SendPropertyChanged("EMPLOYEE1");
+					this.SendPropertyChanged("SUPERVISOR");
 				}
 			}
 		}
@@ -1590,6 +1634,8 @@ namespace GroupProject
 		
 		private System.Nullable<bool> _CURRENT_AVAILABLE;
 		
+		private EntitySet<NEWHIRE> _NEWHIREs;
+		
 		private EntityRef<EMPLOYEE> _EMPLOYEE;
 		
     #region Extensibility Method Definitions
@@ -1606,6 +1652,7 @@ namespace GroupProject
 		
 		public SUPERVISOR()
 		{
+			this._NEWHIREs = new EntitySet<NEWHIRE>(new Action<NEWHIRE>(this.attach_NEWHIREs), new Action<NEWHIRE>(this.detach_NEWHIREs));
 			this._EMPLOYEE = default(EntityRef<EMPLOYEE>);
 			OnCreated();
 		}
@@ -1674,6 +1721,19 @@ namespace GroupProject
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SUPERVISOR_NEWHIRE", Storage="_NEWHIREs", ThisKey="EMPLOYEE_NUM", OtherKey="SUPERVISOR_NUM")]
+		public EntitySet<NEWHIRE> NEWHIREs
+		{
+			get
+			{
+				return this._NEWHIREs;
+			}
+			set
+			{
+				this._NEWHIREs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EMPLOYEE_SUPERVISOR", Storage="_EMPLOYEE", ThisKey="EMPLOYEE_NUM", OtherKey="EMPLOYEE_NUM", IsForeignKey=true)]
 		public EMPLOYEE EMPLOYEE
 		{
@@ -1726,6 +1786,18 @@ namespace GroupProject
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_NEWHIREs(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.SUPERVISOR = this;
+		}
+		
+		private void detach_NEWHIREs(NEWHIRE entity)
+		{
+			this.SendPropertyChanging();
+			entity.SUPERVISOR = null;
 		}
 	}
 }

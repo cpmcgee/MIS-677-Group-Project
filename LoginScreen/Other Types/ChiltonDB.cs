@@ -34,7 +34,6 @@ namespace GroupProject
                                LastName = e.LAST_NAME,
                                Gender = e.GENDER,
                                DOB = e.DATE_OF_BIRTH,
-                               SupNum = e.SUPERVISOR_NUM,
                                IsSu = u.ACCESS_LEVEL
                            };
 
@@ -51,7 +50,7 @@ namespace GroupProject
             {
                 return new BuildTeamMember(user.EmplNum, user.FirstName, user.LastName, user.Gender, Convert.ToDateTime(user.DOB));
             }
-            else if (user.Title == "MANAGER")
+            else if (user.Title == "SRMANAGER")
             {
                 return new Manager(user.EmplNum, user.FirstName, user.LastName, user.Gender, Convert.ToDateTime(user.DOB));
             }

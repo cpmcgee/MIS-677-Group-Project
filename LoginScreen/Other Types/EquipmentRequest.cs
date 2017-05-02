@@ -68,35 +68,6 @@ namespace GroupProject
             Status = status;
         }
 
-
-
-        public void Approve(Employee approvedBy)
-        {
-            Status = 2;
-            ApprovedOn = DateTime.Now;
-            ApprovedBy = approvedBy.EmployeeNum;
-        }
-
-        public void SendToBuildTeam()
-        {
-            Status = 3;
-        }
-
-        public void Build()
-        {
-            Status = 4;
-        }
-
-        public void ApproveBuild()
-        {
-            Status = 5;
-        }
-
-        public void Deliver()
-        {
-            Status = 6;
-        }
-
         public void UpdateRequest(bool[] hardware, bool[] software)
         {
             HardwareOptions = hardware;

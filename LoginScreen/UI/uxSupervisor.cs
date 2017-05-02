@@ -41,6 +41,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for submit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)
@@ -60,6 +65,10 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Creates a hardware request from the checked boxes
+        /// </summary>
+        /// <returns></returns>
         private bool[] CreateHardwareRequest()
         {
             bool[] sw = new bool[9];
@@ -70,6 +79,10 @@ namespace GroupProject
             return sw;
         }
 
+        /// <summary>
+        /// Creates a software request from the checked boxes
+        /// </summary>
+        /// <returns></returns>
         private bool[] CreateSoftwareRequest()
         {
             bool[] hw = new bool[13];
@@ -80,18 +93,33 @@ namespace GroupProject
             return hw;
         }
 
+        /// <summary>
+        /// Event handler for clear button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_Click(object sender, EventArgs e)
         {
             chckLstSoftware.ClearSelected();
             chckLstHardware.ClearSelected();
         }
 
+        /// <summary>
+        /// Event handler for other clear button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear2_Click(object sender, EventArgs e)
         {
             chckLstSoftware.ClearSelected();
             chckLstHardware.ClearSelected();
         }
 
+        /// <summary>
+        /// Event handler for remove button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
@@ -108,6 +136,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for resubmit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnResubmit_Click(object sender, EventArgs e)
         {
             try
@@ -134,6 +167,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for pickup button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPickup_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)
@@ -150,6 +188,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for logout button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -157,6 +200,11 @@ namespace GroupProject
             Close();
         }
 
+        /// <summary>
+        /// Event handler for preview button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)

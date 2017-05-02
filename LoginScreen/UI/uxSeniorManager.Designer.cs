@@ -52,45 +52,45 @@
             this.colFirst,
             this.colLast,
             this.colReqDate});
-            this.uxDataGridRequests.Location = new System.Drawing.Point(9, 36);
-            this.uxDataGridRequests.Margin = new System.Windows.Forms.Padding(2);
+            this.uxDataGridRequests.Location = new System.Drawing.Point(12, 44);
+            this.uxDataGridRequests.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uxDataGridRequests.MultiSelect = false;
             this.uxDataGridRequests.Name = "uxDataGridRequests";
             this.uxDataGridRequests.RowTemplate.Height = 24;
             this.uxDataGridRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.uxDataGridRequests.Size = new System.Drawing.Size(419, 221);
+            this.uxDataGridRequests.Size = new System.Drawing.Size(559, 272);
             this.uxDataGridRequests.TabIndex = 0;
             // 
             // colNum
             // 
             this.colNum.HeaderText = "Request #";
             this.colNum.Name = "colNum";
-            this.colNum.Width = 82;
+            this.colNum.Width = 102;
             // 
             // colFirst
             // 
             this.colFirst.HeaderText = "First Name";
             this.colFirst.Name = "colFirst";
-            this.colFirst.Width = 82;
+            this.colFirst.Width = 105;
             // 
             // colLast
             // 
             this.colLast.HeaderText = "Last Name";
             this.colLast.Name = "colLast";
-            this.colLast.Width = 83;
+            this.colLast.Width = 105;
             // 
             // colReqDate
             // 
             this.colReqDate.HeaderText = "Requested On";
             this.colReqDate.Name = "colReqDate";
-            this.colReqDate.Width = 101;
+            this.colReqDate.Width = 129;
             // 
             // uxApprove
             // 
-            this.uxApprove.Location = new System.Drawing.Point(9, 261);
-            this.uxApprove.Margin = new System.Windows.Forms.Padding(2);
+            this.uxApprove.Location = new System.Drawing.Point(12, 321);
+            this.uxApprove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uxApprove.Name = "uxApprove";
-            this.uxApprove.Size = new System.Drawing.Size(67, 27);
+            this.uxApprove.Size = new System.Drawing.Size(89, 33);
             this.uxApprove.TabIndex = 1;
             this.uxApprove.Text = "Approve";
             this.uxApprove.UseVisualStyleBackColor = true;
@@ -100,19 +100,18 @@
             // 
             this.uxLabel.AutoSize = true;
             this.uxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxLabel.Location = new System.Drawing.Point(10, 11);
-            this.uxLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.uxLabel.Location = new System.Drawing.Point(13, 14);
             this.uxLabel.Name = "uxLabel";
-            this.uxLabel.Size = new System.Drawing.Size(349, 20);
+            this.uxLabel.Size = new System.Drawing.Size(429, 25);
             this.uxLabel.TabIndex = 2;
             this.uxLabel.Text = "Current Equipment Requests Needing Approval:";
             // 
             // uxDeny
             // 
-            this.uxDeny.Location = new System.Drawing.Point(361, 261);
-            this.uxDeny.Margin = new System.Windows.Forms.Padding(2);
+            this.uxDeny.Location = new System.Drawing.Point(481, 321);
+            this.uxDeny.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.uxDeny.Name = "uxDeny";
-            this.uxDeny.Size = new System.Drawing.Size(67, 27);
+            this.uxDeny.Size = new System.Drawing.Size(89, 33);
             this.uxDeny.TabIndex = 3;
             this.uxDeny.Text = "Deny";
             this.uxDeny.UseVisualStyleBackColor = true;
@@ -120,10 +119,10 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(363, 7);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLogout.Location = new System.Drawing.Point(484, 9);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(67, 24);
+            this.btnLogout.Size = new System.Drawing.Size(89, 30);
             this.btnLogout.TabIndex = 4;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -131,9 +130,10 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(171, 263);
+            this.btnPreview.Location = new System.Drawing.Point(228, 324);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(97, 25);
+            this.btnPreview.Size = new System.Drawing.Size(129, 31);
             this.btnPreview.TabIndex = 5;
             this.btnPreview.Text = "View Request";
             this.btnPreview.UseVisualStyleBackColor = true;
@@ -141,9 +141,9 @@
             // 
             // uxSeniorManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 297);
+            this.ClientSize = new System.Drawing.Size(583, 366);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.uxDeny);
@@ -151,7 +151,7 @@
             this.Controls.Add(this.uxApprove);
             this.Controls.Add(this.uxDataGridRequests);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "uxSeniorManager";
             this.Text = "Dashboard - Senior Manager";
             ((System.ComponentModel.ISupportInitialize)(this.uxDataGridRequests)).EndInit();

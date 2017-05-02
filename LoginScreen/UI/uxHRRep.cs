@@ -62,6 +62,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for assign button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAssign_Click(object sender, EventArgs e)
         {
             try
@@ -81,6 +86,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Finds a hire from the one selected on the list
+        /// </summary>
+        /// <param name="selectedHire"></param>
+        /// <returns></returns>
         private JsonDataObject MatchHire(string selectedHire)
         {
             foreach (var unh in unAssignedHires)
@@ -91,6 +101,11 @@ namespace GroupProject
             return null;
         }
 
+        /// <summary>
+        /// Finds a supervisor based on the one selected on the list
+        /// </summary>
+        /// <param name="selectedSupervisor"></param>
+        /// <returns></returns>
         private int MatchSupervisor(string selectedSupervisor)
         {
             foreach (var sup in supervisors)
@@ -101,6 +116,11 @@ namespace GroupProject
             return default(int);
         }
 
+        /// <summary>
+        /// Event handler for send button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSendToManager_Click(object sender, EventArgs e)
         {
             try
@@ -126,6 +146,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for send to build team button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSendToBuildTeam_Click(object sender, EventArgs e)
         {
             try
@@ -151,6 +176,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for approve button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnApprove_Click(object sender, EventArgs e)
         {
             try
@@ -173,6 +203,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for delay button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelay_Click(object sender, EventArgs e)
         {
             try
@@ -195,6 +230,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for logout button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -202,6 +242,11 @@ namespace GroupProject
             Close();
         }
 
+        /// <summary>
+        /// Event handler for preview button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)
@@ -213,6 +258,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for other preview button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPreview1_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)

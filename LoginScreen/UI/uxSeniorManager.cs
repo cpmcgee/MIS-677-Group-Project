@@ -54,6 +54,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for approve button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxApprove_Click(object sender, EventArgs e)
         {
             try
@@ -80,6 +85,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for deny button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxDeny_Click(object sender, EventArgs e)
         {
             try
@@ -102,6 +112,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for logout button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
@@ -109,6 +124,11 @@ namespace GroupProject
             Close();
         }
 
+        /// <summary>
+        /// Event handler for preview button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
             foreach (var hire in hires)

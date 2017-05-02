@@ -52,6 +52,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for mark completed button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMarkCompleted_Click(object sender, EventArgs e)
         {
             try
@@ -78,6 +83,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for changing selected item on list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
             lstSoftware.Items.Clear();
@@ -106,6 +116,11 @@ namespace GroupProject
             }
         }
 
+        /// <summary>
+        /// Event handler for logout button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
