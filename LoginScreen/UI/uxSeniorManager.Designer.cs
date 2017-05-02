@@ -37,8 +37,7 @@
             this.uxLabel = new System.Windows.Forms.Label();
             this.uxDeny = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.lstHardware = new System.Windows.Forms.ListBox();
-            this.lstSoftware = new System.Windows.Forms.ListBox();
+            this.btnPreview = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.uxDataGridRequests)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +60,6 @@
             this.uxDataGridRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.uxDataGridRequests.Size = new System.Drawing.Size(419, 221);
             this.uxDataGridRequests.TabIndex = 0;
-            this.uxDataGridRequests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.uxDataGridRequests_CellContentClick);
             // 
             // colNum
             // 
@@ -122,7 +120,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(715, 7);
+            this.btnLogout.Location = new System.Drawing.Point(363, 7);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(67, 24);
@@ -131,31 +129,22 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // lstHardware
+            // btnPreview
             // 
-            this.lstHardware.FormattingEnabled = true;
-            this.lstHardware.Location = new System.Drawing.Point(609, 35);
-            this.lstHardware.Margin = new System.Windows.Forms.Padding(2);
-            this.lstHardware.Name = "lstHardware";
-            this.lstHardware.Size = new System.Drawing.Size(173, 251);
-            this.lstHardware.TabIndex = 6;
-            // 
-            // lstSoftware
-            // 
-            this.lstSoftware.FormattingEnabled = true;
-            this.lstSoftware.Location = new System.Drawing.Point(432, 36);
-            this.lstSoftware.Margin = new System.Windows.Forms.Padding(2);
-            this.lstSoftware.Name = "lstSoftware";
-            this.lstSoftware.Size = new System.Drawing.Size(173, 251);
-            this.lstSoftware.TabIndex = 5;
+            this.btnPreview.Location = new System.Drawing.Point(171, 263);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(97, 25);
+            this.btnPreview.TabIndex = 5;
+            this.btnPreview.Text = "View Request";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // uxSeniorManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 297);
-            this.Controls.Add(this.lstHardware);
-            this.Controls.Add(this.lstSoftware);
+            this.ClientSize = new System.Drawing.Size(437, 297);
+            this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.uxDeny);
             this.Controls.Add(this.uxLabel);
@@ -177,11 +166,10 @@
         private System.Windows.Forms.Label uxLabel;
         private System.Windows.Forms.Button uxDeny;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.ListBox lstHardware;
-        private System.Windows.Forms.ListBox lstSoftware;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirst;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLast;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReqDate;
+        private System.Windows.Forms.Button btnPreview;
     }
 }

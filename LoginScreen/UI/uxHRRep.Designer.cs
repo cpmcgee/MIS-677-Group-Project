@@ -51,6 +51,8 @@
             this.btnDelay = new System.Windows.Forms.Button();
             this.btnSendToBuildTeam = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnPreview2 = new System.Windows.Forms.Button();
+            this.btnPreview1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewRequests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridViewCompleted)).BeginInit();
             this.SuspendLayout();
@@ -61,14 +63,14 @@
             this.lstUnnasigned.Location = new System.Drawing.Point(9, 32);
             this.lstUnnasigned.Margin = new System.Windows.Forms.Padding(2);
             this.lstUnnasigned.Name = "lstUnnasigned";
-            this.lstUnnasigned.Size = new System.Drawing.Size(158, 134);
+            this.lstUnnasigned.Size = new System.Drawing.Size(143, 134);
             this.lstUnnasigned.TabIndex = 0;
             // 
             // lblUnassigned
             // 
             this.lblUnassigned.AutoSize = true;
             this.lblUnassigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnassigned.Location = new System.Drawing.Point(10, 9);
+            this.lblUnassigned.Location = new System.Drawing.Point(4, 10);
             this.lblUnassigned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUnassigned.Name = "lblUnassigned";
             this.lblUnassigned.Size = new System.Drawing.Size(142, 20);
@@ -78,29 +80,29 @@
             // lstSupervisors
             // 
             this.lstSupervisors.FormattingEnabled = true;
-            this.lstSupervisors.Location = new System.Drawing.Point(171, 32);
+            this.lstSupervisors.Location = new System.Drawing.Point(156, 33);
             this.lstSupervisors.Margin = new System.Windows.Forms.Padding(2);
             this.lstSupervisors.Name = "lstSupervisors";
-            this.lstSupervisors.Size = new System.Drawing.Size(156, 134);
+            this.lstSupervisors.Size = new System.Drawing.Size(144, 134);
             this.lstSupervisors.TabIndex = 2;
             // 
             // lblSupervisors
             // 
             this.lblSupervisors.AutoSize = true;
             this.lblSupervisors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSupervisors.Location = new System.Drawing.Point(167, 9);
+            this.lblSupervisors.Location = new System.Drawing.Point(152, 9);
             this.lblSupervisors.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSupervisors.Name = "lblSupervisors";
-            this.lblSupervisors.Size = new System.Drawing.Size(159, 20);
+            this.lblSupervisors.Size = new System.Drawing.Size(133, 20);
             this.lblSupervisors.TabIndex = 3;
-            this.lblSupervisors.Text = "Available Supervisors";
+            this.lblSupervisors.Text = "Avail. Supervisors";
             // 
             // btnAssign
             // 
             this.btnAssign.Location = new System.Drawing.Point(9, 170);
             this.btnAssign.Margin = new System.Windows.Forms.Padding(2);
             this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(317, 30);
+            this.btnAssign.Size = new System.Drawing.Size(291, 30);
             this.btnAssign.TabIndex = 4;
             this.btnAssign.Text = "Assign Hire to Supervisor";
             this.btnAssign.UseVisualStyleBackColor = true;
@@ -177,13 +179,13 @@
             this.colCompNum,
             this.colCompName,
             this.colCompDate});
-            this.uxGridViewCompleted.Location = new System.Drawing.Point(344, 33);
+            this.uxGridViewCompleted.Location = new System.Drawing.Point(319, 33);
             this.uxGridViewCompleted.Margin = new System.Windows.Forms.Padding(2);
             this.uxGridViewCompleted.MultiSelect = false;
             this.uxGridViewCompleted.Name = "uxGridViewCompleted";
             this.uxGridViewCompleted.RowTemplate.Height = 24;
             this.uxGridViewCompleted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.uxGridViewCompleted.Size = new System.Drawing.Size(317, 133);
+            this.uxGridViewCompleted.Size = new System.Drawing.Size(342, 133);
             this.uxGridViewCompleted.TabIndex = 7;
             // 
             // colCompNum
@@ -205,7 +207,7 @@
             // 
             this.lblComplete.AutoSize = true;
             this.lblComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComplete.Location = new System.Drawing.Point(340, 9);
+            this.lblComplete.Location = new System.Drawing.Point(315, 10);
             this.lblComplete.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblComplete.Name = "lblComplete";
             this.lblComplete.Size = new System.Drawing.Size(133, 20);
@@ -225,7 +227,7 @@
             // 
             // btnApprove
             // 
-            this.btnApprove.Location = new System.Drawing.Point(344, 170);
+            this.btnApprove.Location = new System.Drawing.Point(319, 170);
             this.btnApprove.Margin = new System.Windows.Forms.Padding(2);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(106, 30);
@@ -267,11 +269,33 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // btnPreview2
+            // 
+            this.btnPreview2.Location = new System.Drawing.Point(274, 385);
+            this.btnPreview2.Name = "btnPreview2";
+            this.btnPreview2.Size = new System.Drawing.Size(101, 30);
+            this.btnPreview2.TabIndex = 15;
+            this.btnPreview2.Text = "View Request";
+            this.btnPreview2.UseVisualStyleBackColor = true;
+            this.btnPreview2.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // btnPreview1
+            // 
+            this.btnPreview1.Location = new System.Drawing.Point(440, 171);
+            this.btnPreview1.Name = "btnPreview1";
+            this.btnPreview1.Size = new System.Drawing.Size(101, 30);
+            this.btnPreview1.TabIndex = 16;
+            this.btnPreview1.Text = "View Request";
+            this.btnPreview1.UseVisualStyleBackColor = true;
+            this.btnPreview1.Click += new System.EventHandler(this.btnPreview1_Click);
+            // 
             // uxHRRep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 421);
+            this.Controls.Add(this.btnPreview1);
+            this.Controls.Add(this.btnPreview2);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSendToBuildTeam);
             this.Controls.Add(this.btnDelay);
@@ -321,5 +345,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestedBy;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.Button btnPreview2;
+        private System.Windows.Forms.Button btnPreview1;
     }
 }

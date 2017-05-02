@@ -102,39 +102,22 @@ namespace GroupProject
             }
         }
 
-        private void uxDataGridRequests_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            lstSoftware.Items.Clear();
-            lstHardware.Items.Clear();
-            foreach (var hire in hires)
-            {
-                if (Convert.ToInt32(uxDataGridRequests.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
-                {
-                    for (int i = 0; i < hire.EquipmentReq.SoftwareOptions.Length; i++)
-                    {
-                        if (hire.EquipmentReq.SoftwareOptions[i])
-                        {
-                            lstSoftware.Items.Add(softwareOptions[i]);
-                        }
-                    }
-
-                    for (int i = 0; i < hire.EquipmentReq.HardwareOptions.Length; i++)
-                    {
-                        if (hire.EquipmentReq.HardwareOptions[i])
-                        {
-                            lstHardware.Items.Add(hardwareOptions[i]);
-                        }
-                    }
-                    return;
-                }
-            }
-        }
-
         private void btnLogout_Click(object sender, EventArgs e)
         {
             LoginForm login = new LoginForm();
             login.Show();
             Close();
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            foreach (var hire in hires)
+            {
+                if (Convert.ToInt32(uxDataGridRequests.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                {
+                    new OptionPreview(hire.EquipmentReq).Show();
+                }
+            }
         }
     }
 }

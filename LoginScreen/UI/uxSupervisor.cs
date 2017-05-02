@@ -156,5 +156,16 @@ namespace GroupProject
             login.Show();
             Close();
         }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            foreach (var hire in hires)
+            {
+                if (Convert.ToInt32(uxGridDenied.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                {
+                    new OptionPreview(hire.EquipmentReq).Show();
+                }
+            }
+        }
     }
 }

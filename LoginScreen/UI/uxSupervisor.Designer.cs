@@ -55,6 +55,7 @@
             this.colLast1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFirst1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uxGridNewHires = new System.Windows.Forms.DataGridView();
+            this.btnPreview = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridDenied)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridPickup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxGridNewHires)).BeginInit();
@@ -187,7 +188,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(640, 241);
+            this.btnRemove.Location = new System.Drawing.Point(639, 210);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(94, 27);
@@ -265,7 +266,7 @@
             // 
             // btnPickup
             // 
-            this.btnPickup.Location = new System.Drawing.Point(489, 415);
+            this.btnPickup.Location = new System.Drawing.Point(489, 424);
             this.btnPickup.Margin = new System.Windows.Forms.Padding(2);
             this.btnPickup.Name = "btnPickup";
             this.btnPickup.Size = new System.Drawing.Size(129, 27);
@@ -357,11 +358,22 @@
             this.uxGridNewHires.Size = new System.Drawing.Size(284, 138);
             this.uxGridNewHires.TabIndex = 4;
             // 
+            // btnPreview
+            // 
+            this.btnPreview.Location = new System.Drawing.Point(639, 242);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(97, 25);
+            this.btnPreview.TabIndex = 19;
+            this.btnPreview.Text = "View Request";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
             // uxSupervisor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 508);
+            this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.lblHardware);
             this.Controls.Add(this.lblSoftware);
             this.Controls.Add(this.btnClear2);
@@ -418,5 +430,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLast1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirst1;
         private System.Windows.Forms.DataGridView uxGridNewHires;
+        private System.Windows.Forms.Button btnPreview;
     }
 }

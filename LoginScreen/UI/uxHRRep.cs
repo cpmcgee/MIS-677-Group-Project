@@ -14,11 +14,13 @@ namespace GroupProject
     {
         JsonDataObject[] unAssignedHires;
         List<Supervisor> supervisors;
+        List<NewHire> hires;
         Employee User;
         public uxHRRep(Employee user, List<Supervisor> supervisors, JsonDataObject[] jsonData, List<NewHire> hires)
         {
             InitializeComponent();
             User = user;
+            this.hires = hires;
             this.supervisors = supervisors;
             unAssignedHires = jsonData;
             foreach (var hire in jsonData)
@@ -198,6 +200,28 @@ namespace GroupProject
             LoginForm login = new LoginForm();
             login.Show();
             Close();
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            foreach (var hire in hires)
+            {
+                if (Convert.ToInt32(uxGridViewRequests.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                {
+                    new OptionPreview(hire.EquipmentReq).Show();
+                }
+            }
+        }
+
+        private void btnPreview1_Click(object sender, EventArgs e)
+        {
+            foreach (var hire in hires)
+            {
+                if (Convert.ToInt32(uxGridViewCompleted.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                {
+                    new OptionPreview(hire.EquipmentReq).Show();
+                }
+            }
         }
     }
 }
