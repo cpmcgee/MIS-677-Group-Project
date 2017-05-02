@@ -16,10 +16,13 @@ namespace GroupProject
         List<NewHire> hires;
         Dictionary<int, string> hardwareOptions = new Dictionary<int, string>();
         Dictionary<int, string> softwareOptions = new Dictionary<int, string>();
-        public uxSeniorManager(Employee user, List<NewHire> hires)
+        LoginForm parentForm;
+
+        public uxSeniorManager(LoginForm parent, Employee user, List<NewHire> hires)
         {
             this.hires = hires;
             User = user;
+            parentForm = parent;
             InitializeComponent();
 
             hardwareOptions.Add(0, "Laptop");
@@ -119,8 +122,7 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            parentForm.Show();
             Close();
         }
 

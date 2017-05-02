@@ -69,7 +69,8 @@ namespace GroupProject
         {
             IEnumerable<NewHire> newHires = from e in NEWHIREs
                                             select new NewHire(e.NEWHIRE_NUM,
-                                                               e.FIRSTNAME, e.LASTNAME,
+                                                               e.FIRSTNAME, 
+                                                               e.LASTNAME,
                                                                e.GENDER,
                                                                Convert.ToDateTime(e.DATE_OF_BIRTH),
                                                                e.SUPERVISOR_NUM,
@@ -262,16 +263,6 @@ namespace GroupProject
             return hires;
         }
 
-        public void InsertNewHire(NewHire nh)
-        {
-            NEWHIRE nhr = new NEWHIRE
-            {
-
-            };
-            NEWHIREs.InsertOnSubmit(nhr);
-            SubmitChanges();
-        }
-
         /// <summary>
         /// Adds an EquipmentRequest to the database
         /// </summary>
@@ -284,10 +275,10 @@ namespace GroupProject
                 NEWHIRE_NUM = eq.NewHireNum,
                 STATUS = eq.Status,
             };
-            InsertSoftwareOptions(eq);
-            InsertHardwareOptions(eq);
             EQUIPMENTREQUESTs.InsertOnSubmit(eqr);
             SubmitChanges();
+            InsertSoftwareOptions(eq);
+            InsertHardwareOptions(eq);
         }
 
         /// <summary>
@@ -307,7 +298,7 @@ namespace GroupProject
             {
                 SOFTWARE option = new SOFTWARE
                 {
-                    SOFTWARE_UID = ++max,
+                    SOFTWARE_UID = max++,
                     EQUIPMENT_REQUEST_NUM = eq.RequestNum,
                     SOFTWARE_OPTION = i,
                     USED = eq.SoftwareOptions[i]
@@ -334,7 +325,7 @@ namespace GroupProject
             {
                 HARDWARE option = new HARDWARE
                 {
-                    HARDWARE_UID = ++max,
+                    HARDWARE_UID = max++,
                     EQUIPMENT_REQUEST_NUM = eq.RequestNum,
                     HARDWARE_OPTION = i,
                     USED = eq.SoftwareOptions[i]
@@ -435,7 +426,7 @@ namespace GroupProject
                 if (nh.NEWHIRE_NUM > max)
                     max = nh.NEWHIRE_NUM;
             }
-            return max;
+            return max++;
         }
 
         /// <summary>

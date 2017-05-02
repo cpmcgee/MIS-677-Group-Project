@@ -24,11 +24,11 @@ namespace GroupProject
         {
             using (ChiltonDB dbase = new ChiltonDB())
             {
-                int reqNum = 0;
+                int reqNum = 1;
                 foreach (var req in dbase.EQUIPMENTREQUESTs)
                 {
                     if (req.EQUIPMENT_REQUEST_NUM > reqNum)
-                        reqNum = req.EQUIPMENT_REQUEST_NUM;
+                        reqNum = req.EQUIPMENT_REQUEST_NUM++;
                 }
                 var eq = new EquipmentRequest(NewHireNum, reqNum, 0, software, hardware, this.SupervisorNum);
                 eq.RequestedOn = DateTime.Now;

@@ -14,10 +14,12 @@ namespace GroupProject
     {
         List<NewHire> hires;
         Employee User;
+        LoginForm parentForm;
 
-        public uxSupervisor(Employee user, List<NewHire> hires)
+        public uxSupervisor(LoginForm parent, Employee user, List<NewHire> hires)
         {
             InitializeComponent();
+            parentForm = parent;
             User = user;
             this.hires = hires;
             foreach (var hire in hires)
@@ -72,9 +74,9 @@ namespace GroupProject
         private bool[] CreateHardwareRequest()
         {
             bool[] sw = new bool[9];
-            for(int i = 0; i < chckLstSoftware.Items.Count; i++)
+            for(int i = 0; i < chckLstHardware.Items.Count; i++)
             {
-                sw[i] = chckLstSoftware.GetItemChecked(i);
+                sw[i] = chckLstHardware.GetItemChecked(i);
             }
             return sw;
         }
@@ -86,9 +88,9 @@ namespace GroupProject
         private bool[] CreateSoftwareRequest()
         {
             bool[] hw = new bool[13];
-            for (int i = 0; i < chckLstHardware.Items.Count; i++)
+            for (int i = 0; i < chckLstSoftware.Items.Count; i++)
             {
-                hw[i] = chckLstHardware.GetItemChecked(i);
+                hw[i] = chckLstSoftware.GetItemChecked(i);
             }
             return hw;
         }
@@ -195,8 +197,7 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            parentForm.Show();
             Close();
         }
 

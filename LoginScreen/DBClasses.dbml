@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Group2" Class="DBClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=10.135.85.168;Initial Catalog=Group2;Persist Security Info=True;User ID=Group2" SettingsObjectName="GroupProject.Properties.Settings" SettingsPropertyName="Group2ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.USERS" Member="USERs">
+    <Type Name="USER">
+      <Column Name="USER_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="USER_ID" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ACCESS_LEVEL" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="EMPLOYEE_USER" Member="EMPLOYEE" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.EMPLOYEE" Member="EMPLOYEEs">
     <Type Name="EMPLOYEE">
       <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -9,18 +19,7 @@
       <Column Name="DATE_OF_BIRTH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="TITLE" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Association Name="EMPLOYEE_USER" Member="USERs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="USER" />
-      <Association Name="EMPLOYEE_NEWHIRE" Member="NEWHIREs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="NEWHIRE" />
       <Association Name="EMPLOYEE_SUPERVISOR" Member="SUPERVISORs" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="SUPERVISOR" />
-    </Type>
-  </Table>
-  <Table Name="dbo.USERS" Member="USERs">
-    <Type Name="USER">
-      <Column Name="USER_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="USER_ID" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
-      <Column Name="PASSWORD" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="ACCESS_LEVEL" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="EMPLOYEE_USER" Member="EMPLOYEE" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.EQUIPMENTREQUEST" Member="EQUIPMENTREQUESTs">
@@ -49,16 +48,13 @@
   <Table Name="dbo.NEWHIRE" Member="NEWHIREs">
     <Type Name="NEWHIRE">
       <Column Name="NEWHIRE_NUM" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EMPLOYEE_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="SUPERVISOR_NUM" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FIRSTNAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="LASTNAME" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="GENDER" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="DATE_OF_BIRTH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="BACKGROUND_PASSED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IS_HIRED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="NEWHIRE_EQUIPMENTREQUEST" Member="EQUIPMENTREQUESTs" ThisKey="NEWHIRE_NUM" OtherKey="NEWHIRE_NUM" Type="EQUIPMENTREQUEST" />
-      <Association Name="EMPLOYEE_NEWHIRE" Member="EMPLOYEE" ThisKey="EMPLOYEE_NUM" OtherKey="EMPLOYEE_NUM" Type="EMPLOYEE" IsForeignKey="true" />
       <Association Name="SUPERVISOR_NEWHIRE" Member="SUPERVISOR" ThisKey="SUPERVISOR_NUM" OtherKey="EMPLOYEE_NUM" Type="SUPERVISOR" IsForeignKey="true" />
     </Type>
   </Table>

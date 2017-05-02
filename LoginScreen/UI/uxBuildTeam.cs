@@ -16,12 +16,14 @@ namespace GroupProject
         List<EquipmentRequest> requests;
         Dictionary<int, string> hardwareOptions = new Dictionary<int, string>();
         Dictionary<int, string> softwareOptions = new Dictionary<int, string>();
+        LoginForm parentForm;
 
-        public uxBuildTeam(Employee user, List<EquipmentRequest> requests)
+        public uxBuildTeam(LoginForm parent, Employee user, List<EquipmentRequest> requests)
         {
             InitializeComponent();
             this.requests = requests;
             User = user;
+            parentForm = parent;
             hardwareOptions.Add(0, "Laptop");
             hardwareOptions.Add(1, "Desktop");
             hardwareOptions.Add(2, "Monitor");
@@ -123,8 +125,7 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            parentForm.Show();
             Close();
         }
     }

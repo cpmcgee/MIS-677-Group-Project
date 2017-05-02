@@ -16,9 +16,12 @@ namespace GroupProject
         List<Supervisor> supervisors;
         List<NewHire> hires;
         Employee User;
-        public uxHRRep(Employee user, List<Supervisor> supervisors, JsonDataObject[] jsonData, List<NewHire> hires)
+        LoginForm parentForm;
+
+        public uxHRRep(LoginForm parent, Employee user, List<Supervisor> supervisors, JsonDataObject[] jsonData, List<NewHire> hires)
         {
             InitializeComponent();
+            parentForm = parent;
             User = user;
             this.hires = hires;
             this.supervisors = supervisors;
@@ -75,10 +78,26 @@ namespace GroupProject
                 {
                     JsonDataObject unh = MatchHire((string)lstUnnasigned.SelectedItem);
                     int spvNum = MatchSupervisor((string)lstSupervisors.SelectedItem);
-                    NewHire nh = new NewHire(dbase.GetNewHireNumber(), unh.firstName, unh.lastName, unh.sex, Convert.ToDateTime(unh.dateOfBirth), spvNum);
-                    dbase.InsertNewHire(nh);
+                    NEWHIRE nh = new NEWHIRE
+                    {
+                        FIRSTNAME = unh.firstName,
+                        LASTNAME = unh.lastName,
+                        DATE_OF_BIRTH = Convert.ToDateTime(unh.dateOfBirth),
+                        GENDER = unh.sex,
+                        SUPERVISOR_NUM = spvNum,
+                        NEWHIRE_NUM = dbase.GetNewHireNumber(),
+                        BACKGROUND_PASSED = Convert.ToBoolean(unh.backgroundStatus == "Passed" ? "true" : "false")
+                    };
+                        
+                        //dbase.GetNewHireNumber(), unh.firstName, unh.lastName, unh.sex, Convert.ToDateTime(unh.dateOfBirth), spvNum);
+                    dbase.NEWHIREs.InsertOnSubmit(nh);
+                    dbase.SubmitChanges();
                 }
                 lstUnnasigned.Items.Remove(lstUnnasigned.SelectedItem);
+            }
+            catch (NullReferenceException ne)
+            {
+                MessageBox.Show("Please select a new hire and a supervisor");
             }
             catch (Exception ex)
             {
@@ -237,8 +256,7 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            LoginForm login = new LoginForm();
-            login.Show();
+            parentForm.Show();
             Close();
         }
 

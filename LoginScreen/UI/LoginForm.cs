@@ -32,7 +32,8 @@ namespace GroupProject
         {
            //TODO:
            //Debug front end and backend logic
-           //Add date fields to equipmentrequest db: requested on, completed on, approved on
+           //Re-load data, some hardware and software requests mixed up and causing index out of bounds
+           //Add date fields to equipmentrequest db: requested on, completed on, approved on to view tables
            //Add update and insert for above fields
         }
         
@@ -67,6 +68,7 @@ namespace GroupProject
                             {
                                 validUser = true;
                                 pass = u.PASSWORD; //save users actual password
+                                break;
                             }
                         }
 
@@ -118,6 +120,7 @@ namespace GroupProject
                 {
                     var user = dbase.GetUser(username, password);
                     Login(user, dbase);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -131,10 +134,10 @@ namespace GroupProject
         /// </summary>
         /// <param name="user"></param>
         /// <param name="dbase"></param>
-        private void Login(Employee user, ChiltonDB dbase)
+        private void Login(BuildTeamMember user, ChiltonDB dbase)
         {
             List<EquipmentRequest> buildTeamRequests = dbase.GetBuildTeamData();
-            uxBuildTeam form = new uxBuildTeam(user, buildTeamRequests);
+            uxBuildTeam form = new uxBuildTeam(this, user, buildTeamRequests);
             Close();
             form.Show();
         }
@@ -142,28 +145,28 @@ namespace GroupProject
         private void Login(Supervisor user, ChiltonDB dbase)
         {
             List<NewHire> hires  = dbase.GetSupervisorData();
-            uxSupervisor form = new uxSupervisor(user, hires);
-            Close();
+            uxSupervisor form = new uxSupervisor(this, user, hires);
             form.Show();
+            Hide();
         }
 
         private void Login(HRRep user, ChiltonDB dbase)
         {
             var ser = new JavaScriptSerializer();
-            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText("C:\\Users\\Chris\\Desktop\\data.json"));
+            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText(@"C:\Users\Chris\Desktop\School\_SPRING 2017\MIS 677\Group Project Solution\data.json"));
             List<Supervisor> supervisors;
             List<NewHire> hires = dbase.GetHRData(out supervisors);
-            uxHRRep form = new uxHRRep(user, supervisors, jsonData, hires);
-            Close();
+            uxHRRep form = new uxHRRep(this, user, supervisors, jsonData, hires);
             form.Show();
+            Hide();
         }
 
         private void Login(Manager user, ChiltonDB dbase)
         {
             List<NewHire> hires = dbase.GetManagerData();
-            uxSeniorManager form = new uxSeniorManager(user, hires);
-            Close();
+            uxSeniorManager form = new uxSeniorManager(this, user, hires);
             form.Show();
+            Hide();
         }
 
         /// <summary>
