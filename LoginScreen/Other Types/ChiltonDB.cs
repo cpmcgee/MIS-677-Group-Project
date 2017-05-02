@@ -313,7 +313,9 @@ namespace GroupProject
                     SOFTWARE_OPTION = i,
                     USED = eq.SoftwareOptions[i]
                 };
+                SOFTWAREs.InsertOnSubmit(option);
             }
+            SubmitChanges();
         }
 
         /// <summary>
@@ -338,7 +340,9 @@ namespace GroupProject
                     HARDWARE_OPTION = i,
                     USED = eq.SoftwareOptions[i]
                 };
+                HARDWAREs.InsertOnSubmit(option);
             }
+            SubmitChanges();
         }
 
         /// <summary>
