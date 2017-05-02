@@ -150,6 +150,7 @@
             this.Controls.Add(this.uxLabel);
             this.Controls.Add(this.uxApprove);
             this.Controls.Add(this.uxDataGridRequests);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxSeniorManager";
             this.Text = "Dashboard - Senior Manager";

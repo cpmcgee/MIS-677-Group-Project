@@ -135,6 +135,7 @@
             this.Controls.Add(this.lstHardware);
             this.Controls.Add(this.lstSoftware);
             this.Controls.Add(this.lblRequests);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxBuildTeam";
             this.Text = "Dashboard - Build Team";

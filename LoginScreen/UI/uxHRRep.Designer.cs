@@ -310,6 +310,7 @@
             this.Controls.Add(this.lstSupervisors);
             this.Controls.Add(this.lblUnassigned);
             this.Controls.Add(this.lstUnnasigned);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxHRRep";
             this.Text = "Dashboard - HR";

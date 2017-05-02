@@ -83,6 +83,7 @@
             this.Controls.Add(this.lblHardware);
             this.Controls.Add(this.lstHardware);
             this.Controls.Add(this.lstSoftware);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "OptionPreview";
             this.Text = "View Request";
             this.ResumeLayout(false);

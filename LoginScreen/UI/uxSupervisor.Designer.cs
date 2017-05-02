@@ -391,6 +391,7 @@
             this.Controls.Add(this.chckLstHardware);
             this.Controls.Add(this.chckLstSoftware);
             this.Controls.Add(this.lblNewHires);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "uxSupervisor";
             this.Text = "Dashboard - Supervisor";
