@@ -158,7 +158,7 @@ namespace GroupProject
             form.Show();
         }
 
-        private void LoginManager(Manager user, ChiltonDB dbase)
+        private void Login(Manager user, ChiltonDB dbase)
         {
             List<NewHire> hires = dbase.GetManagerData();
             uxSeniorManager form = new uxSeniorManager(user, hires);
