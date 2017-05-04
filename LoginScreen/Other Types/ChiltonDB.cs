@@ -14,6 +14,7 @@ namespace GroupProject
         //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
         private List<EquipmentRequest> Requests;
+        private List<NewHire> Hires;
 
         /// <summary>
         /// Returns the user having the login information authenticated
@@ -65,25 +66,29 @@ namespace GroupProject
         /// Queries the database
         /// </summary>
         /// <returns>returns a collection of NewHire objects complete with their EquipmentRequests</returns>
-        public List<NewHire> GetNewHires()
+        public List<NewHire> NewHires
         {
-            var newHires = from e in NEWHIREs
-                                            select new NewHire(e.NEWHIRE_NUM,
-                                                               e.FIRSTNAME, 
-                                                               e.LASTNAME,
-                                                               e.GENDER,
-                                                               Convert.ToDateTime(e.DATE_OF_BIRTH),
-                                                               e.SUPERVISOR_NUM,
-                                                               false);
-            List<NewHire> ret = new List<NewHire>();
-            foreach (NewHire nh in newHires)
+            get
             {
-                nh.EquipmentReq = GetEquipmentRequest(nh.NewHireNum);
-                ret.Add(nh);
+                if (Hires == null)
+                {
+                    var newHires = from e in NEWHIREs
+                                   select new NewHire(e.NEWHIRE_NUM,
+                                                      e.FIRSTNAME,
+                                                      e.LASTNAME,
+                                                      e.GENDER,
+                                                      Convert.ToDateTime(e.DATE_OF_BIRTH),
+                                                      e.SUPERVISOR_NUM,
+                                                      false);
+                    Hires = new List<NewHire>();
+                    foreach (NewHire nh in newHires)
+                    {
+                        nh.EquipmentReq = GetEquipmentRequest(nh.NewHireNum);
+                        Hires.Add(nh);
+                    }
+                }
+                return Hires;
             }
-
-            
-            return ret;
         }
 
         /// <summary>
