@@ -20,17 +20,17 @@ namespace GroupProject
             SupervisorNum = supervisorNum;
         }
 
-        public void AssignRequest(bool[] software, bool[] hardware)
+        public void AssignRequest(int supervisorNum, bool[] software, bool[] hardware)
         {
             using (ChiltonDB dbase = new ChiltonDB())
             {
-                int reqNum = 1;
+                int reqNum = 0;
                 foreach (var req in dbase.EQUIPMENTREQUESTs)
                 {
-                    if (req.EQUIPMENT_REQUEST_NUM > reqNum)
-                        reqNum = req.EQUIPMENT_REQUEST_NUM++;
+                    if (req.EQUIPMENT_REQUEST_NUM >= reqNum)
+                        reqNum = req.EQUIPMENT_REQUEST_NUM;
                 }
-                var eq = new EquipmentRequest(NewHireNum, reqNum, 0, software, hardware, this.SupervisorNum);
+                var eq = new EquipmentRequest(NewHireNum, ++reqNum, 0, software, hardware, this.SupervisorNum, DateTime.Now, DateTime.MinValue, 0, supervisorNum);
                 eq.RequestedOn = DateTime.Now;
                 this.EquipmentReq = eq;
                 dbase.InsertEquipmentRequest(eq);

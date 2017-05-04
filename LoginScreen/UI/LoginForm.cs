@@ -21,7 +21,6 @@ namespace GroupProject
         string inUser;
         string inPass;
         int _ct = 0;
-        int _attempts = 0;
 
         public LoginForm()
         {
@@ -35,6 +34,7 @@ namespace GroupProject
            //Re-load data, some hardware and software requests mixed up and causing index out of bounds
            //Add date fields to equipmentrequest db: requested on, completed on, approved on to view tables
            //Add update and insert for above fields
+           
         }
         
         /// <summary>
@@ -90,13 +90,10 @@ namespace GroupProject
                             Suspend(); //reset form, lock user out if 3 failed attempts
                         }
                     }
-
-                    dbase.SubmitChanges(); //insert new login attempt record to database
-                    dbase.Connection.Close();
+                    
                     validPass = false;
                     validUser = false;
                     validAcct = false;
-                    _attempts++;
                 }
                 catch(Exception ex)
                 {
@@ -138,8 +135,8 @@ namespace GroupProject
         {
             List<EquipmentRequest> buildTeamRequests = dbase.GetBuildTeamData();
             uxBuildTeam form = new uxBuildTeam(this, user, buildTeamRequests);
-            Close();
             form.Show();
+            Hide();
         }
 
         private void Login(Supervisor user, ChiltonDB dbase)

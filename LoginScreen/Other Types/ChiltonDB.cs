@@ -67,7 +67,7 @@ namespace GroupProject
         /// <returns>returns a collection of NewHire objects complete with their EquipmentRequests</returns>
         public List<NewHire> GetNewHires()
         {
-            IEnumerable<NewHire> newHires = from e in NEWHIREs
+            var newHires = from e in NEWHIREs
                                             select new NewHire(e.NEWHIRE_NUM,
                                                                e.FIRSTNAME, 
                                                                e.LASTNAME,
@@ -75,13 +75,15 @@ namespace GroupProject
                                                                Convert.ToDateTime(e.DATE_OF_BIRTH),
                                                                e.SUPERVISOR_NUM,
                                                                false);
-
+            List<NewHire> ret = new List<NewHire>();
             foreach (NewHire nh in newHires)
             {
                 nh.EquipmentReq = GetEquipmentRequest(nh.NewHireNum);
+                ret.Add(nh);
             }
 
-            return newHires.ToList();
+            
+            return ret;
         }
 
         /// <summary>
@@ -114,7 +116,9 @@ namespace GroupProject
                                                                                  (int)eq.STATUS,
                                                                                  GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM),
                                                                                  GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM),
-                                                                                 nh.SUPERVISOR_NUM);
+                                                                                 nh.SUPERVISOR_NUM, Convert.ToDateTime(eq.REQUESTED_ON), 
+                                                                                 Convert.ToDateTime(eq.COMPLETED_ON),
+                                                                                 (int)eq.APPROVED_BY, (int)eq.REQUESTED_BY);
             return requests.ToList();
         }
         
@@ -181,11 +185,11 @@ namespace GroupProject
         {
             bool[] options = new bool[9];
 
-            foreach (var r in HARDWAREs)
+            foreach (var r in SOFTWAREs)
             {
                 if (Convert.ToInt32(r.EQUIPMENT_REQUEST_NUM) == requestNum)
                 {
-                    options[(int)r.HARDWARE_OPTION] = (bool)r.USED;
+                    options[(int)r.SOFTWARE_OPTION] = (bool)r.USED;
                 }
             }
 
@@ -224,8 +228,9 @@ namespace GroupProject
             var hires = new List<NewHire>();
             foreach (var nh in GetNewHires())
             {
-                if (nh.EquipmentReq.Status == 1)
-                    hires.Add(nh);
+                if (nh.EquipmentReq != null)
+                    if (nh.EquipmentReq.Status == 1)
+                        hires.Add(nh);
             }
             return hires;
         }
@@ -274,7 +279,9 @@ namespace GroupProject
                 EQUIPMENT_REQUEST_NUM = eq.RequestNum,
                 NEWHIRE_NUM = eq.NewHireNum,
                 STATUS = eq.Status,
+                REQUESTED_ON = eq.RequestedOn
             };
+
             EQUIPMENTREQUESTs.InsertOnSubmit(eqr);
             SubmitChanges();
             InsertSoftwareOptions(eq);
@@ -287,10 +294,10 @@ namespace GroupProject
         /// <param name="eq"></param>
         public void InsertSoftwareOptions(EquipmentRequest eq)
         {
-            int max = 0;
+            int max = 1;
             foreach (var r in SOFTWAREs)
             {
-                if (r.SOFTWARE_UID > max)
+                if (r.SOFTWARE_UID >= max)
                     max = r.SOFTWARE_UID;
             }
 
@@ -298,7 +305,7 @@ namespace GroupProject
             {
                 SOFTWARE option = new SOFTWARE
                 {
-                    SOFTWARE_UID = max++,
+                    SOFTWARE_UID = ++max,
                     EQUIPMENT_REQUEST_NUM = eq.RequestNum,
                     SOFTWARE_OPTION = i,
                     USED = eq.SoftwareOptions[i]
@@ -314,21 +321,21 @@ namespace GroupProject
         /// <param name="eq"></param>
         public void InsertHardwareOptions(EquipmentRequest eq)
         {
-            int max = 0;
+            int max = 1;
             foreach (var r in HARDWAREs)
             {
-                if (r.HARDWARE_UID > max)
+                if (r.HARDWARE_UID >= max)
                     max = r.HARDWARE_UID;
             }
 
-            for (int i = 0; i < eq.SoftwareOptions.Length; i++)
+            for (int i = 0; i < eq.HardwareOptions.Length; i++)
             {
                 HARDWARE option = new HARDWARE
                 {
-                    HARDWARE_UID = max++,
+                    HARDWARE_UID = ++max,
                     EQUIPMENT_REQUEST_NUM = eq.RequestNum,
                     HARDWARE_OPTION = i,
-                    USED = eq.SoftwareOptions[i]
+                    USED = eq.HardwareOptions[i]
                 };
                 HARDWAREs.InsertOnSubmit(option);
             }
@@ -347,11 +354,10 @@ namespace GroupProject
                 if (eq.EQUIPMENT_REQUEST_NUM == request.RequestNum)
                 {
                     eq.STATUS = request.Status;
-                    //eq.REQUESTED_ON = request.RequestedOn;
-                    //eq.APPROVED_ON = request.ApprovedOn;
-                    //eq.COMPLETED_ON = request.CompletedOn;
-                    //eq.REQUESTED_BY = request.RequestedBy;
-                    //eq.APPROVED_BY = request.ApprovedBy;
+                    eq.REQUESTED_ON = request.RequestedOn;
+                    eq.COMPLETED_ON = request.CompletedOn;
+                    eq.REQUESTED_BY = request.RequestedBy;
+                    eq.APPROVED_BY = request.ApprovedBy;
                 }
             }
             SubmitChanges();
@@ -408,7 +414,7 @@ namespace GroupProject
             {
                 if (sw.EQUIPMENT_REQUEST_NUM == update.RequestNum)
                 {
-                    sw.USED = update.HardwareOptions[(int)sw.SOFTWARE_OPTION];
+                    sw.USED = update.SoftwareOptions[(int)sw.SOFTWARE_OPTION];
                 }
             }
             SubmitChanges();
@@ -423,10 +429,10 @@ namespace GroupProject
             int max = 0;
             foreach (var nh in NEWHIREs)
             {
-                if (nh.NEWHIRE_NUM > max)
+                if (nh.NEWHIRE_NUM >= max)
                     max = nh.NEWHIRE_NUM;
             }
-            return max++;
+            return ++max;
         }
 
         /// <summary>

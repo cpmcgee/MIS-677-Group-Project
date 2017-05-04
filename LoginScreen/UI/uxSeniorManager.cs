@@ -75,9 +75,8 @@ namespace GroupProject
                             hire.EquipmentReq.Status = 2;
                             hire.EquipmentReq.ApprovedOn = DateTime.Now;
                             dbase.UpdateEquipmentRequest(hire.EquipmentReq);
-
-                            //update approval date
-
+                            uxDataGridRequests.Rows.Remove(uxDataGridRequests.SelectedRows[0]);
+                            return;
                         }
                     }
                 }
@@ -105,6 +104,8 @@ namespace GroupProject
                         {
                             hire.EquipmentReq.Status = 3;
                             dbase.UpdateEquipmentRequest(hire.EquipmentReq);
+                            uxDataGridRequests.Rows.Remove(uxDataGridRequests.SelectedRows[0]);
+                            return;
                         }
                     }
                 }

@@ -41,66 +41,62 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(131, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(90, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Please Login";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(55, 64);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUsername.Location = new System.Drawing.Point(73, 79);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(58, 13);
+            this.lblUsername.Size = new System.Drawing.Size(77, 17);
             this.lblUsername.TabIndex = 1;
             this.lblUsername.Text = "Username:";
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(57, 95);
-            this.lblPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPassword.Location = new System.Drawing.Point(76, 117);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblPassword.Size = new System.Drawing.Size(73, 17);
             this.lblPassword.TabIndex = 2;
             this.lblPassword.Text = "Password:";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(127, 64);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsername.Location = new System.Drawing.Point(169, 79);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(76, 20);
+            this.txtUsername.Size = new System.Drawing.Size(100, 22);
             this.txtUsername.TabIndex = 3;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(127, 95);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Location = new System.Drawing.Point(169, 117);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(76, 20);
+            this.txtPassword.Size = new System.Drawing.Size(100, 22);
             this.txtPassword.TabIndex = 4;
             // 
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
             this.lblMsg.Enabled = false;
-            this.lblMsg.Location = new System.Drawing.Point(9, 169);
-            this.lblMsg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMsg.Location = new System.Drawing.Point(12, 208);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblMsg.Size = new System.Drawing.Size(0, 17);
             this.lblMsg.TabIndex = 5;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(57, 137);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogin.Location = new System.Drawing.Point(76, 169);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(56, 19);
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Submit";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -108,20 +104,20 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(147, 137);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(196, 169);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 19);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // Form1
+            // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 196);
+            this.ClientSize = new System.Drawing.Size(355, 241);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblMsg);
@@ -130,8 +126,9 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "LoginForm";
             this.Text = "Login Window";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

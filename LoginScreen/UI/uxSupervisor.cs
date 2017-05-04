@@ -37,7 +37,7 @@ namespace GroupProject
                     }
                     else if (hire.EquipmentReq.Status == 6)
                     {
-                        uxGridNewHires.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName, hire.LastName, hire.EquipmentReq.CompletedOn);
+                        uxGridPickup.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName, hire.LastName, hire.EquipmentReq.CompletedOn);
                     }
                 }
             }
@@ -50,20 +50,26 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnSubmitRequest_Click(object sender, EventArgs e)
         {
-            foreach (var hire in hires)
+            try
             {
-                if (hire.NewHireNum == (int)uxGridNewHires.SelectedRows[0].Cells[2].Value)
+
+                foreach (var hire in hires)
                 {
-                    try
-                    {
-                        hire.AssignRequest(CreateSoftwareRequest(), CreateHardwareRequest());
+                    if (hire.NewHireNum == (int)uxGridNewHires.SelectedRows[0].Cells[2].Value)
+                    { 
+                        hire.AssignRequest(User.EmployeeNum, CreateSoftwareRequest(), CreateHardwareRequest());
                         uxGridNewHires.Rows.Remove(uxGridNewHires.SelectedRows[0]);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error assigning equipment request\n" + ex.Message);
+                        return;
                     }
                 }
+            }
+            catch (ArgumentOutOfRangeException ax)
+            {
+                MessageBox.Show("No hires left");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error assigning equipment request\n" + ex.Message);
             }
         }
 
@@ -73,12 +79,12 @@ namespace GroupProject
         /// <returns></returns>
         private bool[] CreateHardwareRequest()
         {
-            bool[] sw = new bool[9];
+            bool[] hw = new bool[13];
             for(int i = 0; i < chckLstHardware.Items.Count; i++)
             {
-                sw[i] = chckLstHardware.GetItemChecked(i);
+                hw[i] = chckLstHardware.GetItemChecked(i);
             }
-            return sw;
+            return hw;
         }
 
         /// <summary>
@@ -87,12 +93,12 @@ namespace GroupProject
         /// <returns></returns>
         private bool[] CreateSoftwareRequest()
         {
-            bool[] hw = new bool[13];
+            bool[] sw = new bool[9];
             for (int i = 0; i < chckLstSoftware.Items.Count; i++)
             {
-                hw[i] = chckLstSoftware.GetItemChecked(i);
+                sw[i] = chckLstSoftware.GetItemChecked(i);
             }
-            return hw;
+            return sw;
         }
 
         /// <summary>
@@ -102,8 +108,7 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnClear_Click(object sender, EventArgs e)
         {
-            chckLstSoftware.ClearSelected();
-            chckLstHardware.ClearSelected();
+            ClearSelected();
         }
 
         /// <summary>
@@ -113,8 +118,19 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnClear2_Click(object sender, EventArgs e)
         {
-            chckLstSoftware.ClearSelected();
-            chckLstHardware.ClearSelected();
+            ClearSelected();
+        }
+
+        private void ClearSelected()
+        {
+            for (int i = 0; i < chckLstSoftware.Items.Count; i++)
+            {
+                chckLstSoftware.SetItemChecked(i, false);
+            }
+            for (int i = 0; i < chckLstHardware.Items.Count; i++)
+            {
+                chckLstHardware.SetItemChecked(i, false);
+            }
         }
 
         /// <summary>
@@ -153,12 +169,13 @@ namespace GroupProject
                     {
                         using (ChiltonDB dbase = new ChiltonDB())
                         {
-                            hire.EquipmentReq.Status = 4;
+                            hire.EquipmentReq.Status = 0;
                             hire.EquipmentReq.SoftwareOptions = CreateSoftwareRequest();
                             hire.EquipmentReq.HardwareOptions = CreateHardwareRequest();
                             dbase.EditEquipmentRequest(hire.EquipmentReq);
                             dbase.UpdateEquipmentRequest(hire.EquipmentReq);
-                            uxGridNewHires.Rows.Remove(uxGridNewHires.SelectedRows[0]);
+                            uxGridDenied.Rows.Remove(uxGridDenied.SelectedRows[0]);
+                            return;
                         }
                     }
                 }
@@ -185,6 +202,7 @@ namespace GroupProject
                         hire.EquipmentReq.Status = 7;
                         dbase.UpdateEquipmentRequest(hire.EquipmentReq);
                         uxGridPickup.Rows.Remove(uxGridPickup.SelectedRows[0]);
+                        return;
                     }
                 }
             }

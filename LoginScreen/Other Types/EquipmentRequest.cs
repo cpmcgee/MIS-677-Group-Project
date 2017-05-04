@@ -30,7 +30,7 @@ namespace GroupProject
          * 7 - Picked up
          * */
 
-        public EquipmentRequest(int newHireNum, int requestNum, int status, bool[] software, bool[] hardware, int supervisorNum)
+        public EquipmentRequest(int newHireNum, int requestNum, int status, bool[] software, bool[] hardware, int supervisorNum, DateTime requestedOn, DateTime completedOn, int approvedBy, int requestedBy)
         {
             NewHireNum = newHireNum;
             /*SOFTWARE OPTIONS INDEXING
@@ -62,7 +62,7 @@ namespace GroupProject
              * 12 - Laptop Docking Station
              * * * * * * * * * * * * * * * */
             HardwareOptions = hardware;
-
+            RequestNum = requestNum;
             RequestedOn = DateTime.Now;
             RequestedBy = supervisorNum;
             Status = status;
