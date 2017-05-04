@@ -220,7 +220,7 @@ namespace GroupProject
         public List<NewHire> GetHRData(out List<Supervisor> supervisors)
         {
             var hires = new List<NewHire>();
-            foreach (var nh in GetNewHires())
+            foreach (var nh in NewHires)
             {
                 if (nh.EquipmentReq != null)
                     if ((nh.EquipmentReq.Status == 5 || nh.EquipmentReq.Status == 0 || nh.EquipmentReq.Status == 2))
@@ -244,7 +244,7 @@ namespace GroupProject
         public List<NewHire> GetManagerData()
         {
             var hires = new List<NewHire>();
-            foreach (var nh in GetNewHires())
+            foreach (var nh in NewHires)
             {
                 if (nh.EquipmentReq != null)
                     if (nh.EquipmentReq.Status == 1)
@@ -276,7 +276,7 @@ namespace GroupProject
         public List<NewHire> GetSupervisorData()
         {
             var hires = new List<NewHire>();
-            foreach (var nh in GetNewHires())
+            foreach (var nh in NewHires)
             {
                 if (nh.EquipmentReq == null || nh.EquipmentReq.Status == 3 || nh.EquipmentReq.Status == 6)
                 {
