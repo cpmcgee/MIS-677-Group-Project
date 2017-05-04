@@ -13,7 +13,7 @@ namespace GroupProject
     {
         //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
-
+        private List<EquipmentRequest> Requests;
 
         /// <summary>
         /// Returns the user having the login information authenticated
@@ -107,19 +107,31 @@ namespace GroupProject
         /// Queries the database
         /// </summary>
         /// <returns>returns a collection of EquipmentRequest objects</returns>
-        public List<EquipmentRequest> GetEquipmentRequests()
+        public List<EquipmentRequest> EquipmentRequests
         {
-            IEnumerable<EquipmentRequest> requests = from eq in EQUIPMENTREQUESTs
-                                                     join nh in NEWHIREs on eq.NEWHIRE_NUM equals nh.NEWHIRE_NUM
-                                                     select new EquipmentRequest(nh.NEWHIRE_NUM,
-                                                                                 eq.EQUIPMENT_REQUEST_NUM,
-                                                                                 (int)eq.STATUS,
-                                                                                 GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM),
-                                                                                 GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM),
-                                                                                 nh.SUPERVISOR_NUM, Convert.ToDateTime(eq.REQUESTED_ON), 
-                                                                                 Convert.ToDateTime(eq.COMPLETED_ON),
-                                                                                 (int)eq.APPROVED_BY, (int)eq.REQUESTED_BY);
-            return requests.ToList();
+            get
+            {
+                if (Requests == null)
+                {
+                    IEnumerable<EquipmentRequest> requests = from eq in EQUIPMENTREQUESTs
+                                                             join nh in NEWHIREs on eq.NEWHIRE_NUM equals nh.NEWHIRE_NUM
+                                                             select new EquipmentRequest(nh.NEWHIRE_NUM,
+                                                                                         eq.EQUIPMENT_REQUEST_NUM,
+                                                                                         (int)eq.STATUS,
+                                                                                         GetSoftwareOptions(eq.EQUIPMENT_REQUEST_NUM),
+                                                                                         GetHardwareOptions(eq.EQUIPMENT_REQUEST_NUM),
+                                                                                         nh.SUPERVISOR_NUM,
+                                                                                         eq.COMPLETED_ON == null ? DateTime.Now :(DateTime)eq.COMPLETED_ON,
+                                                                                         eq.REQUESTED_ON == null ? DateTime.Now : (DateTime)eq.REQUESTED_ON);
+
+                    //
+                    //
+                    Requests = requests.ToList();
+                    return Requests;
+                }
+                else return Requests;
+            }
+            
         }
         
         /// <summary>
@@ -129,7 +141,7 @@ namespace GroupProject
         /// <returns>An EquipmentRequest object</returns>
         public EquipmentRequest GetEquipmentRequest(int newHireNum)
         {
-            foreach (var er in GetEquipmentRequests())
+            foreach (var er in EquipmentRequests)
             {
                 if (er.NewHireNum == newHireNum)
                 {
@@ -146,7 +158,7 @@ namespace GroupProject
         /// <returns></returns>
         public EquipmentRequest GetEquipmentRequestByNum(int requestNum)
         {
-            foreach (var er in GetEquipmentRequests())
+            foreach (var er in EquipmentRequests)
             {
                 if (er.RequestNum == requestNum)
                 {
@@ -205,8 +217,9 @@ namespace GroupProject
             var hires = new List<NewHire>();
             foreach (var nh in GetNewHires())
             {
-                if ((nh.EquipmentReq.Status == 5 || nh.EquipmentReq.Status == 0 || nh.EquipmentReq.Status == 2))
-                    hires.Add(nh);
+                if (nh.EquipmentReq != null)
+                    if ((nh.EquipmentReq.Status == 5 || nh.EquipmentReq.Status == 0 || nh.EquipmentReq.Status == 2))
+                        hires.Add(nh);
             }
             supervisors = new List<Supervisor>();
             foreach (var s in GetSupervisors())
@@ -242,7 +255,7 @@ namespace GroupProject
         public List<EquipmentRequest> GetBuildTeamData()
         {
             List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            foreach (var eq in GetEquipmentRequests())
+            foreach (var eq in EquipmentRequests)
             {
                 if (eq.Status == 4)
                     requests.Add(eq);
@@ -360,20 +373,6 @@ namespace GroupProject
                     eq.APPROVED_BY = request.ApprovedBy;
                 }
             }
-            SubmitChanges();
-        }
-
-        /// <summary>
-        /// Deletes ann equipment request from the database
-        /// </summary>
-        /// <param name="requestNum"></param>
-        public void DeleteEquipmentRequest(int requestNum)
-        {
-            var deleteDetails = from e in EQUIPMENTREQUESTs
-                                where e.EQUIPMENT_REQUEST_NUM == requestNum
-                                select e;
-
-            EQUIPMENTREQUESTs.DeleteOnSubmit(deleteDetails.First());
             SubmitChanges();
         }
 

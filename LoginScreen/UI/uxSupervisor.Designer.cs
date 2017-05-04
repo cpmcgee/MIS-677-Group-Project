@@ -38,7 +38,6 @@
             this.colFirst2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLast2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblDenied = new System.Windows.Forms.Label();
-            this.btnRemove = new System.Windows.Forms.Button();
             this.btnResubmit = new System.Windows.Forms.Button();
             this.uxGridPickup = new System.Windows.Forms.DataGridView();
             this.colReqNum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -183,17 +182,6 @@
             this.lblDenied.Size = new System.Drawing.Size(161, 25);
             this.lblDenied.TabIndex = 8;
             this.lblDenied.Text = "Denied Requests";
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(852, 258);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(125, 33);
-            this.btnRemove.TabIndex = 9;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnResubmit
             // 
@@ -356,7 +344,7 @@
             // btnPreview
             // 
             this.btnPreview.Location = new System.Drawing.Point(852, 298);
-            this.btnPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(4);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(129, 31);
             this.btnPreview.TabIndex = 19;
@@ -378,7 +366,6 @@
             this.Controls.Add(this.lblPickUp);
             this.Controls.Add(this.uxGridPickup);
             this.Controls.Add(this.btnResubmit);
-            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.lblDenied);
             this.Controls.Add(this.uxGridDenied);
             this.Controls.Add(this.btnClear);
@@ -407,7 +394,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView uxGridDenied;
         private System.Windows.Forms.Label lblDenied;
-        private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnResubmit;
         private System.Windows.Forms.DataGridView uxGridPickup;
         private System.Windows.Forms.Label lblPickUp;

@@ -46,20 +46,20 @@ namespace GroupProject
                     if (hire.EquipmentReq.Status == 0)
                     {
                         uxGridViewRequests.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName,
-                                                    hire.LastName, hire.EquipmentReq.RequestedOn,
+                                                    hire.LastName, String.Format("{0:MM/dd/yy}", hire.EquipmentReq.RequestedOn),
                                                     dbase.GetEmployeeName(hire.EquipmentReq.RequestedBy),
                                                     "Requested");
                     }
                     else if (hire.EquipmentReq.Status == 2)
                     {
                         uxGridViewRequests.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName,
-                                                    hire.LastName, hire.EquipmentReq.RequestedOn,
+                                                    hire.LastName, String.Format("{0:MM/dd/yy}", hire.EquipmentReq.RequestedOn),
                                                     dbase.GetEmployeeName(hire.EquipmentReq.RequestedBy),
                                                     "Approved");
                     }
                     else if (hire.EquipmentReq.Status == 5)
                     {
-                        uxGridViewCompleted.Rows.Add(hire.EquipmentReq.RequestNum, hire.LastName, hire.EquipmentReq.CompletedOn);
+                        uxGridViewCompleted.Rows.Add(hire.EquipmentReq.RequestNum, hire.LastName, String.Format("{0:MM/dd/yy}", hire.EquipmentReq.CompletedOn));
                     }
                 }
             }
@@ -155,8 +155,10 @@ namespace GroupProject
                             updatedRequest.Status = 1;
                             dbase.UpdateEquipmentRequest(updatedRequest);
                             row.Cells[5].Value = "Sent to Manager";
+                            return;
                         }
                     }
+                    MessageBox.Show("Request already approved.");
                 }
             }
             catch (Exception ex)
@@ -185,8 +187,10 @@ namespace GroupProject
                             updatedRequest.Status = 4;
                             dbase.UpdateEquipmentRequest(updatedRequest);
                             row.Cells[5].Value = "Sent to Build Team";
+                            return;
                         }
                     }
+                    MessageBox.Show("Request not ready to send to build team.");
                 }
             }
             catch (Exception ex)
@@ -213,6 +217,7 @@ namespace GroupProject
                         updatedRequest.Status = 6;
                         dbase.UpdateEquipmentRequest(updatedRequest);
                         uxGridViewCompleted.Rows.Remove(row);
+                        return;
                     }
                 }
             }
@@ -240,6 +245,7 @@ namespace GroupProject
                         updatedRequest.Status = 4;
                         dbase.UpdateEquipmentRequest(updatedRequest);
                         uxGridViewCompleted.Rows.Remove(row);
+                        return;
                     }
                 }
             }

@@ -30,7 +30,7 @@ namespace GroupProject
          * 7 - Picked up
          * */
 
-        public EquipmentRequest(int newHireNum, int requestNum, int status, bool[] software, bool[] hardware, int supervisorNum, DateTime requestedOn, DateTime completedOn, int approvedBy, int requestedBy)
+        public EquipmentRequest(int newHireNum, int requestNum, int status, bool[] software, bool[] hardware, int supervisorNum, DateTime completedOn, DateTime requestedOn)
         {
             NewHireNum = newHireNum;
             /*SOFTWARE OPTIONS INDEXING
@@ -63,8 +63,9 @@ namespace GroupProject
              * * * * * * * * * * * * * * * */
             HardwareOptions = hardware;
             RequestNum = requestNum;
-            RequestedOn = DateTime.Now;
+            RequestedOn = requestedOn;
             RequestedBy = supervisorNum;
+            CompletedOn = completedOn;
             Status = status;
         }
 

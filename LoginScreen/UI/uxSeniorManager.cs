@@ -53,7 +53,7 @@ namespace GroupProject
             {
                 uxDataGridRequests.Rows.Add(hire.EquipmentReq.RequestNum,
                                             hire.FirstName, hire.LastName,
-                                            hire.EquipmentReq.RequestedOn);
+                                            String.Format("{0:MM/dd/yy}", hire.EquipmentReq.RequestedOn));
             }
         }
 

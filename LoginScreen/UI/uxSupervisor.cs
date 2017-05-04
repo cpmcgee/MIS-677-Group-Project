@@ -37,7 +37,7 @@ namespace GroupProject
                     }
                     else if (hire.EquipmentReq.Status == 6)
                     {
-                        uxGridPickup.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName, hire.LastName, hire.EquipmentReq.CompletedOn);
+                        uxGridPickup.Rows.Add(hire.EquipmentReq.RequestNum, hire.FirstName, hire.LastName, String.Format("{0:MM/dd/yy}", hire.EquipmentReq.CompletedOn));
                     }
                 }
             }
@@ -130,27 +130,6 @@ namespace GroupProject
             for (int i = 0; i < chckLstHardware.Items.Count; i++)
             {
                 chckLstHardware.SetItemChecked(i, false);
-            }
-        }
-
-        /// <summary>
-        /// Event handler for remove button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (ChiltonDB dbase = new ChiltonDB())
-                {
-                    var row = uxGridNewHires.SelectedRows[0];
-                    dbase.DeleteEquipmentRequest((int)row.Cells[0].Value);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error removing request\n" + ex.Message);
             }
         }
 
