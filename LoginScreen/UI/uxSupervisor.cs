@@ -161,7 +161,7 @@ namespace GroupProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error assigning equipment request\n" + ex.Message);
+                MessageBox.Show("No request selected to re-submit");
             }
         }
 
@@ -172,18 +172,25 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnPickup_Click(object sender, EventArgs e)
         {
-            foreach (var hire in hires)
+            try
             {
-                if (hire.EquipmentReq.RequestNum == (int)uxGridPickup.SelectedRows[0].Cells[0].Value)
+                foreach (var hire in hires)
                 {
-                    using (ChiltonDB dbase = new ChiltonDB())
+                    if (hire.EquipmentReq.RequestNum == (int)uxGridPickup.SelectedRows[0].Cells[0].Value)
                     {
-                        hire.EquipmentReq.Status = 7;
-                        dbase.UpdateEquipmentRequest(hire.EquipmentReq);
-                        uxGridPickup.Rows.Remove(uxGridPickup.SelectedRows[0]);
-                        return;
+                        using (ChiltonDB dbase = new ChiltonDB())
+                        {
+                            hire.EquipmentReq.Status = 7;
+                            dbase.UpdateEquipmentRequest(hire.EquipmentReq);
+                            uxGridPickup.Rows.Remove(uxGridPickup.SelectedRows[0]);
+                            return;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No request selected");
             }
         }
 
@@ -205,12 +212,23 @@ namespace GroupProject
         /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            foreach (var hire in hires)
+            try
             {
-                if (Convert.ToInt32(uxGridDenied.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                foreach (var hire in hires)
                 {
-                    new OptionPreview(hire.EquipmentReq).Show();
+                    if (Convert.ToInt32(uxGridDenied.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                    {
+                        new OptionPreview(hire.EquipmentReq).Show();
+                    }
                 }
+            }
+            catch (ArgumentOutOfRangeException ax)
+            {
+                MessageBox.Show("No request selected to preview");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
