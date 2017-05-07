@@ -29,11 +29,6 @@ namespace GroupProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           //TODO:
-           //Debug front end and backend logic
-           //Re-load data, some hardware and software requests mixed up and causing index out of bounds
-           //Add date fields to equipmentrequest db: requested on, completed on, approved on to view tables
-           //Add update and insert for above fields
            
         }
         

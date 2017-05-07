@@ -144,7 +144,7 @@ namespace GroupProject
             {
                 foreach (var hire in hires)
                 {
-                    if (hire.EquipmentReq.RequestNum == (int)uxGridDenied.SelectedRows[0].Cells[0].Value)
+                    if (hire.EquipmentReq != null && hire.EquipmentReq.RequestNum == (int)uxGridDenied.SelectedRows[0].Cells[0].Value)
                     {
                         using (ChiltonDB dbase = new ChiltonDB())
                         {
@@ -216,7 +216,7 @@ namespace GroupProject
             {
                 foreach (var hire in hires)
                 {
-                    if (Convert.ToInt32(uxGridDenied.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum)
+                    if ((hire.EquipmentReq != null && Convert.ToInt32(uxGridDenied.SelectedRows[0].Cells[0].Value) == hire.EquipmentReq.RequestNum))
                     {
                         new OptionPreview(hire.EquipmentReq).Show();
                     }
