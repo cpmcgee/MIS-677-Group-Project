@@ -11,10 +11,14 @@ namespace GroupProject
 
     public class ChiltonDB : DBClassesDataContext
     {
+
         //private const string CONNECTIONSTRING = "Data Source = (localdb)\\ProjectsV13; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-        private const string CONNECTIONSTRING = "Data Source=10.135.85.168;User ID=Group2;Password=Grp22116@;";
+        private const string CONNECTIONSTRING = "Data Source = 10.135.85.168; Initial Catalog = Group2; Persist Security Info=True;User ID = Group2; Password=Grp22116@;";
+        
         private List<EquipmentRequest> Requests;
         private List<NewHire> Hires;
+
+        public ChiltonDB(string connection = CONNECTIONSTRING) : base(connection){ }
 
         /// <summary>
         /// Returns the user having the login information authenticated
