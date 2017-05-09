@@ -24,6 +24,7 @@ namespace GroupProject
             this.requests = requests;
             User = user;
             parentForm = parent;
+
             hardwareOptions.Add(0, "Laptop");
             hardwareOptions.Add(1, "Desktop");
             hardwareOptions.Add(2, "Monitor");

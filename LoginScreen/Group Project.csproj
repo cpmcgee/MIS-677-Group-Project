@@ -118,6 +118,7 @@
     <EmbeddedResource Include="UI\uxSupervisor.resx">
       <DependentUpon>uxSupervisor.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="DBClasses.dbml.layout">
       <DependentUpon>DBClasses.dbml</DependentUpon>
     </None>
