@@ -32,7 +32,7 @@ namespace GroupProject
         private void Form1_Load(object sender, EventArgs e)
         {
             var ser = new JavaScriptSerializer();
-            jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText(@"C:\Users\Chris\Desktop\School\_SPRING 2017\MIS 677\Group Project Solution\data.json"));
+            jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText(@"data.json"));
         }
         
         /// <summary>
