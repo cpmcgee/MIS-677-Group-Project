@@ -15,12 +15,14 @@ namespace GroupProject
 {
     public partial class LoginForm : Form
     {
+
         bool validUser = false;
         bool validPass = false;
         bool validAcct = false;
         string inUser;
         string inPass;
         int _ct = 0;
+        JsonDataObject[] jsonData;
 
         public LoginForm()
         {
@@ -29,7 +31,8 @@ namespace GroupProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            var ser = new JavaScriptSerializer();
+            jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText(@"C:\Users\Chris\Desktop\School\_SPRING 2017\MIS 677\Group Project Solution\data.json"));
         }
         
         /// <summary>
@@ -144,8 +147,6 @@ namespace GroupProject
 
         private void Login(HRRep user, ChiltonDB dbase)
         {
-            var ser = new JavaScriptSerializer();
-            JsonDataObject[] jsonData = ser.Deserialize<JsonDataObject[]>(File.ReadAllText(@"C:\Users\Chris\Desktop\School\_SPRING 2017\MIS 677\Group Project Solution\data.json"));
             List<Supervisor> supervisors;
             List<NewHire> hires = dbase.GetHRData(out supervisors);
             uxHRRep form = new uxHRRep(this, user, supervisors, jsonData, hires);

@@ -28,7 +28,8 @@ namespace GroupProject
             unAssignedHires = jsonData;
             foreach (var hire in jsonData)
             {
-                lstUnnasigned.Items.Add(hire.firstName + " " + hire.lastName);
+                if (hire.backgroundStatus == "Passed" && hire.assigned == false) 
+                    lstUnnasigned.Items.Add(hire.firstName + " " + hire.lastName);
             }
 
             foreach (var s in supervisors)
@@ -92,6 +93,7 @@ namespace GroupProject
                         //dbase.GetNewHireNumber(), unh.firstName, unh.lastName, unh.sex, Convert.ToDateTime(unh.dateOfBirth), spvNum);
                     dbase.NEWHIREs.InsertOnSubmit(nh);
                     dbase.SubmitChanges();
+                    unh.assigned = true;
                 }
                 lstUnnasigned.Items.Remove(lstUnnasigned.SelectedItem);
             }
