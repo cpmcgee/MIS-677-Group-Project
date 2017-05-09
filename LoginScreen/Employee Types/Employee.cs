@@ -13,7 +13,6 @@ namespace GroupProject
         public string LastName { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public bool IsSuperUser { get; set; }
 
         public Employee(int num, string firstName, string lastName, string gender, DateTime dob, bool isSu = false)
         {
@@ -22,15 +21,6 @@ namespace GroupProject
             LastName = lastName;
             Gender = gender;
             DateOfBirth = dob;
-            IsSuperUser = isSu;
-        }
-
-        public void ElevatePriviledges()
-        {
-            //implement "are you sure" type thing
-
-     
-            IsSuperUser = true;
         }
     }
 }
