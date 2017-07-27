@@ -1,0 +1,2 @@
+# MIS-677-Group-Project
+The purpose of this project was to take graduating M.I.S. seniors through the whole software development lifecycle from inception to implementation of a prototype. Being an M.I.S. course, the focus for this project was the stages of the SDLC, rather than coding practices. The final product is not a good example of clean, well designed code, but rather the outcome of the first full software development project participated in by each of our group members.
